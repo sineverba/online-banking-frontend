@@ -1,0 +1,4 @@
+.scannerwork/
+.semaphore/
+coverage/
+node_modules/

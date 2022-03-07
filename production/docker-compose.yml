@@ -1,0 +1,19 @@
+version: "3.8"
+services:
+  online-banking-frontend:
+    image: registry.gitlab.com/private-registry/online-banking-frontend:latest
+    container_name: online-banking-frontend
+    restart: unless-stopped
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=proxy"
+      - "traefik.http.routers.online-banking-frontend.entrypoints=websecure"
+      - "traefik.http.routers.online-banking-frontend.service=online-banking-frontend"
+      - "traefik.http.routers.online-banking-frontend.rule=Host(`bank.k2p.it`)"
+      - "traefik.http.services.online-banking-frontend.loadbalancer.server.port=80"
+
+networks:
+  proxy:
+    external: true

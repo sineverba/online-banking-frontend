@@ -1,0 +1,148 @@
+@import '../sass/sb-admin-2.scss';
+@import '~bootstrap/scss/bootstrap.scss';
+
+.sidebar-dark hr.sidebar-divider {
+    border-top: 1px solid rgba(255, 255, 255, 0.97);
+}
+
+nav#topbar {
+    background-color: $white !important;
+    .btn-link {
+        text-decoration: none;
+        color: $gray-800;
+    }
+    .btn:focus {
+        box-shadow: none;
+    }
+}
+
+nav#topbar {
+    div.container-fluid {
+        button.btn.btn-link {
+            padding-left: 0px;
+        }
+        div.d-flex.justify-content-end {
+            width: 100%;
+        }
+    }
+}
+
+#user-menu {
+    left: -45px;
+}
+
+div.navbar-nav img {
+    max-width: 30px;
+    border-radius: 50%;
+}
+
+span.navbar-brand {
+    text-align: center;
+    width: 100%;
+    margin-right: 0px;
+    a, a:hover, a:focus, a:active {
+        color: $white;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+}
+
+div.sidebar {
+    ul {
+        padding-left: 0px;
+        li {
+            list-style: none outside none;
+            a {
+                text-align: center;
+                color: rgba(255,255,255,.8);
+                font-size: 88%;
+                svg {
+                    color: rgba(255,255,255,.3);
+                    margin-right: 5px
+                }
+            }
+            a:focus, a:active, a:hover {
+                color: $white;
+                svg {
+                    color: $white;
+                }
+            }
+            svg+svg {
+                float: right;
+                margin-top: 3px;
+            }
+        }
+    }
+    div.collapse.show {
+        background-color: $white;
+        width: 90%;
+        padding: 10px;
+        margin: 0 auto;
+        border-radius: 5px;
+    }
+}
+
+
+.form-login {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: 350px;
+    div:first-child {
+        margin-top: 0;
+    }
+    div {
+        margin-top: 15px;
+    }
+    button {
+        margin-top: 35px;
+        width: 100%;
+    }
+}
+
+.card-header {
+    h1, h2 {
+        text-transform: uppercase;
+        font-size: 120%;
+        text-align: center;
+    }
+}
+
+.card-body {
+    .container {
+        padding: 30px;
+    }
+}
+
+.card-text {
+    text-align: center;
+    padding: 15px 0;
+}
+
+footer {
+    background-color: $white;
+    margin-top: auto;
+    margin-bottom: auto;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    p {
+        text-align: center;
+        margin: 0;
+        font-size: 0.8rem;
+    }
+    
+}
+
+@media only screen and (min-width: 768px) {
+    div.sidebar {
+        ul {
+            li {
+                a {
+                    text-align: left;
+                }
+            }
+        }
+    }
+}
