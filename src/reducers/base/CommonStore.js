@@ -28,8 +28,16 @@ export default class CommonStore {
             return state;
         };
 
+        const items = (state = [], { type, data } = {}) => {
+            if (type === INDEX_ITEMS_SUCCEEDED) {
+                return data;
+            }
+            return state;
+        }
+
         return {
             isLoading,
+            items,
         }
     }
 }
