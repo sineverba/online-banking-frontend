@@ -1,11 +1,16 @@
+import { Col, Container, Row } from "react-bootstrap";
 import LoginForm from "./LoginForm";
 
 
 export const HomePage = () => {
     return (
-        <div className="container-fluid">
-            <LoginForm />
-        </div>
+        <Container fluid>
+            <Row>
+                <Col>
+                    <LoginForm />
+                </Col>
+            </Row>
+        </Container>
     )
 }
 
