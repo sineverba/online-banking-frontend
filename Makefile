@@ -17,6 +17,9 @@ upgrade:
 
 build:
 	docker build --tag $(IMAGE_NAME):$(REACT_APP_VERSION) --tag $(IMAGE_NAME):latest .
+
+deploy:
+	docker push $(IMAGE_NAME):latest
 	
 run:
 	docker container run -it --rm --publish 8080:80 --name $(CONTAINER_NAME) $(IMAGE_NAME):$(REACT_APP_VERSION)
