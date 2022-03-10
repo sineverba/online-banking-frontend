@@ -1,5 +1,6 @@
 # Next version
 + Fix Semaphore
++ Upgrade dependencies
 
 ## 0.2.0
 + Add CircleCI
