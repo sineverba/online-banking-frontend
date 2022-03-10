@@ -1,12 +1,20 @@
-import { Card } from "react-bootstrap";
+import { Container, Card, Row, Col } from "react-bootstrap";
 
 export const Kpi = (props) => {
     return (
-        <Card>
+        <Card className="kpi">
             <Card.Body>
-                <Card.Title>{props.title}</Card.Title>
-                <Card.Text>{props.value}</Card.Text>
-                {props.icon}
+                <Container fluid>
+                <Row className="align-items-center">
+                    <Col xs={3} lg={2}>
+                        {props.icon}
+                    </Col>
+                    <Col>
+                        <Card.Title><h1>{props.title}</h1></Card.Title>
+                        <Card.Text>{props.value}</Card.Text>
+                    </Col>
+                </Row>
+                </Container>
             </Card.Body>
         </Card>
     );
