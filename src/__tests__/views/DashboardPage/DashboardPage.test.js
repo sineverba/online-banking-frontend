@@ -17,7 +17,7 @@ let store = mockStore(initialState);
 
 describe('Test DashboardPage', () => {
     it('Can render DashboardPage', () => {
-        render(<DashboardPage />);
+        render(<DashboardPage store={store} />);
         const title = screen.getByText(/dashboard/i);
         expect(title).toBeInTheDocument();
     });
