@@ -1,4 +1,7 @@
 # Next version
++ Fix Semaphore
+
+## 0.2.0
 + Add CircleCI
 + Add balance api and reducer
 + Add KPI
