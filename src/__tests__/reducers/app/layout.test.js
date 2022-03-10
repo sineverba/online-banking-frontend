@@ -6,6 +6,7 @@ describe ('Layout reducer', () => {
     let initialState = {
         isLoading: false,
         isNavbarClosed: false,
+        items: [],
     };
 
     it ('Test default state returns default values', () => {

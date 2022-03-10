@@ -11,6 +11,9 @@ describe('Test App', () => {
     const mockStore = configureStore(middlewares);
 
     let initialState = {
+        balance: {
+            items: []
+        },
         layout: {
             isNavbarClosed: false
         },

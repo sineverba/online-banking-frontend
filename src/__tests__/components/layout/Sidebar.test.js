@@ -1,9 +1,8 @@
-import {fireEvent, render, screen} from '@testing-library/react';
+import {render} from '@testing-library/react';
 import Sidebar from "../../../components/layout/Sidebar";
 import { BrowserRouter } from "react-router-dom";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import { actions as layoutActions } from "../../../actions/app/LayoutActions"
 
 describe('Test Sidebar', () => {
 

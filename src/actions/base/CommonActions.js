@@ -21,6 +21,30 @@ export default class CommonActions {
         return this.api;
     }
 
+    index() {
+        return dispatch => {
+            dispatch(
+                {
+                    type: `TRY_INDEX_${this.getEntity()}_ITEMS`,
+                }
+            );
+            return this.getApi()
+                .index()
+                .then(data => {
+                    dispatch({
+                        type: `INDEX_${this.getEntity()}_ITEMS_SUCCEEDED`,
+                        data
+                    });
+                })
+                .catch(error => {
+                    dispatch({
+                        type: `INDEX_${this.getEntity()}_ITEMS_FAILED`,
+                        error,
+                    });
+                })
+        }
+    }
+
     post(payload) {
         return dispatch => {
             dispatch(
