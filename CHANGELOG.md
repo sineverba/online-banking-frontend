@@ -2,6 +2,7 @@
 + Fix Semaphore
 + Upgrade dependencies
 + Add `bank-account-transactions` api, reducer, page
++ Check for `content` in items
 
 ## 0.2.0
 + Add CircleCI
