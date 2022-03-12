@@ -1,9 +1,9 @@
 import { Nav, Navbar } from "react-bootstrap";
 import { LinkContainer } from "react-router-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTachometerAlt } from "@fortawesome/free-solid-svg-icons";
+import { faTachometerAlt, faEuroSign } from "@fortawesome/free-solid-svg-icons";
 import { connect } from "react-redux";
-import { PATH_HOME, PATH_DASHBOARD } from "../../utils/constants/constant"
+import { PATH_HOME, PATH_DASHBOARD, PATH_BANK_ACCOUNT_TRANSACTIONS } from "../../utils/constants/constant"
 
 export const Sidebar = (props) => {
 
@@ -26,6 +26,11 @@ export const Sidebar = (props) => {
                 <li>
                     <LinkContainer to={PATH_DASHBOARD}>
                         <Nav.Link><FontAwesomeIcon icon={faTachometerAlt} /> Dashboard</Nav.Link>
+                    </LinkContainer>
+                </li>
+                <li>
+                    <LinkContainer to={PATH_BANK_ACCOUNT_TRANSACTIONS}>
+                        <Nav.Link><FontAwesomeIcon icon={faEuroSign} /> Bank Account Transactions</Nav.Link>
                     </LinkContainer>
                 </li>
             </ul>
