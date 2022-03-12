@@ -3,6 +3,7 @@
 + Upgrade dependencies
 + Add `bank-account-transactions` api, reducer, page
 + Check for `content` in items
++ Add Bank Account Transaction Page
 
 ## 0.2.0
 + Add CircleCI
