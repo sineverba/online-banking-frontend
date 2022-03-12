@@ -65,6 +65,7 @@ describe ('bankAccountTransactions reducer', () => {
     let initialState = {
         isLoading: false,
         items: [],
+        total: null,
     };
 
     it ('Test default state returns default values', () => {
@@ -82,7 +83,8 @@ describe ('bankAccountTransactions reducer', () => {
         expect(bankAccountTransactions(initialState, action)).toEqual(
             {
                 isLoading: false,
-                items: content
+                items: content,
+                total: 37
             }
         );
     });

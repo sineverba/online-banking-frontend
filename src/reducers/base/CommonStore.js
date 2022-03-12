@@ -47,9 +47,20 @@ export default class CommonStore {
             return state;
         }
 
+        const total = (state = null, {type, data} = {}) => {
+            if (type === INDEX_ITEMS_SUCCEEDED) {
+                if("totalElements" in data) {
+                    const {totalElements} = data;
+                    return totalElements;
+                }
+            }
+            return state
+        }
+
         return {
             isLoading,
             items,
+            total,
         }
     }
 }

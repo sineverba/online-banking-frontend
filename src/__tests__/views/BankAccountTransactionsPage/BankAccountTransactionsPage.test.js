@@ -1,4 +1,4 @@
-import { render, screen} from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import BankAccountTransactionsPage from "../../../views/BankAccountTransactionsPage/BankAccountTransactionsPage";
@@ -39,7 +39,8 @@ const initialState = {
                 "purpose": "Stake 5HHIG",
                 "transactionDate": "2022-03-09T12:31:16.699904"
             }
-        ]
+        ],
+        total: 90,
     }
 };
 let store = mockStore(initialState);
@@ -57,6 +58,18 @@ describe('Test BankAccountTransactionsPage', () => {
         expect(purpose).toBeInTheDocument();
         const amount = screen.getByText(/1234.56/i);
         expect(amount).toBeInTheDocument();
+    });
+
+    it('Can handlePerRowsChange', () => {
+        render(<BankAccountTransactionsPage store={store} />);
+
+        const nextPage = screen.getByLabelText('Next Page');
+        fireEvent.click(nextPage);
+
+        const perPage = screen.getByLabelText('Rows per page:');
+        fireEvent.change(perPage, {
+            target: { value: "20" },
+        });
 
     });
 })
