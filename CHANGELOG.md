@@ -5,6 +5,7 @@
 + Check for `content` in items
 + Add Bank Account Transaction Page
 + Add Remote Pagination
++ Fetch APP version from package.json
 
 ## 0.2.0
 + Add CircleCI
