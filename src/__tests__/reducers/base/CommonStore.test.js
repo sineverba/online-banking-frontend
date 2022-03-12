@@ -25,4 +25,12 @@ describe('Test CommonStore', () => {
         expect(result).toBeFalsy();
     })
 
+    it ('Test can handle content under items returned', () => {
+        const data = {
+            type: "INDEX_FAKE_ITEMS_SUCCEEDED",
+        }
+        const result = commonStore.isLoading(initialState, data);
+        expect(result).toBeFalsy();
+    })
+
 });

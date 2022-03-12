@@ -79,11 +79,10 @@ describe ('bankAccountTransactions reducer', () => {
 
         const { content } = payload;
 
-        expect(bankAccountTransactions(initialState, action)).toMatchObject(
+        expect(bankAccountTransactions(initialState, action)).toEqual(
             {
-                items: {
-                    content
-                }
+                isLoading: false,
+                items: content
             }
         );
     });
