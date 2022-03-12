@@ -5,6 +5,7 @@ describe ('Balance reducer', () => {
     let initialState = {
         isLoading: false,
         items: [],
+        total: null,
     };
 
     it ('Test default state returns default values', () => {

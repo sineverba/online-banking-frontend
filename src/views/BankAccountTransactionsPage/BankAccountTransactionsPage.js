@@ -7,16 +7,14 @@ import DataTable from "react-data-table-component";
 
 export const BankAccountTransactionsPage = (props) => {
 
-    const [isMounted, setMounted] = useState(false);
+    const [pageNumber, setPageNumber] = useState(1);
+    const [perPageNumber, setPerPageNumber] = useState(10);
 
-    const {items, index} = props;
+    const {items, index, total} = props;
 
     useEffect(() => {
-        if (!isMounted) {
-            setMounted(true);
-            index();
-        }
-    }, [isMounted, index]);
+        index(pageNumber, perPageNumber);
+    }, [index, pageNumber, perPageNumber]);
 
     const columns = [
         {
@@ -34,6 +32,13 @@ export const BankAccountTransactionsPage = (props) => {
         }
     ];
 
+    const handlePerRowsChange = (e) => {
+        setPerPageNumber(e);
+    }
+    const handlePageChange = (e) => {
+        setPageNumber(e);
+    }
+
     return (
         <Container fluid>
             <Row>
@@ -46,6 +51,11 @@ export const BankAccountTransactionsPage = (props) => {
                     <DataTable
                         columns={columns}
                         data={items}
+                        pagination
+                        paginationServer
+                        paginationTotalRows={total}
+                        onChangeRowsPerPage={handlePerRowsChange}
+			            onChangePage={handlePageChange}
                     />
                 </Col>
             </Row>
@@ -55,13 +65,14 @@ export const BankAccountTransactionsPage = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        index: () => dispatch(bankAccountTranscationsActions.index()),
+        index: (pageNumber, perPageNumber) => dispatch(bankAccountTranscationsActions.index(pageNumber, perPageNumber)),
     }
 }
 
 const mapStateToProps = state => {
     return {
         items: state.bankAccountTransactions.items,
+        total: state.bankAccountTransactions.total,
     }
 };
 

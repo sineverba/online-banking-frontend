@@ -3,6 +3,7 @@ import configureMockStore from 'redux-mock-store';
 import thunk from 'redux-thunk';
 import { waitFor } from "@testing-library/react";
 import nock from "nock";
+import * as Constants from "../../../utils/constants/constant";
 
 const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
@@ -69,7 +70,6 @@ const dateGetReturn = {
     "empty": false
 };
 
-
 describe('Test Bank Account Transactions Actions', () => {
 
     let store;
@@ -89,6 +89,10 @@ describe('Test Bank Account Transactions Actions', () => {
                 'access-control-allow-credentials': 'true'
             })
             .get(apiResourceUrl)
+            .query({
+                page: 0,
+                perPage: 5,
+            })
             .reply(200, dateGetReturn);
         store.dispatch(bankAccountTransactionsActions.index());
         expect(store.getActions()).toContainEqual({
@@ -113,6 +117,10 @@ describe('Test Bank Account Transactions Actions', () => {
                 'access-control-allow-credentials': 'true'
             })
             .get(apiResourceUrl)
+            .query({
+                page: 0,
+                perPage: 5,
+            })
             .reply(401);
         store.dispatch(bankAccountTransactionsActions.index());
         expect(store.getActions()).toContainEqual({
@@ -126,6 +134,42 @@ describe('Test Bank Account Transactions Actions', () => {
             {
                 type: "INDEX_BANKACCOUNTTRANSACTIONS_ITEMS_FAILED",
                 error: "Error: Request failed with status code 401"
+            }]);
+        });
+    });
+
+    it('Test can handle STARTING_ZERO constant', async () => {
+
+        /**
+         * Mock a constant and redefine his property
+         */
+        Object.defineProperty(Constants, 'STARTING_ZERO', {
+            value: false,
+        });
+
+        nock(process.env.REACT_APP_BACKEND_URL)
+            .defaultReplyHeaders({
+                'access-control-allow-origin': '*',
+                'access-control-allow-credentials': 'true'
+            })
+            .get(apiResourceUrl)
+            .query({
+                page: 1,
+                perPage: 5,
+            })
+            .reply(200, dateGetReturn);
+        store.dispatch(bankAccountTransactionsActions.index());
+        expect(store.getActions()).toContainEqual({
+            type: "TRY_INDEX_BANKACCOUNTTRANSACTIONS_ITEMS",
+        });
+
+        await waitFor(() => {
+            expect(store.getActions()).toEqual([{
+                type: "TRY_INDEX_BANKACCOUNTTRANSACTIONS_ITEMS",
+            },
+            {
+                type: "INDEX_BANKACCOUNTTRANSACTIONS_ITEMS_SUCCEEDED",
+                data: dateGetReturn,
             }]);
         });
     });

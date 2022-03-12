@@ -19,7 +19,7 @@ __This project uses:__
 | ----- | ---- |
 | Circle CI | [![CircleCI](https://circleci.com/gh/sineverba/online-banking-frontend.svg?style=svg)](https://circleci.com/gh/sineverba/online-banking-frontend) |
 | Semaphore CI | [![Build Status](https://sineverba.semaphoreci.com/badges/online-banking-frontend.svg)](https://sineverba.semaphoreci.com/projects/online-banking-frontend) |
-| Sonarqube | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=sineverba_online-banking-frontend&metric=alert_status)](https://sonarcloud.io/dashboard?id=sineverba_online-banking-frontend) |
+| Sonarqube | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=online-banking-frontend&metric=alert_status)](https://sonarcloud.io/dashboard?id=online-banking-frontend) |
 | Coveralls | [![Coverage Status](https://coveralls.io/repos/github/sineverba/online-banking-frontend/badge.svg?branch=master)](https://coveralls.io/github/sineverba/online-banking-frontend?branch=master) |
 
 ## Local SonarQube
@@ -42,3 +42,10 @@ __This project uses:__
 ### Next Sonar scan
 
 + `make sonar`
+
+
+#### Interesting commits
+
+| Subject | Link |
+| ------- | ---- |
+| Remote pagination | |

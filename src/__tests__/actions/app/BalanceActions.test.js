@@ -33,6 +33,10 @@ describe('Test Balance Actions', () => {
                 'access-control-allow-credentials': 'true'
             })
             .get(apiResourceUrl)
+            .query({
+                page: 0,
+                perPage: 5,
+            })
             .reply(200, dateGetReturn);
         store.dispatch(balanceActions.index());
         expect(store.getActions()).toContainEqual({
@@ -57,6 +61,10 @@ describe('Test Balance Actions', () => {
                 'access-control-allow-credentials': 'true'
             })
             .get(apiResourceUrl)
+            .query({
+                page: 0,
+                perPage: 5,
+            })
             .reply(401);
         store.dispatch(balanceActions.index());
         expect(store.getActions()).toContainEqual({
