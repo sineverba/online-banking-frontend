@@ -6,6 +6,7 @@
 + Add Bank Account Transaction Page
 + Add Remote Pagination
 + Fetch APP version from package.json
++ Add remote sort by
 
 ## 0.2.0
 + Add CircleCI

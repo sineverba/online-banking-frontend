@@ -3,7 +3,7 @@ import { axiosInstance as api } from "./axiosInstance";
 
 export default class ApiCrud {
 
-    index(pageNumber, perPageNumber) {
+    index(pageNumber, perPageNumber, orderBy, orderWay) {
         
         let page = pageNumber ?? 1;
 
@@ -13,6 +13,8 @@ export default class ApiCrud {
         const params = {
             page: page,
             perPage: perPageNumber ?? 5,
+            orderBy: orderBy ?? "id",
+            orderWay: orderWay ?? "asc",
         };
         const queryString = new URLSearchParams(params).toString();
         return api.get(`${this.getBaseUrl()}?${queryString}`).then(result => result.data);

@@ -36,6 +36,8 @@ describe('Test Balance Actions', () => {
             .query({
                 page: 0,
                 perPage: 5,
+                orderBy: "id",
+                orderWay: "asc"
             })
             .reply(200, dateGetReturn);
         store.dispatch(balanceActions.index());
@@ -64,6 +66,8 @@ describe('Test Balance Actions', () => {
             .query({
                 page: 0,
                 perPage: 5,
+                orderBy: "id",
+                orderWay: "asc"
             })
             .reply(401);
         store.dispatch(balanceActions.index());

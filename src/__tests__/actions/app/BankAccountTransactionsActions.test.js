@@ -92,6 +92,8 @@ describe('Test Bank Account Transactions Actions', () => {
             .query({
                 page: 0,
                 perPage: 5,
+                orderBy: "id",
+                orderWay: "asc"
             })
             .reply(200, dateGetReturn);
         store.dispatch(bankAccountTransactionsActions.index());
@@ -120,6 +122,8 @@ describe('Test Bank Account Transactions Actions', () => {
             .query({
                 page: 0,
                 perPage: 5,
+                orderBy: "id",
+                orderWay: "asc"
             })
             .reply(401);
         store.dispatch(bankAccountTransactionsActions.index());
@@ -156,6 +160,8 @@ describe('Test Bank Account Transactions Actions', () => {
             .query({
                 page: 1,
                 perPage: 5,
+                orderBy: "id",
+                orderWay: "asc"
             })
             .reply(200, dateGetReturn);
         store.dispatch(bankAccountTransactionsActions.index());
