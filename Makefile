@@ -2,7 +2,7 @@ include .env
 
 IMAGE_NAME=registry.gitlab.com/private-registry/online-banking-frontend
 CONTAINER_NAME=online-banking-frontend
-APP_VERSION=0.2.0
+APP_VERSION=0.3.0
 
 dc:
 	docker-compose --profile dev up -d 
