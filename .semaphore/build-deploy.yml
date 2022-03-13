@@ -25,7 +25,7 @@ blocks:
         - name: Build and push to Gitlab
           commands:
             - checkout
-            - cp env.bak .env
+            - cp .env.bak .env
             - docker login -u semaphore -p $GITLAB_TOKEN $GITLAB_REGISTRY
             - docker build --tag $GITLAB_REGISTRY/private-registry/$GITLAB_IMAGE_NAME:latest --file ./Dockerfile "."
             - docker push $GITLAB_REGISTRY/private-registry/$GITLAB_IMAGE_NAME:latest

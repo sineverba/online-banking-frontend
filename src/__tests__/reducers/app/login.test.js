@@ -7,6 +7,7 @@ describe ('Login reducer', () => {
         accessToken: null,
         isLoading: false,
         items: [],
+        total: null,
     };
 
     it ('Test default state returns default values', () => {

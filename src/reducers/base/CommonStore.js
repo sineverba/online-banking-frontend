@@ -30,14 +30,37 @@ export default class CommonStore {
 
         const items = (state = [], { type, data } = {}) => {
             if (type === INDEX_ITEMS_SUCCEEDED) {
+                /**
+                 * Check if we have a structure like
+                 * {
+                 *  content: [...],
+                 *  last: ...
+                 *  first: ...
+                 * }
+                 */
+                if ('content' in data) {
+                    const {content} = data;
+                    return content;
+                }
                 return data;
             }
             return state;
         }
 
+        const total = (state = null, {type, data} = {}) => {
+            if (type === INDEX_ITEMS_SUCCEEDED) {
+                if("totalElements" in data) {
+                    const {totalElements} = data;
+                    return totalElements;
+                }
+            }
+            return state
+        }
+
         return {
             isLoading,
             items,
+            total,
         }
     }
 }

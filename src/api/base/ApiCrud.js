@@ -1,9 +1,23 @@
+import { STARTING_ZERO } from "../../utils/constants/constant";
 import { axiosInstance as api } from "./axiosInstance";
 
 export default class ApiCrud {
 
-    index() {
-        return api.get(`${this.getBaseUrl()}`).then(result => result.data);
+    index(pageNumber, perPageNumber, orderBy, orderWay) {
+        
+        let page = pageNumber ?? 1;
+
+        if (STARTING_ZERO) {
+            page = page - 1;
+        }
+        const params = {
+            page: page,
+            perPage: perPageNumber ?? 5,
+            orderBy: orderBy ?? "id",
+            orderWay: orderWay ?? "asc",
+        };
+        const queryString = new URLSearchParams(params).toString();
+        return api.get(`${this.getBaseUrl()}?${queryString}`).then(result => result.data);
     }
 
     post(payload) {
