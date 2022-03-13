@@ -9,12 +9,14 @@ export const BankAccountTransactionsPage = (props) => {
 
     const [pageNumber, setPageNumber] = useState(1);
     const [perPageNumber, setPerPageNumber] = useState(10);
+    const [orderBy, setOrderBy] = useState("transactionDate");
+    const [orderWay, setOrderWay] = useState("desc");
 
     const {items, index, total} = props;
 
     useEffect(() => {
-        index(pageNumber, perPageNumber);
-    }, [index, pageNumber, perPageNumber]);
+        index(pageNumber, perPageNumber, orderBy, orderWay);
+    }, [index, pageNumber, perPageNumber, orderBy, orderWay]);
 
     const columns = [
         {
@@ -29,14 +31,26 @@ export const BankAccountTransactionsPage = (props) => {
             sortable: true,
             sortField: "purpose",
             selector: row => row.purpose
-        }
+        },
+        {
+            name: "Date",
+            sortable: true,
+            sortField: "transactionDate",
+            selector: row => row.transactionDate
+        },
     ];
 
     const handlePerRowsChange = (e) => {
         setPerPageNumber(e);
     }
+
     const handlePageChange = (e) => {
         setPageNumber(e);
+    }
+
+    const handleSort = ({sortField}, sortDirection) => {
+        setOrderBy(sortField);
+        setOrderWay(sortDirection);
     }
 
     return (
@@ -56,6 +70,8 @@ export const BankAccountTransactionsPage = (props) => {
                         paginationTotalRows={total}
                         onChangeRowsPerPage={handlePerRowsChange}
 			            onChangePage={handlePageChange}
+                        sortServer
+                        onSort={handleSort}
                     />
                 </Col>
             </Row>
@@ -65,7 +81,7 @@ export const BankAccountTransactionsPage = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        index: (pageNumber, perPageNumber) => dispatch(bankAccountTranscationsActions.index(pageNumber, perPageNumber)),
+        index: (pageNumber, perPageNumber, orderBy, orderWay) => dispatch(bankAccountTranscationsActions.index(pageNumber, perPageNumber, orderBy, orderWay)),
     }
 }
 

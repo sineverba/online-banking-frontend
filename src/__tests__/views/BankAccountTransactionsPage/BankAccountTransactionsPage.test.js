@@ -72,4 +72,12 @@ describe('Test BankAccountTransactionsPage', () => {
         });
 
     });
+
+    it('Can handle remote sort', () => {
+        render(<BankAccountTransactionsPage store={store} />);
+
+        const headerColumn = screen.getByText('Amount');
+        fireEvent.click(headerColumn);
+
+    });
 })

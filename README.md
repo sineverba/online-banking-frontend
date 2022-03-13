@@ -42,10 +42,3 @@ __This project uses:__
 ### Next Sonar scan
 
 + `make sonar`
-
-
-#### Interesting commits
-
-| Subject | Link |
-| ------- | ---- |
-| Remote pagination | |

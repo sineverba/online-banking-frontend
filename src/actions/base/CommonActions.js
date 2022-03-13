@@ -21,7 +21,7 @@ export default class CommonActions {
         return this.api;
     }
 
-    index(pageNumber, perPageNumber) {
+    index(pageNumber, perPageNumber, orderBy, orderWay) {
         return dispatch => {
             dispatch(
                 {
@@ -29,7 +29,7 @@ export default class CommonActions {
                 }
             );
             return this.getApi()
-                .index(pageNumber, perPageNumber)
+                .index(pageNumber, perPageNumber, orderBy, orderWay)
                 .then(data => {
                     dispatch({
                         type: `INDEX_${this.getEntity()}_ITEMS_SUCCEEDED`,
