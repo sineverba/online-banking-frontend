@@ -1,4 +1,4 @@
-# Next version
+# 0.3.0
 + Fix Semaphore
 + Upgrade dependencies
 + Add `bank-account-transactions` api, reducer, page
