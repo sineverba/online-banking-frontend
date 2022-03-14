@@ -6,12 +6,13 @@ import Kpi from "../../components/Kpi";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEuroSign } from "@fortawesome/free-solid-svg-icons";
 import { actions as balanceActions } from "../../actions/app/BalanceActions";
+import { Loading } from "../../components/Loading";
 
 export const DashboardPage = (props) => {
 
     const [isMounted, setMounted] = useState(false);
 
-    const {items, index} = props;
+    const {items, index, isLoading} = props;
 
     useEffect(() => {
         if (!isMounted) {
@@ -19,6 +20,16 @@ export const DashboardPage = (props) => {
             index();
         }
     }, [isMounted, index])
+
+    const getBalance = () => {
+        if (isLoading) {
+            return <Loading />;
+        }
+        if (items.balance) {
+            return items.balance;
+        }
+        return 'N.A.';
+    }
 
     return (
         <Container fluid>
@@ -31,7 +42,7 @@ export const DashboardPage = (props) => {
                 <Col xs={12} md={6} lg={4}>
                     <Kpi
                         title="balance"
-                        value={items.balance ? items.balance : 'N.A.'}
+                        value={getBalance()}
                         icon={<FontAwesomeIcon icon={faEuroSign} className="fa-4x" />}
                     />
                 </Col>
@@ -49,6 +60,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = state => {
     return {
         items: state.balance.items,
+        isLoading: state.balance.isLoading,
     }
 };
 
