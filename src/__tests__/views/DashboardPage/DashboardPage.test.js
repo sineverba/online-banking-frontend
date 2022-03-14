@@ -28,6 +28,16 @@ describe('Test DashboardPage', () => {
         expect(title).toBeInTheDocument();
         const balance = screen.getByText(/1234.56/i);
         expect(balance).toBeInTheDocument();
-
     });
+
+    it('Can handle loading', () => {
+        let initialState = {
+            balance: {
+                isLoading: true
+            }
+        }
+        let store = mockStore(initialState);
+        const {container} = render(<DashboardPage store={store} />);
+        expect(container.getElementsByClassName('svg-inline--fa fa-spinner').length).toBe(1);
+    })
 })

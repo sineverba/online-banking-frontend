@@ -75,9 +75,19 @@ describe('Test BankAccountTransactionsPage', () => {
 
     it('Can handle remote sort', () => {
         render(<BankAccountTransactionsPage store={store} />);
-
         const headerColumn = screen.getByText('Amount');
         fireEvent.click(headerColumn);
 
     });
+
+    it('Can handle loading', () => {
+        let initialState = {
+            bankAccountTransactions: {
+                isLoading: true
+            }
+        }
+        let store = mockStore(initialState);
+        const {container} = render(<BankAccountTransactionsPage store={store} />);
+        expect(container.getElementsByClassName('svg-inline--fa fa-spinner').length).toBe(1);
+    })
 })
