@@ -22,6 +22,10 @@ __This project uses:__
 | Sonarqube | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=online-banking-frontend&metric=alert_status)](https://sonarcloud.io/dashboard?id=online-banking-frontend) |
 | Coveralls | [![Coverage Status](https://coveralls.io/repos/github/sineverba/online-banking-frontend/badge.svg?branch=master)](https://coveralls.io/github/sineverba/online-banking-frontend?branch=master) |
 
+## Setup
++ Copy .env.bak into .env
++ Change in `utils/constant` `TOTAL_ELEMENTS`
+
 ## Local SonarQube
 
 + Copy .env.bak into .env

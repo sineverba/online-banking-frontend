@@ -1,3 +1,5 @@
+import { TOTAL_ELEMENTS } from "../../utils/constants/constant";
+
 export default class CommonStore {
 
     create(entity) {
@@ -49,12 +51,11 @@ export default class CommonStore {
 
         const total = (state = null, {type, data} = {}) => {
             if (type === INDEX_ITEMS_SUCCEEDED) {
-                if("totalElements" in data) {
-                    const {totalElements} = data;
-                    return totalElements;
+                if(data.hasOwnProperty(TOTAL_ELEMENTS)) {
+                    return data[TOTAL_ELEMENTS];
                 }
             }
-            return state
+            return state;
         }
 
         return {

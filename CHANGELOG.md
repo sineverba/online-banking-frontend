@@ -1,5 +1,6 @@
 # Next version
 + Upgrade dependencies
++ Fetch get total key from constants
 
 ## 0.3.0
 + Fix Semaphore
