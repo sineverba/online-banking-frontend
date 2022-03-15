@@ -2,6 +2,7 @@
 + Upgrade dependencies
 + Fetch get total key from constants
 + Add loading
++ Add amount component
 
 ## 0.3.0
 + Fix Semaphore
