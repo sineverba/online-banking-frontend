@@ -5,6 +5,7 @@ import Title from "../../components/Title";
 import { actions as bankAccountTranscationsActions } from "../../actions/app/BankAccountTransactionsActions";
 import DataTable from "react-data-table-component";
 import Loading from "../../components/Loading";
+import Amount from "../../components/Amount";
 
 export const BankAccountTransactionsPage = (props) => {
 
@@ -24,8 +25,7 @@ export const BankAccountTransactionsPage = (props) => {
             name: 'Amount',
             sortable: true,
             sortField: 'amount',
-            selector: row => row.amount
-
+            selector: row => <Amount amount={row.amount} />
         },
         {
             name: "Purpose",
