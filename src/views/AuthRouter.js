@@ -2,7 +2,7 @@ import { connect } from "react-redux";
 import { Navigate } from "react-router-dom";
 import { PATH_DASHBOARD, PATH_HOME } from "../utils/constants/constant";
 
-export const AuthRouter = ({children, type, accessToken}) => {
+export const AuthRouter = ({ children, type, accessToken }) => {
     if (type === "private" && !accessToken) {
         return <Navigate to={PATH_HOME} />;
     }
@@ -14,6 +14,6 @@ export const AuthRouter = ({children, type, accessToken}) => {
 
 const mapStateToProps = (state) => ({
     accessToken: state.login.accessToken
-  })
-  
-  export default connect(mapStateToProps,null,)(AuthRouter);
+});
+
+export default connect(mapStateToProps, null,)(AuthRouter);
