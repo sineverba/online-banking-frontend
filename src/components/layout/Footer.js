@@ -1,6 +1,6 @@
 export const Footer = () => {
     return (
-        <footer className="sticky-footer">
+        <footer>
             <p>Copyright &copy; 2022</p>
         </footer>
     );
