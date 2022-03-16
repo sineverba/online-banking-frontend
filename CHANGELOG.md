@@ -3,6 +3,7 @@
 + Fetch get total key from constants
 + Add loading
 + Add amount component
++ Refactor login
 
 ## 0.3.0
 + Fix Semaphore

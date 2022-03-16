@@ -25,14 +25,14 @@ describe('Test Login Form', () => {
             }
         })
 
-        const button = screen.getByText(/submit/i)
+        const button = screen.getByRole('button')
         fireEvent.click(button);
     });
 
     it ('Should not handle click if fields are empty', () => {
 
         render(<LoginForm store={store} />);
-        const button = screen.getByText(/submit/i)
+        const button = screen.getByRole('button')
         fireEvent.click(button);
         
     });

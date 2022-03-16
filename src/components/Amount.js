@@ -2,9 +2,9 @@ import React from "react";
 
 export const Amount = ({amount}) => {
 
-    const getClassName = (amount) => {
+    const getClassName = (value) => {
         const className = "amount";
-        if (amount < 0) {
+        if (value < 0) {
             return `${className} text-danger`;
         }
         return className;

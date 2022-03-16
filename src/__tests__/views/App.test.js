@@ -42,7 +42,7 @@ describe('Test App', () => {
     
         let store = mockStore(initialState);
         render(<BrowserRouter><Provider store={store}><App /></Provider></BrowserRouter>);
-        const button = screen.getByText(/submit/i)
+        const button = screen.getByRole('button')
         expect(button).toBeInTheDocument();
     });
 });
