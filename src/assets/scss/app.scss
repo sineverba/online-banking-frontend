@@ -3,7 +3,7 @@
 @import '~bootstrap/scss/bootstrap.scss';
 
 #wrapper #content-wrapper {
-    background-color: #FFFFFF;
+    background-color: $white;
 }
 
 .with-background {
@@ -142,18 +142,10 @@ div.container-fluid {
 }
 
 footer {
-    background-color: $white;
-    margin-top: auto;
-    margin-bottom: auto;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
     p {
         text-align: center;
-        margin: 0;
-        font-size: 0.8rem;
+        font-size: 90%;
     }
-    
 }
 
 span.amount {
