@@ -103,24 +103,25 @@ form.form-login {
     }
 }
 
-div.container-fluid {
+div.container-login {
+    margin-top: 100px;
+    h1, p {
+        text-align: right;
+    }
     div.row {
-        div.col {
-            h1, p {
-                text-align: right;
-            }
-            div.container {
-                margin-top: 100px;
-                div.row {
-                    div.col-12 {
-                        background-color: white;
-                        padding: 25px;
-                    }
-                }
-            }
+        div.col-12 {
+            background-color: white;
+            padding: 25px;
         }
     }
 }
+
+h1.title {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 105%;
+}
+    
 
 .card-header {
     h1, h2 {
@@ -153,16 +154,15 @@ span.amount {
 }
 
 @media only screen and (max-width: 767px) {
-    div.container-fluid {
+    div.container-login {
+        margin-top: 10px;
+        h1, p {
+            text-align: center;
+        }
         div.row {
-            div.col {
-                h1, p {
-                    text-align: left;
-                    color: white;
-                }
-                div.container {
-                    margin-top: 10px;
-                }
+            div.col-12 {
+                background-color: white;
+                padding: 25px;
             }
         }
     }

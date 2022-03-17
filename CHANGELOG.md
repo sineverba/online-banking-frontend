@@ -5,6 +5,7 @@
 + Add amount component
 + Refactor login
 + Fix footer
++ Fix title
 
 ## 0.3.0
 + Fix Semaphore

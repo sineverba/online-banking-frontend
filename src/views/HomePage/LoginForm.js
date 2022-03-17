@@ -30,7 +30,7 @@ export const LoginForm = (props) => {
     }
 
     return (
-        <Container>
+        <Container className="container-login">
             <Row className="justify-content-md-center">
                 <Col xs={12} sm={6} lg="auto">
                     <h1>Welcome to BitBank!</h1>
