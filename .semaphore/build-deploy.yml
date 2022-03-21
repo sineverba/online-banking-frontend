@@ -9,20 +9,19 @@ agent:
 global_job_config:
   secrets:
     - name: ACCESS_TOKENS
-
   env_vars:
     - name: HEROKU_REGISTRY_IMAGE
       value: registry.heroku.com/bit-bank/web
     - name: HEROKU_APP
       value: bit-bank
+  prologue:
+    - checkout
+    - cp .env.bak .env
+    - npm install -g npm@8.5.4
 
 blocks:
   - name: "Build and deploy"
     task:
-      prologue:
-        - checkout
-        - cp .env.bak .env
-        - npm install -g npm@8.5.4
       jobs:
         - name: Deploy to Heroku
           commands:
