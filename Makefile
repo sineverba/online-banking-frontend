@@ -20,7 +20,7 @@ build:
 	docker build --tag $(IMAGE_NAME):$(APP_VERSION) --tag $(IMAGE_NAME):latest .
 
 spin:
-	docker container run -it --rm --publish 8080:80 --name $(CONTAINER_NAME) $(IMAGE_NAME):$(REACT_APP_VERSION)
+	docker container run -it --rm --publish 8080:80 --name $(CONTAINER_NAME) -e "PORT=8080" $(IMAGE_NAME):$(REACT_APP_VERSION)
 
 deploy:
 	docker push $(IMAGE_NAME):latest

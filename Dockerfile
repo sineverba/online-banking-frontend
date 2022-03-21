@@ -13,7 +13,5 @@ RUN apk update --no-cache && apk upgrade
 COPY --from=builder /app/build /usr/share/nginx/html
 # Copy nginx configuration
 COPY dockerfiles/nginx/app.conf /etc/nginx/conf.d/default.conf
-# Expose port
-EXPOSE 80
 # Start nginx
-CMD ["nginx", "-g", "daemon off;"]
+CMD sed -i -e 's/$PORT/'"$PORT"'/g' /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'
