@@ -15,9 +15,10 @@ global_job_config:
     - name: HEROKU_APP
       value: bit-bank
   prologue:
-    - checkout
-    - cp .env.bak .env
-    - npm install -g npm@8.5.4
+    commands:
+      - checkout
+      - cp .env.bak .env
+      - npm install -g npm@8.5.4
 
 blocks:
   - name: "Build and deploy"
