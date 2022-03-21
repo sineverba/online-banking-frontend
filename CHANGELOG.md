@@ -6,6 +6,7 @@
 + Refactor login
 + Fix footer
 + Fix title
++ Move deploy to Heroku, Netlify and Vercel
 
 ## 0.3.0
 + Fix Semaphore
