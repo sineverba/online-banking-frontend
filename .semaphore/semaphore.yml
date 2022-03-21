@@ -17,7 +17,8 @@ blocks:
 
   - name: Install dependencies
     skip:
-      when: "tag =~ '.*'"
+      #when: "tag =~ '.*'"
+      when: true
     task:
       jobs:
         - name: 'Install'
@@ -27,7 +28,8 @@ blocks:
 
   - name: Test
     skip:
-      when: "tag =~ '.*'"
+      #when: "tag =~ '.*'"
+      when: true
     task:
       jobs:
         - name: Test
@@ -37,7 +39,8 @@ blocks:
 
   - name: Coverage
     skip:
-      when: "tag =~ '.*'"
+      #when: "tag =~ '.*'"
+      when: true
     task:
       prologue:
         commands:
