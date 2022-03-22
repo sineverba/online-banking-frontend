@@ -1,9 +1,9 @@
-FROM node:16.14.0-alpine3.15 AS builder
+FROM node:16.14.2-alpine3.15 AS builder
 # Add a workdir directory
 WORKDIR /app
 # Install dependencies
 COPY . .
-RUN npm install npm@8.5.4 && npm install --production && npm run build
+RUN npm install npm@8.5.5 && npm install --production && npm run build
 
 # Use NGINX
 FROM nginx:1.21.6-alpine AS production
