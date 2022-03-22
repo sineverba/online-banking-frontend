@@ -2,6 +2,19 @@
 @import './kpi.scss';
 @import '~bootstrap/scss/bootstrap.scss';
 
+#wrapper #content-wrapper {
+    background-color: $white;
+}
+
+.with-background {
+    background-image: url(../../assets/images/background.jpg);
+    background-size: cover;
+    background-position: top;
+    min-height: 100%;
+    height: 100vh;
+    position: relative;
+}
+
 .sidebar-dark hr.sidebar-divider {
     border-top: 1px solid rgba(255, 255, 255, 0.97);
 }
@@ -83,24 +96,32 @@ div.sidebar {
     }
 }
 
-
-.form-login {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    max-width: 350px;
-    div:first-child {
-        margin-top: 0;
-    }
-    div {
-        margin-top: 15px;
-    }
+form.form-login {
     button {
-        margin-top: 35px;
         width: 100%;
+        margin-top: 10px;
     }
 }
+
+div.container-login {
+    margin-top: 100px;
+    h1, p {
+        text-align: right;
+    }
+    div.row {
+        div.col-12 {
+            background-color: white;
+            padding: 25px;
+        }
+    }
+}
+
+h1.title {
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 105%;
+}
+    
 
 .card-header {
     h1, h2 {
@@ -122,18 +143,29 @@ div.sidebar {
 }
 
 footer {
-    background-color: $white;
-    margin-top: auto;
-    margin-bottom: auto;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
     p {
         text-align: center;
-        margin: 0;
-        font-size: 0.8rem;
+        font-size: 90%;
     }
-    
+}
+
+span.amount {
+    font-weight: bold;
+}
+
+@media only screen and (max-width: 767px) {
+    div.container-login {
+        margin-top: 10px;
+        h1, p {
+            text-align: center;
+        }
+        div.row {
+            div.col-12 {
+                background-color: white;
+                padding: 25px;
+            }
+        }
+    }
 }
 
 @media only screen and (min-width: 768px) {

@@ -5,8 +5,8 @@ Online Banking Demo Frontend
 
 | Service | Github link | Demo |
 | ------- | ----------- | ---- |
-| Backend | [https://github.com/sineverba/online-banking-backend](https://github.com/sineverba/online-banking-backend) | [Swagger](https://online-banking-backend.k2p.it) |
-| Frontend | [https://github.com/sineverba/online-banking-frontend](https://github.com/sineverba/online-banking-frontend) | [Netlify](TODO) - [Vercel](TODO) |
+| Backend | [https://github.com/sineverba/online-banking-backend](https://github.com/sineverba/online-banking-backend) | [Swagger](https://online-banking-backend-api.herokuapp.com/swagger-ui/index.html) |
+| Frontend | [https://github.com/sineverba/online-banking-frontend](https://github.com/sineverba/online-banking-frontend) | [Netlify](https://bit-bank.netlify.app/) - [Vercel](https://online-banking-frontend.vercel.app/) - [Heroku](https://bit-bank.herokuapp.com/) |
 
 __This project uses:__
 
@@ -21,6 +21,10 @@ __This project uses:__
 | Semaphore CI | [![Build Status](https://sineverba.semaphoreci.com/badges/online-banking-frontend.svg)](https://sineverba.semaphoreci.com/projects/online-banking-frontend) |
 | Sonarqube | [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=online-banking-frontend&metric=alert_status)](https://sonarcloud.io/dashboard?id=online-banking-frontend) |
 | Coveralls | [![Coverage Status](https://coveralls.io/repos/github/sineverba/online-banking-frontend/badge.svg?branch=master)](https://coveralls.io/github/sineverba/online-banking-frontend?branch=master) |
+
+## Setup
++ Copy .env.bak into .env
++ Change in `utils/constant` `TOTAL_ELEMENTS`
 
 ## Local SonarQube
 

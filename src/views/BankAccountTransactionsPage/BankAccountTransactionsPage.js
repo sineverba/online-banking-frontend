@@ -4,6 +4,7 @@ import { Row, Col, Container } from "react-bootstrap";
 import Title from "../../components/Title";
 import { actions as bankAccountTranscationsActions } from "../../actions/app/BankAccountTransactionsActions";
 import DataTable from "react-data-table-component";
+import Amount from "../../components/Amount";
 
 export const BankAccountTransactionsPage = (props) => {
 
@@ -12,7 +13,7 @@ export const BankAccountTransactionsPage = (props) => {
     const [orderBy, setOrderBy] = useState("transactionDate");
     const [orderWay, setOrderWay] = useState("desc");
 
-    const {items, index, total} = props;
+    const { items, index, total, isLoading } = props;
 
     useEffect(() => {
         index(pageNumber, perPageNumber, orderBy, orderWay);
@@ -23,8 +24,7 @@ export const BankAccountTransactionsPage = (props) => {
             name: 'Amount',
             sortable: true,
             sortField: 'amount',
-            selector: row => row.amount
-
+            selector: row => <Amount amount={row.amount} />
         },
         {
             name: "Purpose",
@@ -48,7 +48,7 @@ export const BankAccountTransactionsPage = (props) => {
         setPageNumber(e);
     }
 
-    const handleSort = ({sortField}, sortDirection) => {
+    const handleSort = ({ sortField }, sortDirection) => {
         setOrderBy(sortField);
         setOrderWay(sortDirection);
     }
@@ -64,12 +64,13 @@ export const BankAccountTransactionsPage = (props) => {
                 <Col>
                     <DataTable
                         columns={columns}
-                        data={items}
+                        data={items ? items : []}
                         pagination
                         paginationServer
                         paginationTotalRows={total}
+                        progressPending={isLoading}
                         onChangeRowsPerPage={handlePerRowsChange}
-			            onChangePage={handlePageChange}
+                        onChangePage={handlePageChange}
                         sortServer
                         onSort={handleSort}
                     />
@@ -89,6 +90,7 @@ const mapStateToProps = state => {
     return {
         items: state.bankAccountTransactions.items,
         total: state.bankAccountTransactions.total,
+        isLoading: state.bankAccountTransactions.isLoading,
     }
 };
 

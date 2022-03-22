@@ -1,7 +1,6 @@
 version: "3.8"
 services:
   sonarqube:
-    profiles: ["all"]
     image: sonarqube:9.2.4-community
     container_name: online-banking-frontend-sonarqube
     volumes:
@@ -15,7 +14,6 @@ services:
       - online-banking-frontend
 
   sonarscanner:
-    profiles: ["dev", "all"]
     image: sonarsource/sonar-scanner-cli:4.6
     container_name: online-banking-frontend-sonarscanner
     volumes:

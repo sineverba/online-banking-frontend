@@ -1,4 +1,15 @@
-# 0.3.0
+# 0.4.0
++ Upgrade dependencies
++ Fetch get total key from constants
++ Add loading
++ Add amount component
++ Refactor login
++ Fix footer
++ Fix title
++ Move deploy to Heroku, Netlify and Vercel
++ Fix datatable
+
+## 0.3.0
 + Fix Semaphore
 + Upgrade dependencies
 + Add `bank-account-transactions` api, reducer, page

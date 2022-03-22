@@ -75,9 +75,20 @@ describe('Test BankAccountTransactionsPage', () => {
 
     it('Can handle remote sort', () => {
         render(<BankAccountTransactionsPage store={store} />);
-
         const headerColumn = screen.getByText('Amount');
         fireEvent.click(headerColumn);
-
     });
+
+    it('Can handle empty items', () => {
+        const emptyState = {
+            bankAccountTransactions: {
+                items: null
+            }
+        };
+        store = mockStore(emptyState);
+        render(<BankAccountTransactionsPage store={store} />);
+        const headerColumn = screen.getByText('There are no records to display');
+        fireEvent.click(headerColumn);
+    });
+
 })

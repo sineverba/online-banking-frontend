@@ -9,36 +9,36 @@ agent:
 global_job_config:
   secrets:
     - name: ACCESS_TOKENS
-    - name: VPS
-
   env_vars:
-    - name: GITLAB_REGISTRY
-      value: registry.gitlab.com
-    - name: GITLAB_IMAGE_NAME
-      value: online-banking-frontend
+    - name: HEROKU_REGISTRY_IMAGE
+      value: registry.heroku.com/bit-bank/web
+    - name: HEROKU_APP
+      value: bit-bank
+  prologue:
+    commands:
+      - checkout
+      - cp .env.bak .env
+      - npm install -g npm@8.5.4
 
 blocks:
-  - name: "Build and deploy image"
-    dependencies: []
+  - name: "Build and deploy"
     task:
       jobs:
-        - name: Build and push to Gitlab
+        - name: Deploy to Heroku
           commands:
-            - checkout
-            - cp .env.bak .env
-            - docker login -u semaphore -p $GITLAB_TOKEN $GITLAB_REGISTRY
-            - docker build --tag $GITLAB_REGISTRY/private-registry/$GITLAB_IMAGE_NAME:latest --file ./Dockerfile "."
-            - docker push $GITLAB_REGISTRY/private-registry/$GITLAB_IMAGE_NAME:latest
-  - name: "Deploy to VPS"
-    dependencies: ["Build and deploy image"]
-    task:
-      jobs:
-        - name: Deploy to VPS
+            - docker build --tag $HEROKU_REGISTRY_IMAGE --file ./Dockerfile "."
+            - docker login -u _ -p $HEROKU_API_KEY registry.heroku.com
+            - docker push $HEROKU_REGISTRY_IMAGE
+            - curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+            - heroku container:release web -a $HEROKU_APP
+        - name: Deploy to Netlify
           commands:
-            - ssh-keyscan -p 7654 -H $VPS_DOC_URL >> ~/.ssh/known_hosts
-            - chmod 0600 ~/.ssh/id_rsa_semaphoreci
-            - ssh-add ~/.ssh/id_rsa_semaphoreci
-            - ssh -t $VPS_DOC_USERNAME@$VPS_DOC_URL -p 7654 "cd $GITLAB_IMAGE_NAME && docker-compose stop && exit"
-            - ssh -t $VPS_DOC_USERNAME@$VPS_DOC_URL -p 7654 "docker container rm $GITLAB_IMAGE_NAME && docker image rm $GITLAB_REGISTRY/private-registry/$GITLAB_IMAGE_NAME:latest && exit"
-            - ssh -t $VPS_DOC_USERNAME@$VPS_DOC_URL -p 7654 "docker pull $GITLAB_REGISTRY/private-registry/$GITLAB_IMAGE_NAME:latest && exit"
-            - ssh -t $VPS_DOC_USERNAME@$VPS_DOC_URL -p 7654 "cd $GITLAB_IMAGE_NAME && docker-compose up -d && exit"
+            - npm install netlify-cli -g
+            - npm ci
+            - npm run build
+            - netlify deploy -s $NETLIFY_BITBANK_SITE_ID --auth $NETLIFY_ACCESS_TOKEN -p --dir ./build
+        - name: Deploy to Vercel
+          commands:
+            - npm install -g vercel
+            - npm ci
+            - VERCEL_PROJECT_ID=$VERCEL_BITBANK_PROJECT_ID VERCEL_ORG_ID=$VERCEL_ORG_ID npx vercel --token $VERCEL_TOKEN --confirm --prod
