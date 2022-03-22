@@ -4,11 +4,8 @@ IMAGE_NAME=registry.gitlab.com/private-registry/online-banking-frontend
 CONTAINER_NAME=online-banking-frontend
 APP_VERSION=0.3.0
 
-dc:
-	docker-compose --profile dev up -d 
-
 sonar:
-	docker-compose start sonarscanner && docker-compose logs -f sonarscanner
+	docker-compose up sonarscanner && docker-compose logs -f sonarscanner
 
 upgrade:
 	npx ncu -u
