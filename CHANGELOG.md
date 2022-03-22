@@ -1,4 +1,4 @@
-# Next version
+# 0.4.0
 + Upgrade dependencies
 + Fetch get total key from constants
 + Add loading
