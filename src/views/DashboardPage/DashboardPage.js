@@ -15,6 +15,7 @@ export const DashboardPage = (props) => {
     const {items, index, isLoading} = props;
 
     useEffect(() => {
+        document.title = `${process.env.REACT_APP_NAME} - Dashboard`;
         if (!isMounted) {
             setMounted(true);
             index();
