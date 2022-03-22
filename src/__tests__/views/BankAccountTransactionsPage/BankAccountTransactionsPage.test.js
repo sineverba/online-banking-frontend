@@ -77,17 +77,18 @@ describe('Test BankAccountTransactionsPage', () => {
         render(<BankAccountTransactionsPage store={store} />);
         const headerColumn = screen.getByText('Amount');
         fireEvent.click(headerColumn);
-
     });
 
-    it('Can handle loading', () => {
-        let initialState = {
+    it('Can handle empty items', () => {
+        const emptyState = {
             bankAccountTransactions: {
-                isLoading: true
+                items: null
             }
-        }
-        let store = mockStore(initialState);
-        const {container} = render(<BankAccountTransactionsPage store={store} />);
-        expect(container.getElementsByClassName('svg-inline--fa fa-spinner').length).toBe(1);
-    })
+        };
+        store = mockStore(emptyState);
+        render(<BankAccountTransactionsPage store={store} />);
+        const headerColumn = screen.getByText('There are no records to display');
+        fireEvent.click(headerColumn);
+    });
+
 })

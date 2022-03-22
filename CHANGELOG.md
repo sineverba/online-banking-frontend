@@ -7,6 +7,7 @@
 + Fix footer
 + Fix title
 + Move deploy to Heroku, Netlify and Vercel
++ Fix datatable
 
 ## 0.3.0
 + Fix Semaphore

@@ -4,7 +4,6 @@ import { Row, Col, Container } from "react-bootstrap";
 import Title from "../../components/Title";
 import { actions as bankAccountTranscationsActions } from "../../actions/app/BankAccountTransactionsActions";
 import DataTable from "react-data-table-component";
-import Loading from "../../components/Loading";
 import Amount from "../../components/Amount";
 
 export const BankAccountTransactionsPage = (props) => {
@@ -63,23 +62,18 @@ export const BankAccountTransactionsPage = (props) => {
             </Row>
             <Row>
                 <Col>
-                    {
-                        isLoading ?
-                            <Loading />
-                            :
-
-                            <DataTable
-                                columns={columns}
-                                data={items}
-                                pagination
-                                paginationServer
-                                paginationTotalRows={total}
-                                onChangeRowsPerPage={handlePerRowsChange}
-                                onChangePage={handlePageChange}
-                                sortServer
-                                onSort={handleSort}
-                            />
-                    }
+                    <DataTable
+                        columns={columns}
+                        data={items ? items : []}
+                        pagination
+                        paginationServer
+                        paginationTotalRows={total}
+                        progressPending={isLoading}
+                        onChangeRowsPerPage={handlePerRowsChange}
+                        onChangePage={handlePageChange}
+                        sortServer
+                        onSort={handleSort}
+                    />
                 </Col>
             </Row>
         </Container>
