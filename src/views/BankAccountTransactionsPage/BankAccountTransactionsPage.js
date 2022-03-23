@@ -16,6 +16,7 @@ export const BankAccountTransactionsPage = (props) => {
     const { items, index, total, isLoading } = props;
 
     useEffect(() => {
+        document.title = `${process.env.REACT_APP_NAME} - Bank Account Transactions`;
         index(pageNumber, perPageNumber, orderBy, orderWay);
     }, [index, pageNumber, perPageNumber, orderBy, orderWay]);
 

@@ -1,5 +1,6 @@
 # Next version
 + Upgrade dependencies
++ Change documen title
 
 ## 0.4.0
 + Upgrade dependencies
