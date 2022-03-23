@@ -1,6 +1,7 @@
 # Next version
 + Upgrade dependencies
-+ Change documen title
++ Change document title
++ Add date component
 
 ## 0.4.0
 + Upgrade dependencies
