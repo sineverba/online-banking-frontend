@@ -5,7 +5,7 @@ CONTAINER_NAME=online-banking-frontend
 APP_VERSION=0.4.0
 
 sonar:
-	docker-compose up sonarscanner && docker-compose logs -f sonarscanner
+	docker-compose up sonarscanner
 
 upgrade:
 	npx ncu -u
