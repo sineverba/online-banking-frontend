@@ -2,6 +2,7 @@
 + Upgrade dependencies
 + Change document title
 + Add date component
++ Refactor date visualization on bank account transactions page
 
 ## 0.4.0
 + Upgrade dependencies

@@ -5,6 +5,7 @@ import Title from "../../components/Title";
 import { actions as bankAccountTranscationsActions } from "../../actions/app/BankAccountTransactionsActions";
 import DataTable from "react-data-table-component";
 import Amount from "../../components/Amount";
+import Date from "../../components/Date";
 
 export const BankAccountTransactionsPage = (props) => {
 
@@ -37,7 +38,7 @@ export const BankAccountTransactionsPage = (props) => {
             name: "Date",
             sortable: true,
             sortField: "transactionDate",
-            selector: row => row.transactionDate
+            selector: row => <Date date={row.transactionDate} />
         },
     ];
 
