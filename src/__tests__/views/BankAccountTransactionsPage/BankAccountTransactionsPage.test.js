@@ -31,7 +31,7 @@ const initialState = {
                 "id": 34,
                 "amount": -10.00,
                 "purpose": "Netlify Monthly Subscription",
-                "transactionDate": "2022-03-09T12:31:32.621767"
+                "transactionDate": "2022-03-10T12:31:32.621767"
             },
             {
                 "id": 33,
@@ -58,6 +58,12 @@ describe('Test BankAccountTransactionsPage', () => {
         expect(purpose).toBeInTheDocument();
         const amount = screen.getByText(/1234.56/i);
         expect(amount).toBeInTheDocument();
+    });
+
+    it('Can render local date', () => {
+        render(<BankAccountTransactionsPage store={store} />);
+        const date = screen.getByText(/09\/03\/2022/i);
+        expect(date).toBeInTheDocument();
     });
 
     it('Can handlePerRowsChange', () => {
