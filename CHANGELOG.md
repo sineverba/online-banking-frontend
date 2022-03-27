@@ -3,6 +3,7 @@
 + Change document title
 + Add date component
 + Refactor date visualization on bank account transactions page
++ Create payment form
 
 ## 0.4.0
 + Upgrade dependencies
