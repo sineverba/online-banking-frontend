@@ -5,6 +5,7 @@
 + Refactor date visualization on bank account transactions page
 + Create payment form
 + Create toolbar
++ Create modalpopup
 
 ## 0.4.0
 + Upgrade dependencies
