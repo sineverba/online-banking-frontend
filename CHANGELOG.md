@@ -4,6 +4,7 @@
 + Add date component
 + Refactor date visualization on bank account transactions page
 + Create payment form
++ Create toolbar
 
 ## 0.4.0
 + Upgrade dependencies
