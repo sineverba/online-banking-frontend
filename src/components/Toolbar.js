@@ -8,7 +8,10 @@ export const Toolbar = ({ data }) => {
                     return (<Button
                         key={index}
                         onClick={item.handleProp}
-                        id={item.value}>{item.icon}
+                        id={item.value}
+                        variant={item.variant}>
+                            <span>{item.icon}</span>
+                            <span>{item.label}</span>
                     </Button>);
                 })
             }

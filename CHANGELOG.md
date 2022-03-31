@@ -6,6 +6,7 @@
 + Create payment form
 + Create toolbar
 + Create modalpopup
++ Add Toolbar to the page
 
 ## 0.4.0
 + Upgrade dependencies
