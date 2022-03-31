@@ -9,6 +9,7 @@ import Date from "../../components/Date";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEuroSign } from "@fortawesome/free-solid-svg-icons";
 import Toolbar from "../../components/Toolbar";
+import ModalPopup from "../../components/ModalPopup";
 
 export const BankAccountTransactionsPage = (props) => {
 
@@ -16,6 +17,7 @@ export const BankAccountTransactionsPage = (props) => {
     const [perPageNumber, setPerPageNumber] = useState(10);
     const [orderBy, setOrderBy] = useState("transactionDate");
     const [orderWay, setOrderWay] = useState("desc");
+    const [show, setShow] = useState(false);
 
     const { items, index, total, isLoading } = props;
 
@@ -61,14 +63,21 @@ export const BankAccountTransactionsPage = (props) => {
     const getToolbar = () => {
         return [
             {
-                handleProp: null,
+                handleProp: openModalPopup,
                 value: null,
                 variant: "success",
                 label: "make a payment",
                 icon: <FontAwesomeIcon icon={faEuroSign} />
             }
-
         ];
+    }
+
+    const openModalPopup = () => {
+        setShow(true);
+    }
+
+    const handleClick = () => {
+        setShow(false);
     }
 
     return (
@@ -99,6 +108,11 @@ export const BankAccountTransactionsPage = (props) => {
                     />
                 </Col>
             </Row>
+            <ModalPopup
+                show={show}
+                onHandleClick={handleClick}
+            >
+            </ModalPopup>
         </Container>
     )
 }

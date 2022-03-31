@@ -3,7 +3,7 @@ import { Button, Modal, Tab, Tabs } from "react-bootstrap";
 export const ModalPopup = (props) => {
     return (
         <Modal show={props.show}>
-            <Modal.Header closeButton>
+            <Modal.Header closeButton onClick={props.onHandleClick}>
                 <Modal.Title>{props.title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
