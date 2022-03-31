@@ -153,6 +153,21 @@ span.amount {
     font-weight: bold;
 }
 
+button {
+    span, span+span {
+        display: block;
+    }
+    span {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 90%;
+        svg {
+            font-size: 120%;
+        }
+    }
+}
+
 @media only screen and (max-width: 767px) {
     div.container-login {
         margin-top: 10px;

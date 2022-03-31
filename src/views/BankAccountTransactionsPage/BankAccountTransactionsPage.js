@@ -6,6 +6,9 @@ import { actions as bankAccountTranscationsActions } from "../../actions/app/Ban
 import DataTable from "react-data-table-component";
 import Amount from "../../components/Amount";
 import Date from "../../components/Date";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEuroSign } from "@fortawesome/free-solid-svg-icons";
+import Toolbar from "../../components/Toolbar";
 
 export const BankAccountTransactionsPage = (props) => {
 
@@ -55,11 +58,29 @@ export const BankAccountTransactionsPage = (props) => {
         setOrderWay(sortDirection);
     }
 
+    const getToolbar = () => {
+        return [
+            {
+                handleProp: null,
+                value: null,
+                variant: "success",
+                label: "make a payment",
+                icon: <FontAwesomeIcon icon={faEuroSign} />
+            }
+
+        ];
+    }
+
     return (
         <Container fluid>
             <Row>
                 <Col>
                     <Title label="Bank Account Transactions" />
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                    <Toolbar data={getToolbar()} />
                 </Col>
             </Row>
             <Row>
