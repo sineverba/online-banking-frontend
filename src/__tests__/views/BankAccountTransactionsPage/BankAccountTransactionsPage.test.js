@@ -1,4 +1,5 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import ModalPopup from '../../../components/ModalPopup';
@@ -99,13 +100,13 @@ describe('Test BankAccountTransactionsPage', () => {
     });
 
     it('Can handle open modal', () => {
-        render(<BankAccountTransactionsPage store={store} />);
+        render(<Provider store={store}><BankAccountTransactionsPage /></Provider>);
         const makePayment = screen.getByText(/make a payment/i);
         fireEvent.click(makePayment);
     })
 
     it('Can handle close modal', () => {
-        render(<BankAccountTransactionsPage store={store} />);
+        render(<Provider store={store}><BankAccountTransactionsPage /></Provider>);
         const makePayment = screen.getByText(/make a payment/i);
         fireEvent.click(makePayment);
         const button = screen.getByText(/close/i);

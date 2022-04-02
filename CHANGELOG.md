@@ -8,6 +8,7 @@
 + Create modalpopup
 + Add Toolbar to the page
 + Open modal popup
++ Insert form into modal
 
 ## 0.4.0
 + Upgrade dependencies

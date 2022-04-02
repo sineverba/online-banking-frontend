@@ -12,7 +12,7 @@ export const Payments = (props) => {
         e.preventDefault();
         if (amount && purpose && amount !== "" && purpose !== "") {
             const payload = {
-                amount: amount,
+                amount: -amount,
                 purpose: purpose,
             };
             props.post(payload);
@@ -38,9 +38,11 @@ export const Payments = (props) => {
                 <Form.Label>Purpose</Form.Label>
                 <Form.Control type="text" placeholder="purpose" onChange={handleChange} />
             </Form.Group>
-            <Button variant="primary" type="submit" size="lg" onClick={handleClick}>
-                Send payment
-            </Button>
+            <div className="d-grid">
+                <Button variant="success" type="submit" onClick={handleClick}>
+                    Send payment
+                </Button>
+            </div>
         </Form>
     )
 }
