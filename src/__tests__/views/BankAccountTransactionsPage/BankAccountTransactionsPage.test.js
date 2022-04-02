@@ -1,6 +1,7 @@
 import { render, screen, fireEvent } from '@testing-library/react';
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
+import ModalPopup from '../../../components/ModalPopup';
 import BankAccountTransactionsPage from "../../../views/BankAccountTransactionsPage/BankAccountTransactionsPage";
 
 const middlewares = [thunk];
@@ -96,5 +97,19 @@ describe('Test BankAccountTransactionsPage', () => {
         const headerColumn = screen.getByText('There are no records to display');
         fireEvent.click(headerColumn);
     });
+
+    it('Can handle open modal', () => {
+        render(<BankAccountTransactionsPage store={store} />);
+        const makePayment = screen.getByText(/make a payment/i);
+        fireEvent.click(makePayment);
+    })
+
+    it('Can handle close modal', () => {
+        render(<BankAccountTransactionsPage store={store} />);
+        const makePayment = screen.getByText(/make a payment/i);
+        fireEvent.click(makePayment);
+        const button = screen.getByText(/close/i);
+        fireEvent.click(button);
+    })
 
 })
