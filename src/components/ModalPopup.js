@@ -7,7 +7,7 @@ export const ModalPopup = (props) => {
                 <Modal.Title>{props.title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Tabs defaultActiveKey="detail">
+                <Tabs defaultActiveKey="payment">
                     {
                         props.tabs && props.tabs.map((item, index) => {
                             return (

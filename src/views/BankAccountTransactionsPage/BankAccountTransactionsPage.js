@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEuroSign } from "@fortawesome/free-solid-svg-icons";
 import Toolbar from "../../components/Toolbar";
 import ModalPopup from "../../components/ModalPopup";
+import PaymentsForm from "../PaymentsPage/PaymentsForm";
 
 export const BankAccountTransactionsPage = (props) => {
 
@@ -79,6 +80,15 @@ export const BankAccountTransactionsPage = (props) => {
     const handleClick = () => {
         setShow(false);
     }
+    const buildTabsForModal = () => {
+        return [
+            {
+                tabEventKey: "payment",
+                tabTitle: "make a payment",
+                children: <PaymentsForm />,
+            },
+        ];
+    }
 
     return (
         <Container fluid>
@@ -111,6 +121,7 @@ export const BankAccountTransactionsPage = (props) => {
             <ModalPopup
                 show={show}
                 onHandleClick={handleClick}
+                tabs={buildTabsForModal()}
             >
             </ModalPopup>
         </Container>
