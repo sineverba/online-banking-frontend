@@ -1,4 +1,4 @@
-# Next version
+# 0.5.0
 + Upgrade dependencies
 + Change document title
 + Add date component
