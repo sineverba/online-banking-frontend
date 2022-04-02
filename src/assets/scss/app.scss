@@ -153,6 +153,37 @@ span.amount {
     font-weight: bold;
 }
 
+button {
+    span, span+span {
+        display: block;
+    }
+    span {
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: bold;
+        font-size: 90%;
+        svg {
+            font-size: 120%;
+        }
+    }
+}
+
+div.d-grid {
+    button {
+        margin-top: 20px
+    }
+}
+
+label.form-label {
+    margin-top: 10px;
+}
+
+button.nav-link {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: 90%;
+}
+
 @media only screen and (max-width: 767px) {
     div.container-login {
         margin-top: 10px;

@@ -1,4 +1,16 @@
-# 0.4.0
+# 0.5.0
++ Upgrade dependencies
++ Change document title
++ Add date component
++ Refactor date visualization on bank account transactions page
++ Create payment form
++ Create toolbar
++ Create modalpopup
++ Add Toolbar to the page
++ Open modal popup
++ Insert form into modal
+
+## 0.4.0
 + Upgrade dependencies
 + Fetch get total key from constants
 + Add loading

@@ -1,6 +1,8 @@
 import { render, screen, fireEvent } from '@testing-library/react';
+import { Provider } from 'react-redux';
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
+import ModalPopup from '../../../components/ModalPopup';
 import BankAccountTransactionsPage from "../../../views/BankAccountTransactionsPage/BankAccountTransactionsPage";
 
 const middlewares = [thunk];
@@ -31,7 +33,7 @@ const initialState = {
                 "id": 34,
                 "amount": -10.00,
                 "purpose": "Netlify Monthly Subscription",
-                "transactionDate": "2022-03-09T12:31:32.621767"
+                "transactionDate": "2022-03-10T12:31:32.621767"
             },
             {
                 "id": 33,
@@ -58,6 +60,12 @@ describe('Test BankAccountTransactionsPage', () => {
         expect(purpose).toBeInTheDocument();
         const amount = screen.getByText(/1234.56/i);
         expect(amount).toBeInTheDocument();
+    });
+
+    it('Can render local date', () => {
+        render(<BankAccountTransactionsPage store={store} />);
+        const date = screen.getByText(/09\/03\/2022/i);
+        expect(date).toBeInTheDocument();
     });
 
     it('Can handlePerRowsChange', () => {
@@ -90,5 +98,19 @@ describe('Test BankAccountTransactionsPage', () => {
         const headerColumn = screen.getByText('There are no records to display');
         fireEvent.click(headerColumn);
     });
+
+    it('Can handle open modal', () => {
+        render(<Provider store={store}><BankAccountTransactionsPage /></Provider>);
+        const makePayment = screen.getByText(/make a payment/i);
+        fireEvent.click(makePayment);
+    })
+
+    it('Can handle close modal', () => {
+        render(<Provider store={store}><BankAccountTransactionsPage /></Provider>);
+        const makePayment = screen.getByText(/make a payment/i);
+        fireEvent.click(makePayment);
+        const button = screen.getByText(/close/i);
+        fireEvent.click(button);
+    })
 
 })
