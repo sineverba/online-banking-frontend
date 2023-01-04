@@ -1,6 +1,9 @@
 # Next version
 + Upgrade dependencies
 
+## 0.5.1
++ Change backend URL
+
 ## 0.5.0
 + Upgrade dependencies
 + Change document title

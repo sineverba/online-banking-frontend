@@ -9,11 +9,6 @@ agent:
 global_job_config:
   secrets:
     - name: ACCESS_TOKENS
-  env_vars:
-    - name: HEROKU_REGISTRY_IMAGE
-      value: registry.heroku.com/bit-bank/web
-    - name: HEROKU_APP
-      value: bit-bank
   prologue:
     commands:
       - checkout
@@ -24,13 +19,6 @@ blocks:
   - name: "Build and deploy"
     task:
       jobs:
-        - name: Deploy to Heroku
-          commands:
-            - docker build --tag $HEROKU_REGISTRY_IMAGE --file ./Dockerfile "."
-            - docker login -u _ -p $HEROKU_API_KEY registry.heroku.com
-            - docker push $HEROKU_REGISTRY_IMAGE
-            - curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
-            - heroku container:release web -a $HEROKU_APP
         - name: Deploy to Netlify
           commands:
             - npm install netlify-cli -g
