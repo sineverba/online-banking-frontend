@@ -5,8 +5,8 @@ Online Banking Demo Frontend
 
 | Service | Github link | Demo |
 | ------- | ----------- | ---- |
-| Backend | [https://github.com/sineverba/online-banking-backend](https://github.com/sineverba/online-banking-backend) | [Swagger](https://online-banking-backend-api.herokuapp.com/swagger-ui/index.html) |
-| Frontend | [https://github.com/sineverba/online-banking-frontend](https://github.com/sineverba/online-banking-frontend) | [Netlify](https://bit-bank.netlify.app/) - [Vercel](https://online-banking-frontend.vercel.app/) - [Heroku](https://bit-bank.herokuapp.com/) |
+| Backend | [https://github.com/sineverba/online-banking-backend](https://github.com/sineverba/online-banking-backend) | [Swagger](https://bitbankapi.k2p.it/swagger-ui/index.html) |
+| Frontend | [https://github.com/sineverba/online-banking-frontend](https://github.com/sineverba/online-banking-frontend) | [Netlify](https://bit-bank.netlify.app/) - [Vercel](https://online-banking-frontend.vercel.app/) |
 
 __This project uses:__
 
@@ -25,24 +25,3 @@ __This project uses:__
 ## Setup
 + Copy .env.bak into .env
 + Change in `utils/constant` `TOTAL_ELEMENTS`
-
-## Local SonarQube
-
-+ Copy .env.bak into .env
-+ Start containers (`docker-compose up -d`)
-+ Connect to SonarQube (at `http://localhost:9000")
-+ First credentials are `admin // admin`
-+ To associate a new project
-  + Manually
-  + Project Display Name: Online Banking Backend
-  + Project Key: online-banking-backend
-  + Setup
-  + Locally
-  + Generate a token called `online-banking-backend`
-  + In `.env`, place as `SONAR_LOGIN` the token value
-  + Continue > Run analyses ... > Other > Linux
-  + Launch scanner with `make sonar`
-
-### Next Sonar scan
-
-+ `make sonar`
