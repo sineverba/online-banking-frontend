@@ -1,5 +1,6 @@
 # Next version
 + Upgrade dependencies
++ Migrate to RTK Query
 
 ## 0.5.1
 + Change backend URL
