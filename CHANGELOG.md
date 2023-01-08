@@ -1,6 +1,7 @@
 # Next version
 + Upgrade dependencies
 + Migrate to RTK Query
++ Add balancec
 
 ## 0.5.1
 + Change backend URL
