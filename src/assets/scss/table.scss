@@ -1,0 +1,10 @@
+div.rdt_TableHead {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.is-clickable:hover,
+.rdt_TableRow:hover,
+.highcharts-point:hover {
+    cursor: pointer;
+}

@@ -37,6 +37,12 @@ export function GenericPage(props) {
       sortField: "purpose",
       selector: (row) => row.purpose
     },
+    {
+      name: "date",
+      sortable: true,
+      sortField: "transactionDate",
+      selector: (row) => row.transactionDate
+    },
   ];
 
   /**

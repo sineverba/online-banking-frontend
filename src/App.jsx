@@ -10,10 +10,18 @@ function App() {
   
   const accessToken = useSelector((state) => state.loginSlice.mutations[LOGIN_SHARED_KEY]?.data?.access_token ?? null);
 
+  const getClassName = () => {
+    let className = "d-flex flex-column";
+    if (!accessToken) {
+      className = `${className} with-background`;
+    }
+    return className;
+  };
+
   return (
     <div id="wrapper">
       {accessToken && <Sidebar />}
-      <div id="content-wrapper" className="d-flex flex-column">
+      <div id="content-wrapper" className={getClassName()}>
         <div id="content">
           {accessToken && <Topbar />}
           <Router />

@@ -3,6 +3,7 @@
 + Migrate to RTK Query
 + Add balance
 + Add transactions
++ Fix some CSS
 
 ## 0.5.1
 + Change backend URL
