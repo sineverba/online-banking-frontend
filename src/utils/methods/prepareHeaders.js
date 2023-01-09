@@ -5,8 +5,8 @@ import {
 const prepareHeaders = (headers) => {
   if (localStorage.getItem(LOCALSTORAGE_ACCESS_TOKEN)) {
     headers.set(
-      "accesstoken",
-      `${localStorage.getItem(LOCALSTORAGE_ACCESS_TOKEN)}`
+      "authorization",
+      `Bearer ${localStorage.getItem(LOCALSTORAGE_ACCESS_TOKEN)}`
     );
   }
   return headers;

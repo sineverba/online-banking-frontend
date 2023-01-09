@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Row, Col } from "react-bootstrap";
 
 export function Kpi(props) {
-  const { title, number, icon, variant } = props;
+  const { title, value, icon, variant } = props;
 
   return (
     <Card className="kpi" bg={variant}>
@@ -10,7 +10,7 @@ export function Kpi(props) {
         <Row>
           <Col>
             <p>{title}</p>
-            <p>{number}</p>
+            <p>{value}</p>
           </Col>
           <Col>
             <span className="icon">{icon}</span>
