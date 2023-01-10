@@ -1,11 +1,15 @@
 @import '../sass/sb-admin-2.scss';
 @import '~bootstrap/scss/bootstrap.scss';
 @import './kpi.scss';
+@import './table.scss';
 
-.is-clickable:hover,
-.rdt_TableRow:hover,
-.highcharts-point:hover {
-    cursor: pointer;
+.with-background {
+    background-image: url(../images/background.jpg);
+    background-size: cover;
+    background-position: top;
+    min-height: 100%;
+    height: 100vh;
+    position: relative;
 }
 
 nav#topbar {
@@ -110,55 +114,6 @@ div.menu {
     }
 }
 
-div.menu {
-    background-color: $white;
-
-    ul {
-        padding-left: 0px;
-
-        li {
-            list-style: none outside none;
-
-            a {
-                text-align: center;
-                text-transform: uppercase;
-                color: $blue;
-                font-size: 88%;
-                font-weight: bold;
-
-                svg {
-                    color: $blue;
-                    margin-right: 12px;
-                    width: 30px;
-                }
-            }
-
-            a.nav-link.active,
-            a.nav-link:hover {
-                color: $blue;
-                background-color: $blue-light;
-
-                svg {
-                    color: $white;
-                }
-            }
-
-            svg+svg {
-                float: right;
-                margin-top: 3px;
-            }
-        }
-    }
-
-    div.collapse.show {
-        background-color: $white;
-        width: 90%;
-        padding: 10px;
-        margin: 0 auto;
-        border-radius: 5px;
-    }
-}
-
 h1 {
     text-transform: capitalize;
 }
@@ -172,4 +127,15 @@ div.loading {
 
 footer {
     text-align: center;
+}
+
+div.container-login {
+    max-width: 50%;
+    background-color: #FFFFFF;
+    padding: 50px;
+    margin-top:50px;
+
+    button {
+        margin-top: 15px;
+    }
 }

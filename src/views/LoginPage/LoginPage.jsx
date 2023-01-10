@@ -14,7 +14,7 @@ export function LoginPage() {
   const [currentItem, setCurrentItem] = useState(null);
   const [disabledForm, setDisabledForm] = useState(true);
 
-  const [postLogin, {isLoading: isUpdating}] = usePostLoginMutation({
+  const [postLogin, { isLoading: isUpdating }] = usePostLoginMutation({
     fixedCacheKey: LOGIN_SHARED_KEY
   });
 
@@ -63,7 +63,7 @@ export function LoginPage() {
 
   return (
     <Form>
-      <Container>
+      <Container className="container-login">
         <Row>
           {fields.map((item) => (
             <Col key={item.id} lg={12}>
@@ -80,9 +80,16 @@ export function LoginPage() {
             {isUpdating ? (
               <Loading />
             ) : (
-              <Button onClick={handleClick} disabled={disabledForm}>
-                Login
-              </Button>
+              <div className="d-grid gap-2">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  onClick={handleClick}
+                  disabled={disabledForm}
+                >
+                  Login
+                </Button>
+              </div>
             )}
           </Col>
         </Row>
