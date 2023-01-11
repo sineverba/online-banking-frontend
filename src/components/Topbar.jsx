@@ -1,15 +1,14 @@
 import React from "react";
-import {
-  Container, Navbar, Nav, Dropdown
-} from "react-bootstrap";
+import { Container, Navbar, Nav, Dropdown } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { logout } from "../features/accessTokenSlice";
+import { loginSlice } from "../features/loginSlice";
 
 export function Topbar() {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(logout());
+    // Reset the loginSlice
+    dispatch(loginSlice.util.resetApiState());
   };
 
   return (

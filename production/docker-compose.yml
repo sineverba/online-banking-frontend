@@ -1,19 +1,25 @@
 version: "3.8"
 services:
   online-banking-frontend:
-    image: registry.gitlab.com/private-registry/online-banking-frontend:latest
-    container_name: online-banking-frontend
+    image: registry.gitlab.com/cicdprojects/online-banking-frontend:latest
+    container_name: ${CONTAINER_NAME}
     restart: unless-stopped
+    env_file:
+      - ./.env
     networks:
       - proxy
+      - manage
     labels:
       - "traefik.enable=true"
       - "traefik.docker.network=proxy"
-      - "traefik.http.routers.online-banking-frontend.entrypoints=websecure"
-      - "traefik.http.routers.online-banking-frontend.service=online-banking-frontend"
-      - "traefik.http.routers.online-banking-frontend.rule=Host(`bank.k2p.it`)"
-      - "traefik.http.services.online-banking-frontend.loadbalancer.server.port=80"
+      - "traefik.http.routers.${CONTAINER_NAME}.entrypoints=websecure"
+      - "traefik.http.routers.${CONTAINER_NAME}.service=${CONTAINER_NAME}"
+      - "traefik.http.routers.${CONTAINER_NAME}.rule=Host(`${HOST}`)"
+      - "traefik.http.services.${CONTAINER_NAME}.loadbalancer.server.port=${PORT}"
 
 networks:
   proxy:
     external: true
+  manage:
+    name: manage
+    driver: bridge
