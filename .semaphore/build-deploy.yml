@@ -29,6 +29,7 @@ global_job_config:
 
 blocks:
   - name: "Build and deploy"
+    dependencies: []
     task:
       jobs:
         - name: Deploy to Netlify
