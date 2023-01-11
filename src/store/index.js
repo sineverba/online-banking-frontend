@@ -3,6 +3,7 @@ import { userSlice } from "../features/userSlice";
 import { loginSlice } from "../features/loginSlice";
 import { balanceSlice } from "../features/balanceSlice";
 import addAccessTokenMiddleware from "../middlewares/addAccessTokenMiddleware";
+import removeAccessTokenMiddleware from "../middlewares/removeAccessTokenMiddleware";
 import { transactionsSlice } from "../features/transactionsSlice";
 
 const setupStore = (preloadedState) =>
@@ -20,6 +21,7 @@ const setupStore = (preloadedState) =>
         serializableCheck: false
       })
         .prepend(addAccessTokenMiddleware.middleware)
+        .prepend(removeAccessTokenMiddleware.middleware)
         .concat(loginSlice.middleware)
         .concat(balanceSlice.middleware)
         .concat(transactionsSlice.middleware)
