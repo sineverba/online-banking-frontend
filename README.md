@@ -25,3 +25,6 @@ __This project uses:__
 ## Setup
 1. Copy .env.bak into .env
 2. Insert random string on `LOCALSTORAGE_ACCESS_TOKEN` in .env file (`$ echo $RANDOM | md5sum | head -c 20; echo;`). This will deny conflicts with other localStorage used by other projects
+
+## Production
++ Use files in `/production` folder
