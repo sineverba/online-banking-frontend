@@ -4,6 +4,7 @@
 + Add balance
 + Add transactions
 + Fix some CSS
++ Add Docker multi arch
 
 ## 0.5.1
 + Change backend URL

@@ -33,7 +33,8 @@ blocks:
         - name: Test
           commands:
             - cache restore
-            - CI=true npm run test
+            - npm run eslint
+            - npm run test:ci
 
   - name: Coverage
     skip:
