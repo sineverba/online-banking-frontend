@@ -26,6 +26,7 @@ global_job_config:
       - checkout
       - cp .env.bak .env
       - npm install -g npm@9.2.0
+      - npm ci
 
 blocks:
   - name: "Build and deploy"
@@ -35,17 +36,15 @@ blocks:
         - name: Deploy to Netlify
           commands:
             - npm install netlify-cli -g
-            - npm ci
             - npm run build
             - netlify deploy -s $NETLIFY_BITBANK_SITE_ID --auth $NETLIFY_ACCESS_TOKEN -p --dir ./build
         - name: Deploy to Vercel
           commands:
             - npm install -g vercel
-            - npm ci
             - VERCEL_PROJECT_ID=$VERCEL_BITBANK_PROJECT_ID VERCEL_ORG_ID=$VERCEL_ORG_ID npx vercel --token $VERCEL_TOKEN --confirm --prod
         - name: Create Docker image
           commands:
-            - npm ci
+            - docker login -u semaphore -p $GITLAB_TOKEN $GITLAB_REGISTRY
             - npm run build
             - mkdir -vp ~/.docker/cli-plugins/
             - curl --silent -L "https://github.com/docker/buildx/releases/download/v$BUILDX_VERSION/buildx-v$BUILDX_VERSION.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
