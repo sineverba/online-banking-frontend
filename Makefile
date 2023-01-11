@@ -4,7 +4,7 @@ IMAGE_NAME=registry.gitlab.com/cicdprojects/online-banking-frontend
 CONTAINER_NAME=online-banking-frontend
 APP_VERSION=0.6.4-dev
 SONARSCANNER_VERSION=4.8.0
-BUILDX_VERSION=0.9.1
+BUILDX_VERSION=0.10.0
 BINFMT_VERSION=qemu-v7.0.0-28
 
 sonar:
@@ -46,7 +46,7 @@ multi:
 	rm -r build
 
 test:
-	docker run --rm -it --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION) cat /etc/os-release | grep "Alpine Linux v3.16"
+	docker run --rm -it --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION) cat /etc/os-release | grep "Alpine Linux v3.17"
 	
 spin:
 	docker container run -it --rm --publish 8080:80 --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION)

@@ -1,5 +1,6 @@
 # Next version
 + Remove docker-compose and refactor Docker
++ Upgrade dependencies
 
 ## 0.6.4
 + Fix Semaphore
