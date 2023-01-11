@@ -3,11 +3,17 @@ include .env
 IMAGE_NAME=registry.gitlab.com/cicdprojects/online-banking-frontend
 CONTAINER_NAME=online-banking-frontend
 APP_VERSION=0.6.4-dev
+SONARSCANNER_VERSION=4.8.0
 BUILDX_VERSION=0.9.1
 BINFMT_VERSION=qemu-v7.0.0-28
 
 sonar:
-	docker-compose up sonarscanner
+	docker run --rm -it \
+		--name sonarscanner \
+		-v $(PWD):/usr/src \
+		-e SONAR_HOST_URL=$(SONAR_HOST_URL) \
+		-e SONAR_LOGIN=$(SONAR_LOGIN) \
+		sonarsource/sonar-scanner-cli:$(SONARSCANNER_VERSION)
 
 upgrade:
 	npx ncu -u
