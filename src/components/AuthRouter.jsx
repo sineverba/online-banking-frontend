@@ -10,7 +10,7 @@ export function AuthRouter(props) {
   // Destructure the props
   const { children, type } = props;
   // Get the access token
-  const accessToken = useSelector((state) => state.loginSlice.mutations[LOGIN_SHARED_KEY]?.data?.access_token ?? null);
+  const accessToken = useSelector((state) => state.apiSlice.mutations[LOGIN_SHARED_KEY]?.data?.access_token ?? null);
   /**
      * If route need to be NOT AUTHENTICATED and we have the access token
      * REDIRECT TO dashboard (login page)

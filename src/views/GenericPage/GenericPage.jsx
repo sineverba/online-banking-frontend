@@ -2,7 +2,7 @@ import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { Datatable } from "../../components/Datatable";
 import { Loading } from "../../components/Loading";
-import { useGetTransactionsQuery } from "../../features/transactionsSlice";
+import { useGetTransactionsQuery } from "../../features/apiSlice";
 import { ENTITY_TRANSACTIONS } from "../../utils/constants/constant";
 
 export function GenericPage(props) {

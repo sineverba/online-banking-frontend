@@ -4,7 +4,7 @@ import { FormComponent } from "../../components/FormComponent";
 import hasFormErrors from "../../utils/methods/hasFormErrors";
 import getRequired from "../../utils/methods/getRequired";
 import { Loading } from "../../components/Loading";
-import { usePostLoginMutation } from "../../features/loginSlice";
+import { usePostLoginMutation } from "../../features/apiSlice";
 import { LOGIN_SHARED_KEY } from "../../utils/constants/constant";
 
 export function LoginPage() {

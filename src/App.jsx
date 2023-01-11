@@ -8,7 +8,7 @@ import { LOGIN_SHARED_KEY } from "./utils/constants/constant";
 
 function App() {
   
-  const accessToken = useSelector((state) => state.loginSlice.mutations[LOGIN_SHARED_KEY]?.data?.access_token ?? null);
+  const accessToken = useSelector((state) => state.apiSlice.mutations[LOGIN_SHARED_KEY]?.data?.access_token ?? null);
 
   const getClassName = () => {
     let className = "d-flex flex-column";

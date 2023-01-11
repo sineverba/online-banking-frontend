@@ -1,16 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { loginSlice } from "../features/loginSlice";
-import { balanceSlice } from "../features/balanceSlice";
+import { apiSlice } from "../features/apiSlice";
 import addAccessTokenMiddleware from "../middlewares/addAccessTokenMiddleware";
 import removeAccessTokenMiddleware from "../middlewares/removeAccessTokenMiddleware";
-import { transactionsSlice } from "../features/transactionsSlice";
 
 const setupStore = (preloadedState) =>
   configureStore({
     reducer: {
-      [loginSlice.reducerPath]: loginSlice.reducer,
-      [balanceSlice.reducerPath]: balanceSlice.reducer,
-      [transactionsSlice.reducerPath]: transactionsSlice.reducer
+      [apiSlice.reducerPath]: apiSlice.reducer
     },
     preloadedState,
     middleware: (getDefaultMiddleware) =>
@@ -20,9 +16,7 @@ const setupStore = (preloadedState) =>
       })
         .prepend(addAccessTokenMiddleware.middleware)
         .prepend(removeAccessTokenMiddleware.middleware)
-        .concat(loginSlice.middleware)
-        .concat(balanceSlice.middleware)
-        .concat(transactionsSlice.middleware)
+        .concat(apiSlice.middleware)
   });
 
 export default setupStore;

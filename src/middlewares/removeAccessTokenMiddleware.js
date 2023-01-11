@@ -6,7 +6,7 @@ import { LOCALSTORAGE_ACCESS_TOKEN } from "../utils/constants/constant";
  * delete localStorage
  */
 
-const type = `loginSlice/resetApiState`;
+const type = `apiSlice/resetApiState`;
 
 const removeAccessTokenMiddleware = createListenerMiddleware();
 removeAccessTokenMiddleware.startListening({
