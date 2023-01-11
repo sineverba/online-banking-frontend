@@ -1,4 +1,4 @@
-# Next version
+# 0.7.0
 + Remove docker-compose and refactor Docker
 + Upgrade dependencies
 + Remove accessTokenSlice
