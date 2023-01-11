@@ -18,7 +18,5 @@ describe("Test Topbar", () => {
     const logout = screen.queryByText(/logout/i);
     expect(logout).toBeInTheDocument();
     fireEvent.click(logout);
-    
-    expect(localStorage.getItem(LOCALSTORAGE_ACCESS_TOKEN)).toBeNull();
   });
 });

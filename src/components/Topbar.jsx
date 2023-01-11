@@ -1,17 +1,7 @@
 import React from "react";
-import {
-  Container, Navbar, Nav, Dropdown
-} from "react-bootstrap";
-import { useDispatch } from "react-redux";
-import { logout } from "../features/accessTokenSlice";
+import { Container, Navbar, Nav, Dropdown } from "react-bootstrap";
 
 export function Topbar() {
-  const dispatch = useDispatch();
-
-  const handleClick = () => {
-    dispatch(logout());
-  };
-
   return (
     <Navbar variant="light" id="topbar">
       <Container fluid>
@@ -22,7 +12,7 @@ export function Topbar() {
                 <span>info@example.com</span>
               </Dropdown.Toggle>
               <Dropdown.Menu id="user-menu">
-                <Dropdown.Item onClick={handleClick}>Logout</Dropdown.Item>
+                <Dropdown.Item>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
