@@ -1,4 +1,7 @@
-# 0.6.3
+# 0.6.4
++ Fix Semaphore
+
+## 0.6.3
 + Fix Semaphore
 
 ## 0.6.2
