@@ -2,6 +2,7 @@
 + Remove docker-compose and refactor Docker
 + Upgrade dependencies
 + Remove accessTokenSlice
++ Perform logout
 
 ## 0.6.4
 + Fix Semaphore

@@ -1,7 +1,16 @@
 import React from "react";
 import { Container, Navbar, Nav, Dropdown } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { loginSlice } from "../features/loginSlice";
 
 export function Topbar() {
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    // Reset the loginSlice
+    dispatch(loginSlice.util.resetApiState());
+  };
+
   return (
     <Navbar variant="light" id="topbar">
       <Container fluid>
@@ -12,7 +21,7 @@ export function Topbar() {
                 <span>info@example.com</span>
               </Dropdown.Toggle>
               <Dropdown.Menu id="user-menu">
-                <Dropdown.Item>Logout</Dropdown.Item>
+                <Dropdown.Item onClick={handleClick}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </Nav>
