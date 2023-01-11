@@ -1,5 +1,6 @@
 # Next version
 + Remove token middleware on logout
++ Remove `usersSlice`
 
 ## 0.7.0
 + Remove docker-compose and refactor Docker
