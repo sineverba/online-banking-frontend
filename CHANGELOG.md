@@ -1,6 +1,7 @@
 # Next version
 + Remove docker-compose and refactor Docker
 + Upgrade dependencies
++ Remove accessTokenSlice
 
 ## 0.6.4
 + Fix Semaphore
