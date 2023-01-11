@@ -1,13 +1,46 @@
-div.card.kpi {
-    h1 {
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 110%;
-    }
-    p.card-text {
-        text-align: left;
-        padding: 0px;
-        font-weight: bold;
-        font-size: 120%;
+.kpi {
+    margin: 10px 0;
+    min-width: 332px;
+    padding: 20px;
+
+    .card-body {
+        padding: 20px;
+
+        .row {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+
+            .col:first-child {
+                text-align: left;
+
+                p:first-child {
+                    text-transform: uppercase;
+                    font-size: 1.75rem;
+                    color: $white;
+                    margin-bottom: 5px;
+                }
+
+                p {
+                    font-size: 2.5rem;
+                    color: $white;
+                    margin-bottom: 0;
+                }
+            }
+
+            .col {
+                text-align: right;
+                flex: 0 0 auto;
+                max-width: 100%;
+                width: auto;
+
+                .icon {
+                    font-size: 8em;
+                    color: $white-transparent;
+                    text-align: end;
+                }
+            }
+        }
     }
 }

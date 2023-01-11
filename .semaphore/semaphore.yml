@@ -11,7 +11,7 @@ global_job_config:
   prologue:
     commands:
       - checkout
-      - npm install -g npm@8.6.0
+      - npm install -g npm@9.2.0
 
 blocks:
 
@@ -33,7 +33,8 @@ blocks:
         - name: Test
           commands:
             - cache restore
-            - CI=true npm run test
+            - npm run eslint
+            - npm run test:ci
 
   - name: Coverage
     skip:
@@ -50,7 +51,7 @@ blocks:
             - cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js
         - name: Sonarcloud
           commands:
-            - docker run --rm -e SONAR_HOST_URL="https://sonarcloud.io" -e SONAR_LOGIN=$SONAR_TOKEN -v "/home/semaphore/online-banking-frontend:/usr/src" sonarsource/sonar-scanner-cli:4.6
+            - docker run --rm -e SONAR_HOST_URL="https://sonarcloud.io" -e SONAR_LOGIN=$SONAR_TOKEN -v "/home/semaphore/online-banking-frontend:/usr/src" sonarsource/sonar-scanner-cli:4.8.0
           
 promotions:
   - name: Deploy

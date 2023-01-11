@@ -9,11 +9,23 @@ agent:
 global_job_config:
   secrets:
     - name: ACCESS_TOKENS
+    - name: VPS
+  env_vars:
+    - name: DOCKER_IMAGE
+      value: registry.gitlab.com/cicdprojects/online-banking-frontend
+    - name: GITLAB_REGISTRY
+      value: registry.gitlab.com
+    - name: BUILDX_VERSION
+      value: 0.9.1
+    - name: BINFMT_VERSION
+      value: qemu-v7.0.0-28
+    - name: FOLDER_APP
+      value: online-banking-frontend
   prologue:
     commands:
       - checkout
       - cp .env.bak .env
-      - npm install -g npm@8.5.5
+      - npm install -g npm@9.2.0
 
 blocks:
   - name: "Build and deploy"
@@ -30,3 +42,30 @@ blocks:
             - npm install -g vercel
             - npm ci
             - VERCEL_PROJECT_ID=$VERCEL_BITBANK_PROJECT_ID VERCEL_ORG_ID=$VERCEL_ORG_ID npx vercel --token $VERCEL_TOKEN --confirm --prod
+        - name: Create Docker image
+          commands:
+            - npm ci
+            - npm run build
+            - mkdir -vp ~/.docker/cli-plugins/
+            - curl --silent -L "https://github.com/docker/buildx/releases/download/v$BUILDX_VERSION/buildx-v$BUILDX_VERSION.linux-amd64" > ~/.docker/cli-plugins/docker-buildx
+            - chmod a+x ~/.docker/cli-plugins/docker-buildx
+            - docker buildx version
+            - docker run --rm --privileged tonistiigi/binfmt:$BINFMT_VERSION --install all
+            - docker buildx ls
+            - docker buildx create --name multiarch --driver docker-container --use
+            - docker buildx inspect --bootstrap --builder multiarch
+            - docker buildx build --platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 --tag $DOCKER_USERNAME/$DOCKER_IMAGE:$SEMAPHORE_GIT_TAG_NAME --tag $DOCKER_USERNAME/$DOCKER_IMAGE:latest --push --file ./dockerfiles/Dockerfile .
+
+  - name: "Deploy APP"
+    dependencies: ["Build and deploy"]
+    task:
+      jobs:
+        - name: Deploy APP
+          commands:
+            - ssh-keyscan -p $VPS01_OCI_PORT -H $VPS01_OCI_URL >> ~/.ssh/known_hosts
+            - chmod 0600 ~/.ssh/id_semaphore
+            - ssh-add ~/.ssh/id_semaphore
+            - ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT "cd $FOLDER_APP && docker-compose stop && exit"
+            - ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT "docker container rm $FOLDER_APP && docker image rm $DOCKER_IMAGE:latest && exit"
+            - ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT "docker pull $DOCKER_IMAGE:latest && exit"
+            - ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT "cd $FOLDER_APP && docker-compose up -d && exit"

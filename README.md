@@ -6,7 +6,7 @@ Online Banking Demo Frontend
 | Service | Github link | Demo |
 | ------- | ----------- | ---- |
 | Backend | [https://github.com/sineverba/online-banking-backend](https://github.com/sineverba/online-banking-backend) | [Swagger](https://bitbankapi.k2p.it/swagger-ui/index.html) |
-| Frontend | [https://github.com/sineverba/online-banking-frontend](https://github.com/sineverba/online-banking-frontend) | [Netlify](https://bit-bank.netlify.app/) - [Vercel](https://online-banking-frontend.vercel.app/) |
+| Frontend | [https://github.com/sineverba/online-banking-frontend](https://github.com/sineverba/online-banking-frontend) | [Netlify](https://bit-bank.netlify.app/) - [Vercel](https://online-banking-frontend.vercel.app/) - [Custom](https://bitbank.k2p.it/) |
 
 __This project uses:__
 
@@ -23,5 +23,5 @@ __This project uses:__
 | Coveralls | [![Coverage Status](https://coveralls.io/repos/github/sineverba/online-banking-frontend/badge.svg?branch=master)](https://coveralls.io/github/sineverba/online-banking-frontend?branch=master) |
 
 ## Setup
-+ Copy .env.bak into .env
-+ Change in `utils/constant` `TOTAL_ELEMENTS`
+1. Copy .env.bak into .env
+2. Insert random string on `LOCALSTORAGE_ACCESS_TOKEN` in .env file (`$ echo $RANDOM | md5sum | head -c 20; echo;`). This will deny conflicts with other localStorage used by other projects

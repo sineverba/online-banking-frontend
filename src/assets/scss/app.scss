@@ -1,13 +1,10 @@
 @import '../sass/sb-admin-2.scss';
-@import './kpi.scss';
 @import '~bootstrap/scss/bootstrap.scss';
-
-#wrapper #content-wrapper {
-    background-color: $white;
-}
+@import './kpi.scss';
+@import './table.scss';
 
 .with-background {
-    background-image: url(../../assets/images/background.jpg);
+    background-image: url(../images/background.jpg);
     background-size: cover;
     background-position: top;
     min-height: 100%;
@@ -15,16 +12,14 @@
     position: relative;
 }
 
-.sidebar-dark hr.sidebar-divider {
-    border-top: 1px solid rgba(255, 255, 255, 0.97);
-}
-
 nav#topbar {
-    background-color: $white !important;
+    background-color: $gray;
+
     .btn-link {
         text-decoration: none;
-        color: $gray-800;
+        color: $blue;
     }
+
     .btn:focus {
         box-shadow: none;
     }
@@ -35,6 +30,7 @@ nav#topbar {
         button.btn.btn-link {
             padding-left: 0px;
         }
+
         div.d-flex.justify-content-end {
             width: 100%;
         }
@@ -45,48 +41,70 @@ nav#topbar {
     left: -45px;
 }
 
-div.navbar-nav img {
-    max-width: 30px;
-    border-radius: 50%;
-}
-
 span.navbar-brand {
     text-align: center;
     width: 100%;
     margin-right: 0px;
-    a, a:hover, a:focus, a:active {
-        color: $white;
+
+    svg {
+        color: $blue;
+        font-size: 248%;
+    }
+
+    span {
+        margin-top: 6px;
+    }
+
+    a,
+    a:hover,
+    a:focus,
+    a:active {
+        color: $blue-light;
         text-transform: uppercase;
         font-weight: bold;
     }
 }
 
-div.sidebar {
+div.menu {
+    background-color: $white;
+
     ul {
         padding-left: 0px;
+
         li {
             list-style: none outside none;
+
             a {
                 text-align: center;
-                color: rgba(255,255,255,.8);
+                text-transform: uppercase;
+                color: $blue;
                 font-size: 88%;
+                font-weight: bold;
+
                 svg {
-                    color: rgba(255,255,255,.3);
-                    margin-right: 5px
+                    color: $blue;
+                    margin-right: 12px;
+                    width: 30px;
                 }
             }
-            a:focus, a:active, a:hover {
-                color: $white;
+
+            a.nav-link.active,
+            a.nav-link:hover {
+                color: $blue;
+                background-color: $blue-light;
+
                 svg {
                     color: $white;
                 }
             }
+
             svg+svg {
                 float: right;
                 margin-top: 3px;
             }
         }
     }
+
     div.collapse.show {
         background-color: $white;
         width: 90%;
@@ -96,117 +114,28 @@ div.sidebar {
     }
 }
 
-form.form-login {
-    button {
-        width: 100%;
-        margin-top: 10px;
-    }
+h1 {
+    text-transform: capitalize;
 }
 
-div.container-login {
-    margin-top: 100px;
-    h1, p {
-        text-align: right;
-    }
-    div.row {
-        div.col-12 {
-            background-color: white;
-            padding: 25px;
-        }
-    }
-}
-
-h1.title {
-    font-weight: bold;
-    text-transform: uppercase;
-    font-size: 105%;
-}
-    
-
-.card-header {
-    h1, h2 {
-        text-transform: uppercase;
-        font-size: 120%;
-        text-align: center;
-    }
-}
-
-.card-body {
-    .container {
-        padding: 30px;
-    }
-}
-
-.card-text {
+div.loading {
     text-align: center;
-    padding: 15px 0;
+    p {
+        margin-top: 15px;
+    }
 }
 
 footer {
-    p {
-        text-align: center;
-        font-size: 90%;
-    }
+    text-align: center;
 }
 
-span.amount {
-    font-weight: bold;
-}
+div.container-login {
+    max-width: 50%;
+    background-color: #FFFFFF;
+    padding: 50px;
+    margin-top:50px;
 
-button {
-    span, span+span {
-        display: block;
-    }
-    span {
-        text-align: center;
-        text-transform: uppercase;
-        font-weight: bold;
-        font-size: 90%;
-        svg {
-            font-size: 120%;
-        }
-    }
-}
-
-div.d-grid {
     button {
-        margin-top: 20px
-    }
-}
-
-label.form-label {
-    margin-top: 10px;
-}
-
-button.nav-link {
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 90%;
-}
-
-@media only screen and (max-width: 767px) {
-    div.container-login {
-        margin-top: 10px;
-        h1, p {
-            text-align: center;
-        }
-        div.row {
-            div.col-12 {
-                background-color: white;
-                padding: 25px;
-            }
-        }
-    }
-}
-
-@media only screen and (min-width: 768px) {
-    div.sidebar {
-        ul {
-            li {
-                a {
-                    text-align: left;
-                }
-            }
-        }
+        margin-top: 15px;
     }
 }

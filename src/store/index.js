@@ -1,12 +1,32 @@
-import { createStore, applyMiddleware, compose } from "redux";
-import rootReducer from "../reducers/index";
-import thunk from "redux-thunk";
+import { configureStore } from "@reduxjs/toolkit";
+import { accessTokenSlice } from "../features/accessTokenSlice";
+import { userSlice } from "../features/userSlice";
+import { loginSlice } from "../features/loginSlice";
+import { balanceSlice } from "../features/balanceSlice";
+import addAccessTokenMiddleware from "../middlewares/addAccessTokenMiddleware";
+import removeAccessTokenMiddleware from "../middlewares/removeAccessTokenMiddleware";
+import { transactionsSlice } from "../features/transactionsSlice";
 
-const storeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const setupStore = (preloadedState) =>
+  configureStore({
+    reducer: {
+      [loginSlice.reducerPath]: loginSlice.reducer,
+      [balanceSlice.reducerPath]: balanceSlice.reducer,
+      [transactionsSlice.reducerPath]: transactionsSlice.reducer,
+      accessTokenSlice: accessTokenSlice.reducer,
+      userSlice: userSlice.reducer
+    },
+    preloadedState,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware({
+        immutableCheck: false,
+        serializableCheck: false
+      })
+        .prepend(addAccessTokenMiddleware.middleware)
+        .prepend(removeAccessTokenMiddleware.middleware)
+        .concat(loginSlice.middleware)
+        .concat(balanceSlice.middleware)
+        .concat(transactionsSlice.middleware)
+  });
 
-const store = createStore(
-  rootReducer,
-  storeEnhancers(applyMiddleware(thunk))
-);
-
-export default store;
+export default setupStore;
