@@ -2,7 +2,7 @@ include .env
 
 IMAGE_NAME=registry.gitlab.com/cicdprojects/online-banking-frontend
 CONTAINER_NAME=online-banking-frontend
-APP_VERSION=0.6.3-dev
+APP_VERSION=0.6.4-dev
 BUILDX_VERSION=0.9.1
 BINFMT_VERSION=qemu-v7.0.0-28
 
