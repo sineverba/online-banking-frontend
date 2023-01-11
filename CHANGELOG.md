@@ -1,4 +1,7 @@
-# 0.6.0
+# 0.6.1
++ Fix Semaphore
+
+## 0.6.0
 + Upgrade dependencies
 + Migrate to RTK Query
 + Add balance
