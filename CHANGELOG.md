@@ -1,6 +1,7 @@
 # Next version
 + Remove token middleware on logout
 + Remove `usersSlice`
++ Add Footer to HomePage
 
 ## 0.7.0
 + Remove docker-compose and refactor Docker
