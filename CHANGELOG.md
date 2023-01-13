@@ -1,4 +1,4 @@
-# Next version
+# 0.8.0
 + Remove token middleware on logout
 + Remove `usersSlice`
 + Add Footer to HomePage
