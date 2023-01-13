@@ -6,7 +6,7 @@ import { LOCALSTORAGE_ACCESS_TOKEN } from "../utils/constants/constant";
  * store it into localStorage
  */
 
-const type = `loginSlice/executeMutation/fulfilled`;
+const type = `apiSlice/executeMutation/fulfilled`;
 
 const addAccessTokenMiddleware = createListenerMiddleware();
 addAccessTokenMiddleware.startListening({

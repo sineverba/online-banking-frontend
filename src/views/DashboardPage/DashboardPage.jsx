@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { Kpi } from "../../components/Kpi";
-import { useGetBalanceQuery } from "../../features/balanceSlice";
+import { useGetBalanceQuery } from "../../features/apiSlice";
 
 export function DashboardPage() {
 

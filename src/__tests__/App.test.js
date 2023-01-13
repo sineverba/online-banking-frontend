@@ -43,6 +43,10 @@ describe("Test App.js", () => {
         <App />
       </BrowserRouter>
     );
+
+    const version = screen.getByText(/9.8.7/i);
+    expect(version).toBeInTheDocument();
+
     const inputUsername = screen.getByLabelText(/username/i);
     fireEvent.change(inputUsername, {
       target: {
