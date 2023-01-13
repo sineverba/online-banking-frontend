@@ -5,6 +5,7 @@ export function Datatable(props) {
   const {
     columns,
     data,
+    defaultSortAsc,
     pagination,
     paginationServer,
     paginationRowsPerPageOptions,
@@ -45,6 +46,7 @@ export function Datatable(props) {
       onSelectedRowsChange={onSelectedRowsChange}
       clearSelectedRows={clearSelectedRows}
       onRowClicked={onRowClicked}
+      defaultSortAsc={defaultSortAsc}
       /** SUBHEADERS */
       subHeader={subHeader}
       subHeaderComponent={subHeaderComponent}
