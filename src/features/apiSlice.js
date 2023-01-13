@@ -23,7 +23,8 @@ export const apiSlice = createApi({
         url: "/auth/login",
         method: "POST",
         body
-      })
+      }),
+      providesTags: ["login"]
     }),
     /**
      * Balance section
@@ -36,7 +37,7 @@ export const apiSlice = createApi({
      * Transactions section
      */
     getTransactions: builder.query({
-      query: () => "/bank-account-transactions",
+      query: (queryString) => `/bank-account-transactions?${queryString}`,
       providesTags: ["transaction"]
     })
   })

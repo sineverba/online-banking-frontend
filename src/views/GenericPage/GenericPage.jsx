@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { Datatable } from "../../components/Datatable";
 import { Loading } from "../../components/Loading";
@@ -7,7 +7,30 @@ import { ENTITY_TRANSACTIONS } from "../../utils/constants/constant";
 
 export function GenericPage(props) {
   // Get current entity
-  const { entity } = props;
+  const { forceUndefinedForSort, entity } = props;
+
+  const [page, setPage] = useState(1);
+  const [perPage, setPerPage] = useState(10);
+  const [orderBy, setOrderBy] = useState("id");
+  const [orderWay, setOrderWay] = useState("desc");
+
+  /**
+   * Create the querystring.
+   *
+   *
+   * @returns
+   */
+  const getQueryString = () => {
+    const params = {
+      page: page - 1,
+      perPage,
+      orderBy,
+      orderWay
+    };
+    const queryString = new URLSearchParams(params).toString();
+
+    return queryString;
+  };
 
   /**
    * Set here all fetches.
@@ -19,11 +42,14 @@ export function GenericPage(props) {
     data: transactions,
     isLoading: isLoadingTransactions,
     isFetching: isFetchingTransactions
-  } = useGetTransactionsQuery(undefined, {
+  } = useGetTransactionsQuery(getQueryString(), {
     skip: entity !== ENTITY_TRANSACTIONS
   });
 
-
+  /**
+   * Get the columns for the table
+   * @returns
+   */
   const getColumns = () => [
     {
       name: "amount",
@@ -62,11 +88,57 @@ export function GenericPage(props) {
    */
   const getItems = () => {
     let items = [];
-    if (transactions && transactions.content && transactions.content.length > 0) {
+    if (
+      transactions &&
+      transactions.content &&
+      transactions.content.length > 0
+    ) {
       // Copy all array into items
       items = [...transactions.content];
     }
     return items;
+  };
+
+  /**
+   * Get the total number of elements
+   *
+   * @returns the total number of elements
+   */
+  const getTotalRows = () => {
+    if (transactions && transactions.totalElements) {
+      return transactions.totalElements;
+    }
+    return 0;
+  };
+
+  /**
+   * Set the new page.
+   *
+   * @param {*} e the page
+   */
+  const handlePageChange = (e) => {
+    setPage(e);
+  };
+
+  /**
+   * Set the number of elements per page
+   *
+   * @param {*} e the number of elements
+   */
+  const handlePerRowsChange = (e) => {
+    setPerPage(e);
+  };
+
+  const handleSort = ({ sortField }, sortDirection) => {
+    let finalSortField = sortField;
+    /**
+     * Yes... only for test :p
+     */
+    if (forceUndefinedForSort) {
+      finalSortField = undefined;
+    }
+    setOrderBy(typeof finalSortField === "undefined" ? "id" : finalSortField);
+    setOrderWay(sortDirection);
   };
 
   return (
@@ -76,15 +148,20 @@ export function GenericPage(props) {
           <Card>
             <Card.Body>
               <h1>{entity}</h1>
-              {checkIsLoading() ? (
-                <Loading />
-              ) : (
-                <Datatable
-                  columns={getColumns()}
-                  data={getItems()}
-                  pagination
-                />
-              )}
+              {checkIsLoading() && <Loading />}
+              <Datatable
+                columns={getColumns()}
+                data={getItems()}
+                pagination
+                paginationServer
+                paginationTotalRows={getTotalRows()}
+                progressPending={checkIsLoading()}
+                onChangePage={handlePageChange}
+                onChangeRowsPerPage={handlePerRowsChange}
+                sortServer
+                onSort={handleSort}
+                defaultSortAsc={false}
+              />
             </Card.Body>
           </Card>
         </Col>
