@@ -8,7 +8,7 @@ import {
   TYPE_GUEST,
   TYPE_PRIVATE
 } from "./utils/constants/constant";
-import { LoginPage } from "./views/LoginPage/LoginPage";
+import { GenericForm } from "./views/GenericPage/GenericForm";
 import { DashboardPage } from "./views/DashboardPage/DashboardPage";
 import { AuthRouter } from "./components/AuthRouter";
 import { GenericPage } from "./views/GenericPage/GenericPage";
@@ -20,7 +20,7 @@ export function Router() {
         path={PATH_HOME}
         element={(
           <AuthRouter type={TYPE_GUEST}>
-            <LoginPage />
+            <GenericForm />
           </AuthRouter>
         )}
       />

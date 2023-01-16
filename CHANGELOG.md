@@ -1,5 +1,6 @@
 # Next version
 + Upgrade dependencies
++ Move login to GenericForm
 
 ## 0.8.0
 + Remove token middleware on logout
