@@ -7,7 +7,7 @@ import { Loading } from "../../components/Loading";
 import { usePostLoginMutation } from "../../features/apiSlice";
 import { LOGIN_SHARED_KEY } from "../../utils/constants/constant";
 
-export function LoginPage() {
+export function GenericForm() {
   /**
    * Local state to save the form
    */
@@ -98,4 +98,4 @@ export function LoginPage() {
   );
 }
 
-export default LoginPage;
+export default GenericForm;
