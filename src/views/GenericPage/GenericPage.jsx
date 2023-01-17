@@ -4,6 +4,7 @@ import { Datatable } from "../../components/Datatable";
 import { Loading } from "../../components/Loading";
 import { useGetTransactionsQuery } from "../../features/apiSlice";
 import { ENTITY_TRANSACTIONS } from "../../utils/constants/constant";
+import { GenericForm } from "./GenericForm";
 
 export function GenericPage(props) {
   // Get current entity
@@ -141,6 +142,31 @@ export function GenericPage(props) {
     setOrderWay(sortDirection);
   };
 
+  /**
+   * Get the children of the page
+   * @returns 
+   */
+  const getChildren = () => {
+    if (entity === ENTITY_TRANSACTIONS) {
+      return (
+        <Datatable
+          columns={getColumns()}
+          data={getItems()}
+          pagination
+          paginationServer
+          paginationTotalRows={getTotalRows()}
+          progressPending={checkIsLoading()}
+          onChangePage={handlePageChange}
+          onChangeRowsPerPage={handlePerRowsChange}
+          sortServer
+          onSort={handleSort}
+          defaultSortAsc={false}
+        />
+      );
+    }
+    return <GenericForm entity={entity} />;
+  };
+
   return (
     <Container fluid>
       <Row>
@@ -149,19 +175,7 @@ export function GenericPage(props) {
             <Card.Body>
               <h1>{entity}</h1>
               {checkIsLoading() && <Loading />}
-              <Datatable
-                columns={getColumns()}
-                data={getItems()}
-                pagination
-                paginationServer
-                paginationTotalRows={getTotalRows()}
-                progressPending={checkIsLoading()}
-                onChangePage={handlePageChange}
-                onChangeRowsPerPage={handlePerRowsChange}
-                sortServer
-                onSort={handleSort}
-                defaultSortAsc={false}
-              />
+              {getChildren()}
             </Card.Body>
           </Card>
         </Col>

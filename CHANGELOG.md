@@ -1,4 +1,12 @@
-# 0.8.0
+# 0.9.0
++ Upgrade dependencies
++ Move login to GenericForm
++ Add payment form
++ Add payment page
++ Refactor generic page
++ Refactor payment name
+
+## 0.8.0
 + Remove token middleware on logout
 + Remove `usersSlice`
 + Add Footer to HomePage

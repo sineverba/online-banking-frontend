@@ -4,6 +4,7 @@ import { LinkContainer } from "react-router-bootstrap";
 import {
   PATH_DASHBOARD,
   PATH_HOME,
+  PATH_PAYMENTS,
   PATH_TRANSACTIONS
 } from "../utils/constants/constant";
 
@@ -29,6 +30,11 @@ export function Menu() {
         <li>
           <LinkContainer activeClassName="active" to={PATH_TRANSACTIONS}>
             <Nav.Link>Transactions</Nav.Link>
+          </LinkContainer>
+        </li>
+        <li>
+          <LinkContainer activeClassName="active" to={PATH_PAYMENTS}>
+            <Nav.Link>Payments</Nav.Link>
           </LinkContainer>
         </li>
       </ul>

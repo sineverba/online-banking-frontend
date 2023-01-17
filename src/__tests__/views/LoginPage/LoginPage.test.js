@@ -1,5 +1,5 @@
 import { fireEvent, screen, waitFor } from "@testing-library/react";
-import { LoginPage } from "../../../views/LoginPage/LoginPage";
+import { GenericForm } from "../../../views/GenericPage/GenericForm";
 import { renderWithProviders } from "../../__test-utils__/test-utils";
 import { rest } from "msw";
 // eslint-disable-next-line jest/no-mocks-import
@@ -29,7 +29,7 @@ afterAll(() => server.close());
 
 describe("Test LoginPage", () => {
   it("Can perform login", async () => {
-    renderWithProviders(<LoginPage />);
+    renderWithProviders(<GenericForm />);
 
     const inputUsername = screen.getByLabelText(/username/i);
     fireEvent.change(inputUsername, {
@@ -50,7 +50,7 @@ describe("Test LoginPage", () => {
   });
 
   it("Can manage wrong credentials", async () => {
-    renderWithProviders(<LoginPage />);
+    renderWithProviders(<GenericForm />);
 
     const inputUsername = screen.getByLabelText(/username/i);
     fireEvent.change(inputUsername, {

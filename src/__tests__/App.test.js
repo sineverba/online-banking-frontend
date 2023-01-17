@@ -104,4 +104,50 @@ describe("Test App.js", () => {
       fireEvent.click(logout);
     });
   });
+
+
+  it("Can manage missing data from mutation", async () => {
+
+    const zeroItems = {
+      content: []
+    };
+
+    server.use(
+      rest.post(
+        `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
+        (req, res, ctx) => {
+          return res(ctx.json(zeroItems));
+        }
+      )
+    );
+
+    renderWithProviders(
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    );
+
+    const inputUsername = screen.getByLabelText(/username/i);
+    fireEvent.change(inputUsername, {
+      target: {
+        value: mockedEmail
+      }
+    });
+
+    const inputPassword = screen.getByLabelText(/password/i);
+    fireEvent.change(inputPassword, {
+      target: {
+        value: mockedPassword
+      }
+    });
+
+    const loginButton = screen.getByRole("button", { name: /login/i });
+    fireEvent.click(loginButton);
+
+    await waitFor(() => {
+      const loginButton = screen.getByRole("button", { name: /login/i });
+      expect(loginButton).toBeInTheDocument();
+    });
+  });
+
 });
