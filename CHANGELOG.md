@@ -1,4 +1,4 @@
-# Next version
+# 0.9.0
 + Upgrade dependencies
 + Move login to GenericForm
 + Add payment form
