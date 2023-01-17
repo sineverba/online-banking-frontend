@@ -1,11 +1,11 @@
-import { fireEvent, screen, waitFor } from "@testing-library/react";
-import { GenericForm } from "../../../views/GenericPage/GenericForm";
+import { fireEvent, screen } from "@testing-library/react";
+import { GenericPage } from "../../../views/GenericPage/GenericPage";
 import { renderWithProviders } from "../../__test-utils__/test-utils";
 import { rest } from "msw";
 // eslint-disable-next-line jest/no-mocks-import
 import { server } from "../../__mocks__/api/server";
 import { item } from "../../__mocks__/responses/payment";
-import { ENTITY_TRANSACTIONS } from "../../../utils/constants/constant";
+import { ENTITY_PAYMENT } from "../../../utils/constants/constant";
 
 beforeEach(() => {
   server.use(
@@ -28,7 +28,7 @@ afterAll(() => server.close());
 
 describe("Test Payment Form", () => {
   it("Can perform a transaction", async () => {
-    renderWithProviders(<GenericForm entity={ENTITY_TRANSACTIONS} />);
+    renderWithProviders(<GenericPage entity={ENTITY_PAYMENT} />);
 
     const inputAmount = screen.getByLabelText(/amount/i);
     fireEvent.change(inputAmount, {
