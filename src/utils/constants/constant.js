@@ -1,6 +1,8 @@
 export const PATH_HOME = "/";
 export const PATH_DASHBOARD = "/dashboard";
+export const PATH_PAYMENTS = "/payments";
 export const PATH_TRANSACTIONS = "/transactions";
+
 
 export const LOCALSTORAGE_ACCESS_TOKEN = process.env.REACT_APP_LOCALSTORAGE_ACCESS_TOKEN;
 export const LOCALSTORAGE_ID_TOKEN = process.env.REACT_APP_LOCALSTORAGE_ID_TOKEN;
