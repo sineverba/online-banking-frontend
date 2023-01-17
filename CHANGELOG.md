@@ -4,6 +4,7 @@
 + Add payment form
 + Add payment page
 + Refactor generic page
++ Refactor payment name
 
 ## 0.8.0
 + Remove token middleware on logout
