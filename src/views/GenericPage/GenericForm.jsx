@@ -6,7 +6,7 @@ import getRequired from "../../utils/methods/getRequired";
 import { Loading } from "../../components/Loading";
 import {
   usePostLoginMutation,
-  usePostTransactionMutation
+  usePostPaymentMutation
 } from "../../features/apiSlice";
 import {
   ENTITY_PAYMENT,
@@ -25,8 +25,8 @@ export function GenericForm(props) {
   const [postLogin, { isLoading: isUpdatingLogin }] = usePostLoginMutation({
     fixedCacheKey: LOGIN_SHARED_KEY
   });
-  const [postTransaction, { isLoading: isUpdatingTransaction }] =
-    usePostTransactionMutation();
+  const [postPayment, { isLoading: isUpdatingTransaction }] =
+    usePostPaymentMutation();
 
   /**
    * Why ID's are important? Because of https://stackoverflow.com/questions/49841086/reactjs-what-is-the-best-way-to-give-keys-in-array-element
@@ -73,7 +73,11 @@ export function GenericForm(props) {
 
   const handleChange = (e) => {
     // Destrutturo l'oggetto in arrivo
-    const { id, value } = e.target;
+    const { id } = e.target;
+    let { value } = e.target;
+    if (id === "amount") {
+      value = -value;
+    }
     // Preparo un oggetto temporaneo
     const tempItem = {
       ...currentItem,
@@ -101,7 +105,7 @@ export function GenericForm(props) {
 
   const handleClick = async () => {
     if (entity === ENTITY_PAYMENT) {
-      await postTransaction(currentItem);
+      await postPayment(currentItem);
     } else {
       await postLogin(currentItem);
     }

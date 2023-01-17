@@ -40,7 +40,7 @@ export const apiSlice = createApi({
       query: (queryString) => `/bank-account-transactions?${queryString}`,
       providesTags: ["transaction"]
     }),
-    postTransaction: builder.mutation({
+    postPayment: builder.mutation({
       query: (body) => ({
         url: "/bank-account-transactions",
         method: "POST",
@@ -54,4 +54,4 @@ export const apiSlice = createApi({
  * Names export are endpoints: use{endpoint}Query for query
  * Names export are endpoints: use{endpoint}Mutation for Mutation
  */
-export const { usePostLoginMutation, useGetBalanceQuery, useGetTransactionsQuery, usePostTransactionMutation } = apiSlice;
+export const { usePostLoginMutation, useGetBalanceQuery, useGetTransactionsQuery, usePostPaymentMutation } = apiSlice;
