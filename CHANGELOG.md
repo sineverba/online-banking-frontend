@@ -2,6 +2,7 @@
 + Upgrade dependencies
 + Move login to GenericForm
 + Add payment form
++ Add payment page
 
 ## 0.8.0
 + Remove token middleware on logout

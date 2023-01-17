@@ -12,10 +12,12 @@ const addAccessTokenMiddleware = createListenerMiddleware();
 addAccessTokenMiddleware.startListening({
   type,
   effect: (action) => {
-    localStorage.setItem(
-      LOCALSTORAGE_ACCESS_TOKEN,
-      action.payload.access_token
-    );
+    if (action.payload.access_token) {
+      localStorage.setItem(
+        LOCALSTORAGE_ACCESS_TOKEN,
+        action.payload.access_token
+      );
+    }
   }
 });
 

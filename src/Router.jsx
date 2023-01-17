@@ -4,6 +4,7 @@ import {
   ENTITY_TRANSACTIONS,
   PATH_DASHBOARD,
   PATH_HOME,
+  PATH_PAYMENTS,
   PATH_TRANSACTIONS,
   TYPE_GUEST,
   TYPE_PRIVATE
@@ -37,6 +38,14 @@ export function Router() {
         element={(
           <AuthRouter type={TYPE_PRIVATE}>
             <GenericPage entity={ENTITY_TRANSACTIONS} />
+          </AuthRouter>
+        )}
+      />
+      <Route
+        path={PATH_PAYMENTS}
+        element={(
+          <AuthRouter type={TYPE_PRIVATE}>
+            <GenericForm entity={ENTITY_TRANSACTIONS} />
           </AuthRouter>
         )}
       />

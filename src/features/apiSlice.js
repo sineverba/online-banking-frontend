@@ -46,7 +46,7 @@ export const apiSlice = createApi({
         method: "POST",
         body
       }),
-      providesTags: ["transaction"]
+      invalidatesTags: ["transaction"]
     })
   })
 });

@@ -4,7 +4,7 @@ import { renderWithProviders } from "../../__test-utils__/test-utils";
 import { rest } from "msw";
 // eslint-disable-next-line jest/no-mocks-import
 import { server } from "../../__mocks__/api/server";
-import { items } from "../../__mocks__/responses/login";
+import { item } from "../../__mocks__/responses/payment";
 import { ENTITY_TRANSACTIONS } from "../../../utils/constants/constant";
 
 beforeEach(() => {
@@ -12,7 +12,7 @@ beforeEach(() => {
     rest.post(
       `${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions`,
       (req, res, ctx) => {
-        return res(ctx.json(items));
+        return res(ctx.json(item));
       }
     )
   );

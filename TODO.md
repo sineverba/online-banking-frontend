@@ -1,5 +1,5 @@
 TODO
 ====
 
-+ Invalidate the tags (https://redux-toolkit.js.org/rtk-query/api/created-api/api-slice-utils#invalidatetags)
++ Refactor ENTITY_TRANSACTION to ENTITY_PAYMENT
 + Split all splices (https://redux-toolkit.js.org/rtk-query/usage/code-splitting)
