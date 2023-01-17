@@ -1,6 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import {
+  ENTITY_PAYMENT,
   ENTITY_TRANSACTIONS,
   PATH_DASHBOARD,
   PATH_HOME,
@@ -9,10 +10,10 @@ import {
   TYPE_GUEST,
   TYPE_PRIVATE
 } from "./utils/constants/constant";
-import { GenericForm } from "./views/GenericPage/GenericForm";
 import { DashboardPage } from "./views/DashboardPage/DashboardPage";
 import { AuthRouter } from "./components/AuthRouter";
 import { GenericPage } from "./views/GenericPage/GenericPage";
+import {LoginPage} from "./views/LoginPage/LoginPage";
 
 export function Router() {
   return (
@@ -21,7 +22,7 @@ export function Router() {
         path={PATH_HOME}
         element={(
           <AuthRouter type={TYPE_GUEST}>
-            <GenericForm />
+            <LoginPage />
           </AuthRouter>
         )}
       />
@@ -45,7 +46,7 @@ export function Router() {
         path={PATH_PAYMENTS}
         element={(
           <AuthRouter type={TYPE_PRIVATE}>
-            <GenericForm entity={ENTITY_TRANSACTIONS} />
+            <GenericPage entity={ENTITY_PAYMENT} />
           </AuthRouter>
         )}
       />

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Button, Col, Container, Form, Row } from "react-bootstrap";
+import { Button, Col, Form, Row } from "react-bootstrap";
 import { FormComponent } from "../../components/FormComponent";
 import hasFormErrors from "../../utils/methods/hasFormErrors";
 import getRequired from "../../utils/methods/getRequired";
@@ -9,7 +9,7 @@ import {
   usePostTransactionMutation
 } from "../../features/apiSlice";
 import {
-  ENTITY_TRANSACTIONS,
+  ENTITY_PAYMENT,
   LOGIN_SHARED_KEY
 } from "../../utils/constants/constant";
 
@@ -32,7 +32,7 @@ export function GenericForm(props) {
    * Why ID's are important? Because of https://stackoverflow.com/questions/49841086/reactjs-what-is-the-best-way-to-give-keys-in-array-element
    */
   const getFields = () => {
-    if (entity === ENTITY_TRANSACTIONS) {
+    if (entity === ENTITY_PAYMENT) {
       return [
         {
           id: 1,
@@ -65,7 +65,7 @@ export function GenericForm(props) {
   };
 
   const getButtonLabel = () => {
-    if (entity === ENTITY_TRANSACTIONS) {
+    if (entity === ENTITY_PAYMENT) {
       return "Pay";
     }
     return "Login";
@@ -91,63 +91,53 @@ export function GenericForm(props) {
       setDisabledForm(false);
     }
   };
-
-  const getClassName = () => {
-    if (typeof entity === "undefined") {
-      return "container-login";
-    }
-    return "";
-  };
-
   /**
    * Check if loading or not.
    * We check against current entity and ONE OF loading OR fetching
    *
    */
   const checkIsLoading = () =>
-    (isUpdatingLogin) || (entity === ENTITY_TRANSACTIONS && isUpdatingTransaction);
+    isUpdatingLogin || (entity === ENTITY_PAYMENT && isUpdatingTransaction);
 
   const handleClick = async () => {
-    if (entity === ENTITY_TRANSACTIONS) {
+    if (entity === ENTITY_PAYMENT) {
       await postTransaction(currentItem);
     } else {
       await postLogin(currentItem);
-    };
+    }
   };
 
   return (
     <Form>
-      <Container className={getClassName()}>
-        <Row>
-          {getFields().map((item) => (
-            <Col key={item.id} lg={12}>
-              <FormComponent
-                field={item}
-                onChange={handleChange}
-                currentItem={currentItem}
-              />
-            </Col>
-          ))}
-        </Row>
-        <Row>
-          <Col>
-            {checkIsLoading() ? (
-              <Loading />
-            ) : (
-              <div className="d-grid gap-2">
-                <Button
-                  variant="primary"
-                  size="lg"
-                  onClick={handleClick}
-                  disabled={disabledForm}
-                >
-                  {getButtonLabel()}
-                </Button>
-              </div>
-            )}
+      <Row>
+        {getFields().map((item) => (
+          <Col key={item.id} lg={12}>
+            <FormComponent
+              field={item}
+              onChange={handleChange}
+              currentItem={currentItem}
+            />
           </Col>
-        </Row>
-      </Container>
+        ))}
+      </Row>
+      <Row>
+        <Col>
+          {checkIsLoading() ? (
+            <Loading />
+          ) : (
+            <div className="d-grid gap-2">
+              <Button
+                variant="primary"
+                size="lg"
+                onClick={handleClick}
+                disabled={disabledForm}
+              >
+                {getButtonLabel()}
+              </Button>
+            </div>
+          )}
+        </Col>
+      </Row>
     </Form>
   );
 }

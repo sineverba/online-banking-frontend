@@ -21,4 +21,6 @@ export const LOADING = "loading";
 
 export const LOGIN_SHARED_KEY = "loginSharedKey";
 
+export const ENTITY_LOGIN = "login";
+export const ENTITY_PAYMENT = "payment";
 export const ENTITY_TRANSACTIONS = "transactions";
