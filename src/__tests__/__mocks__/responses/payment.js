@@ -3,7 +3,7 @@
  */
 
 export const item = {
-  id: 64,
+  id: 1,
   amount: -75,
   purpose: "Energy bill",
   transactionDate: "2023-01-17T11:00:25.499812937",

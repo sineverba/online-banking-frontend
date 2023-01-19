@@ -26,7 +26,7 @@ afterEach(() => {
 // Clean up after the tests are finished.
 afterAll(() => server.close());
 
-describe("Test Payment Form", () => {
+describe("Test Payment Page", () => {
   it("Can perform a transaction", async () => {
     renderWithProviders(<GenericPage entity={ENTITY_PAYMENT} />);
 
