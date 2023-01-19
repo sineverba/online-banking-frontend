@@ -13,7 +13,7 @@ export const apiSlice = createApi({
   /**
    * Convention: tag type singular
    */
-  tagTypes: ["login", "balance", "transaction"],
+  tagTypes: ["login", "balance", "transactions", "transaction"],
   endpoints: (builder) => ({
     /**
      * Login section
@@ -31,13 +31,18 @@ export const apiSlice = createApi({
      */
     getBalance: builder.query({
       query: () => "/balance",
-      providesTags: ["balance", "transaction"]
+      providesTags: ["balance", "transactions"]
     }),
     /**
      * Transactions section
      */
     getTransactions: builder.query({
       query: (queryString) => `/bank-account-transactions?${queryString}`,
+      providesTags: ["transactions"]
+    }),
+    // Single
+    getTransaction: builder.query({
+      query: (id) => `/bank-account-transactions/${id}`,
       providesTags: ["transaction"]
     }),
     postPayment: builder.mutation({
@@ -46,7 +51,7 @@ export const apiSlice = createApi({
         method: "POST",
         body
       }),
-      invalidatesTags: ["transaction"]
+      invalidatesTags: ["transactions"]
     })
   })
 });
@@ -54,4 +59,10 @@ export const apiSlice = createApi({
  * Names export are endpoints: use{endpoint}Query for query
  * Names export are endpoints: use{endpoint}Mutation for Mutation
  */
-export const { usePostLoginMutation, useGetBalanceQuery, useGetTransactionsQuery, usePostPaymentMutation } = apiSlice;
+export const {
+  usePostLoginMutation,
+  useGetBalanceQuery,
+  useGetTransactionsQuery,
+  useGetTransactionQuery,
+  usePostPaymentMutation
+} = apiSlice;

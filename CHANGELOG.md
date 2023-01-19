@@ -1,5 +1,6 @@
 # Next version
 + Upgrade dependencies
++ Add generic detail
 
 ## 0.9.0
 + Upgrade dependencies
