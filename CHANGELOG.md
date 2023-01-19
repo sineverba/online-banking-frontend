@@ -1,6 +1,7 @@
 # Next version
 + Upgrade dependencies
 + Add generic detail
++ Add ModalWindow component
 
 ## 0.9.0
 + Upgrade dependencies
