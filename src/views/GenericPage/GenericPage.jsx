@@ -5,6 +5,8 @@ import { Loading } from "../../components/Loading";
 import { useGetTransactionsQuery } from "../../features/apiSlice";
 import { ENTITY_TRANSACTIONS } from "../../utils/constants/constant";
 import { GenericForm } from "./GenericForm";
+import { ModalWindow } from "../../components/ModalWindow";
+import {GenericDetail} from "./GenericDetail";
 
 export function GenericPage(props) {
   // Get current entity
@@ -14,6 +16,9 @@ export function GenericPage(props) {
   const [perPage, setPerPage] = useState(10);
   const [orderBy, setOrderBy] = useState("id");
   const [orderWay, setOrderWay] = useState("desc");
+
+  const [show, setShow] = useState(false);
+  const [idDetail, setIdDetail] = useState(null);
 
   /**
    * Create the querystring.
@@ -142,6 +147,11 @@ export function GenericPage(props) {
     setOrderWay(sortDirection);
   };
 
+  const handleOnRowClicked = ({ id }) => {
+    setIdDetail(id);
+    setShow(true);
+  };
+
   /**
    * Get the children of the page
    * @returns 
@@ -161,6 +171,7 @@ export function GenericPage(props) {
           sortServer
           onSort={handleSort}
           defaultSortAsc={false}
+          onRowClicked={handleOnRowClicked}
         />
       );
     }
@@ -180,6 +191,9 @@ export function GenericPage(props) {
           </Card>
         </Col>
       </Row>
+      <ModalWindow show={show} handleHide={setShow}>
+        <GenericDetail id={idDetail} />
+      </ModalWindow>
     </Container>
   );
 }

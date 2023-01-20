@@ -24,7 +24,6 @@ afterEach(() => {
 afterAll(() => server.close());
 
 describe("Test Transactions Detail", () => {
-
   it("Test can show single detail", async () => {
     renderWithProviders(<GenericDetail id={1} />);
     await waitFor(() => {
