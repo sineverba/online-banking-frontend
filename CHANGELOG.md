@@ -1,4 +1,10 @@
-# 0.9.0
+# 0.10.0
++ Upgrade dependencies
++ Add generic detail
++ Add ModalWindow component
++ Add transaction detail
+
+## 0.9.0
 + Upgrade dependencies
 + Move login to GenericForm
 + Add payment form
