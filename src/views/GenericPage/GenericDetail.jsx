@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Col, Container, Row } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import { Loading } from "../../components/Loading";
 import { useGetTransactionQuery } from "../../features/apiSlice";
 
@@ -27,24 +27,18 @@ export function GenericDetail(props) {
   const checkIsLoading = () => isLoadingTransaction || isFetchingTransaction;
 
   return (
-    <Container fluid>
-      <Row>
-        <Col>
-          <Card>
-            <Card.Body>
-              {checkIsLoading() ? (
-                <Loading />
-              ) : (
-                <>
-                  <h1>{transaction && transaction.transactionDate}</h1>
-                  <p>{transaction && transaction.purpose}</p>
-                </>
-              )}
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-    </Container>
+    <Card>
+      <Card.Body>
+        {checkIsLoading() ? (
+          <Loading />
+        ) : (
+          <>
+            <h1>{transaction && transaction.purpose}</h1>
+            <p>{transaction && transaction.transactionDate}</p>
+          </>
+        )}
+      </Card.Body>
+    </Card>
   );
 }
 

@@ -13,6 +13,11 @@ beforeEach(() => {
       return res(ctx.json(items));
     })
   );
+  server.use(
+    rest.get(`${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions/56`, (req, res, ctx) => {
+      return res(ctx.json(items.content[0]));
+    })
+  );
 });
 
 // Reset any request handlers that we may add during the tests,
@@ -90,6 +95,28 @@ describe("Test TransactionsPage", () => {
       const column = screen.getByText(/amount/i);
       expect(column).toBeInTheDocument();
       fireEvent.click(column);
+    });
+  });
+
+  it("Test can open and close modal on modal header", async () => {
+    renderWithProviders(<GenericPage entity={ENTITY_TRANSACTIONS} />);
+    await waitFor(() => {
+      const purpose = screen.queryAllByText(/December 2022 - Salary/i);
+      fireEvent.click(purpose.at(0));
+      // Search the close button
+      const closeButton = screen.getAllByRole("button", { name: /close/i });
+      fireEvent.click(closeButton.at(0));
+    });
+  });
+
+  it("Test can open and close modal on modal footer", async () => {
+    renderWithProviders(<GenericPage entity={ENTITY_TRANSACTIONS} />);
+    await waitFor(() => {
+      const purpose = screen.queryAllByText(/December 2022 - Salary/i);
+      fireEvent.click(purpose.at(0));
+      // Search the close button
+      const closeButton = screen.getAllByRole("button", { name: /close/i });
+      fireEvent.click(closeButton.at(1));
     });
   });
 
