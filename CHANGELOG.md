@@ -1,4 +1,7 @@
-# 0.10.0
+# 0.10.1
++ Fix Semaphore
+
+## 0.10.0
 + Upgrade dependencies
 + Add generic detail
 + Add ModalWindow component
