@@ -1,4 +1,7 @@
-# 0.10.1
+# Next version
++ Upgrade dependencies + Refactor Semaphore
+
+## 0.10.1
 + Fix Semaphore
 
 ## 0.10.0
