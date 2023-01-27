@@ -27,9 +27,6 @@ global_job_config:
     commands:
       - checkout
       - cp .env.bak .env
-      - npm install -g npm@$NPM_VERSION
-      - npm pkg set scripts.prepare="echo no-prepare"
-      - npm install --omit=dev
 
 blocks:
   - name: "Deploy"
@@ -37,11 +34,17 @@ blocks:
       jobs:
         - name: Deploy to Netlify
           commands:
+            - npm install -g npm@$NPM_VERSION
+            - npm pkg set scripts.prepare="echo no-prepare"
+            - npm install --omit=dev
             - npm install netlify-cli -g
             - npm run build
             - netlify deploy -s $NETLIFY_BITBANK_SITE_ID --auth $NETLIFY_ACCESS_TOKEN -p --dir ./build
         - name: Deploy to Vercel
           commands:
+            - npm install -g npm@$NPM_VERSION
+            - npm pkg set scripts.prepare="echo no-prepare"
+            - npm install --omit=dev
             - npm install -g vercel
             - VERCEL_PROJECT_ID=$VERCEL_BITBANK_PROJECT_ID VERCEL_ORG_ID=$VERCEL_ORG_ID npx vercel --token $VERCEL_TOKEN --confirm --prod
         - name: Deploy to VPS
