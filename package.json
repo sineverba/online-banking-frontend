@@ -74,5 +74,8 @@
   },
   "jest-junit": {
     "outputDirectory": "./report"
+  },
+  "msw": {
+    "workerDirectory": "public"
   }
 }

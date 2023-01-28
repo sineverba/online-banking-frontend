@@ -1,5 +1,6 @@
 # Next version
 + Upgrade dependencies + reorganize Docker
++ Add MSW during development
 
 ## 0.11.0
 + Upgrade dependencies + Refactor Semaphore
