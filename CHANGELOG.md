@@ -1,4 +1,7 @@
-# 0.11.0
+# Next version
++ Upgrade dependencies + reorganize Docker
+
+## 0.11.0
 + Upgrade dependencies + Refactor Semaphore
 
 ## 0.10.1
