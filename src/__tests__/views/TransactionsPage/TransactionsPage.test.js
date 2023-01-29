@@ -3,29 +3,13 @@ import { renderWithProviders } from "../../__test-utils__/test-utils";
 import { rest } from "msw";
 // eslint-disable-next-line jest/no-mocks-import
 import { server } from "../../__mocks__/api/server";
-import { items } from "../../__mocks__/responses/bank-account-transactions";
 import GenericPage from "../../../views/GenericPage/GenericPage";
 import { ENTITY_TRANSACTIONS } from "../../../utils/constants/constant";
 
-beforeEach(() => {
-  server.use(
-    rest.get(`${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions`, (req, res, ctx) => {
-      return res(ctx.json(items));
-    })
-  );
-  server.use(
-    rest.get(`${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions/56`, (req, res, ctx) => {
-      return res(ctx.json(items.content[0]));
-    })
-  );
-});
-
+beforeEach(() => { server.listen(); });
 // Reset any request handlers that we may add during the tests,
 // so they don't affect other tests.
-afterEach(() => {
-  server.resetHandlers();
-});
-
+afterEach(() => { server.resetHandlers(); });
 // Clean up after the tests are finished.
 afterAll(() => server.close());
 
