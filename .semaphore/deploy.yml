@@ -68,7 +68,7 @@ blocks:
             - >-
               ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT
               "sed -i \"/image\: registry.gitlab.com\/cicdprojects\/$FOLDER_APP:/c\    image\: registry.gitlab.com\/cicdprojects\/$FOLDER_APP\:$SEMAPHORE_GIT_TAG_NAME\" $FOLDER_APP/docker-compose.yml && exit"
-            # 6 - Restart the service
+            # 5 - Restart the service
             - >-
               ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT
               "cd $FOLDER_APP && docker-compose up -d && exit"

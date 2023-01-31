@@ -5,15 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import { email as mockedEmail } from "./__mocks__/items/email";
 import { password as mockedPassword } from "./__mocks__/items/password";
 import { rest } from "msw";
-// eslint-disable-next-line jest/no-mocks-import
 import { server } from "./__mocks__/api/server";
-
-beforeEach(() => { server.listen(); });
-// Reset any request handlers that we may add during the tests,
-// so they don't affect other tests.
-afterEach(() => { server.resetHandlers(); });
-// Clean up after the tests are finished.
-afterAll(() => server.close());
 
 describe("Test App.js", () => {
 
@@ -89,15 +81,11 @@ describe("Test App.js", () => {
 
   it("Can manage missing data from mutation", async () => {
 
-    const zeroItems = {
-      content: []
-    };
-
     server.use(
       rest.post(
         `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
         (req, res, ctx) => {
-          return res(ctx.json(zeroItems));
+          return res(ctx.json([]));
         }
       )
     );
