@@ -1,4 +1,11 @@
-# 0.11.0
+# 1.0.0
++ Upgrade dependencies + reorganize Docker
++ Add MSW during development
++ Refactor MSW tests
++ Refactor tests
++ Upgrade dependencies
+
+## 0.11.0
 + Upgrade dependencies + Refactor Semaphore
 
 ## 0.10.1

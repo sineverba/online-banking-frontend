@@ -26,5 +26,11 @@ __This project uses:__
 1. Copy .env.bak into .env
 2. Insert random string on `LOCALSTORAGE_ACCESS_TOKEN` in .env file (`$ echo $RANDOM | md5sum | head -c 20; echo;`). This will deny conflicts with other localStorage used by other projects
 
+## Development
+
+`npm run start` to start development with real call.
+
+`npm run msw` to start development with mocked call.
+
 ## Production
 + Use files in `/production` folder
