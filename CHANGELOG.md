@@ -1,4 +1,7 @@
-# 1.0.0
+# Next version
++ Upgrade dependencies
+
+## 1.0.0
 + Upgrade dependencies + reorganize Docker
 + Add MSW during development
 + Refactor MSW tests
