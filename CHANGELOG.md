@@ -1,5 +1,6 @@
 # Next version
 + Upgrade dependencies
++ Refactor tests
 
 ## 1.0.0
 + Upgrade dependencies + reorganize Docker

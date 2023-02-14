@@ -1,7 +1,8 @@
 import { rest } from "msw";
 import { item as login } from "../responses/login";
 import { item as balance } from "../responses/balance";
-import { items as transactions } from "../responses/bank-account-transactions";
+import { items as transactionsPage0 } from "../responses/bank-account-transactions/page-00";
+import { items as transactionsPage1 } from "../responses/bank-account-transactions/page-01";
 import { item as payment } from "../responses/payment";
 
 export const handlers = [
@@ -20,12 +21,15 @@ export const handlers = [
   rest.get(
     `${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions`,
     (req, res, ctx) => {
-      return res(ctx.json(transactions));
+      if (req.url.searchParams.get("page") === "1") {
+        return res(ctx.json(transactionsPage1));
+      }
+      return res(ctx.json(transactionsPage0));
     }
   ),
   // Single transaction
   rest.get(`${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions/:id`, (req, res, ctx) => {
-    return res(ctx.json(transactions.content[0]));
+    return res(ctx.json(transactionsPage0.content[0]));
   }),
   // Make payment
   rest.post(
