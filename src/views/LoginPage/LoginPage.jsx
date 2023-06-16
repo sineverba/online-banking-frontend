@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container, Image, Row } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { ENTITY_LOGIN } from "../../utils/constants/constant";
 import { GenericForm } from "../GenericPage/GenericForm";
 
@@ -8,11 +8,6 @@ export function LoginPage() {
     <Container fluid>
       <Container className="container-login">
         <GenericForm entity={ENTITY_LOGIN} />
-        <Row>
-          <Col>
-            <Image src="download.png" alt="QRCode" />
-          </Col>
-        </Row>
       </Container>
     </Container>
   );

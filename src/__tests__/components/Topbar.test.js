@@ -19,4 +19,18 @@ describe("Test Topbar", () => {
     expect(logout).toBeInTheDocument();
     fireEvent.click(logout);
   });
+
+  it("Can click on Enable MFA", () => {
+    // Set a fake token
+    localStorage.setItem(LOCALSTORAGE_ACCESS_TOKEN, accessToken);
+    renderWithProviders(<Topbar />);
+
+    // Open the dropdown
+    const email = screen.queryByText(mockedEmail);
+    fireEvent.click(email);
+
+    const enableMfa = screen.queryByText(/enable mfa/i);
+    expect(enableMfa).toBeInTheDocument();
+    fireEvent.click(enableMfa);
+  });
 });
