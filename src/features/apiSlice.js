@@ -13,41 +13,41 @@ export const apiSlice = createApi({
   /**
    * Convention: tag type singular
    */
-  tagTypes: ["login", "balance", "transactions", "transaction"],
+  tagTypes: ["loginV1", "balance", "transactions", "transaction"],
   endpoints: (builder) => ({
     /**
      * Login section
      */
     postLogin: builder.mutation({
       query: (body) => ({
-        url: "/auth/login",
+        url: "/v1/auth/login",
         method: "POST",
         body
       }),
-      providesTags: ["login"]
+      providesTags: ["loginV1"]
     }),
     /**
      * Balance section
      */
     getBalance: builder.query({
-      query: () => "/balance",
+      query: () => "/v1/balance",
       providesTags: ["balance", "transactions"]
     }),
     /**
      * Transactions section
      */
     getTransactions: builder.query({
-      query: (queryString) => `/bank-account-transactions?${queryString}`,
+      query: (queryString) => `/v1/bank-account-transactions?${queryString}`,
       providesTags: ["transactions"]
     }),
     // Single
     getTransaction: builder.query({
-      query: (id) => `/bank-account-transactions/${id}`,
+      query: (id) => `/v1/bank-account-transactions/${id}`,
       providesTags: ["transaction"]
     }),
     postPayment: builder.mutation({
       query: (body) => ({
-        url: "/bank-account-transactions",
+        url: "/v1/bank-account-transactions",
         method: "POST",
         body
       }),

@@ -12,7 +12,7 @@ sonar:
 		--name $(CONTAINER_NAME)-sonarscanner \
 		-v $(PWD):/usr/src \
 		-e SONAR_HOST_URL=$(SONAR_HOST_URL) \
-		-e SONAR_LOGIN=$(SONAR_LOGIN) \
+		-e SONAR_LOGIN=$(SONAR_TOKEN) \
 		sonarsource/sonar-scanner-cli:$(SONARSCANNER_VERSION)
 
 upgrade:

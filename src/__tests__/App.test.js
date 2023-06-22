@@ -1,4 +1,4 @@
-import { fireEvent, renderHook, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import App from "../App";
 import { renderWithProviders } from "./__test-utils__/test-utils";
 import { BrowserRouter } from "react-router-dom";
@@ -83,7 +83,7 @@ describe("Test App.js", () => {
 
     server.use(
       rest.post(
-        `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
+        `${process.env.REACT_APP_BACKEND_URL}/v1/auth/login`,
         (req, res, ctx) => {
           return res(ctx.json([]));
         }

@@ -4,6 +4,7 @@
 + Upgrade dependencies
 + Add QRCode to enable MFA
 + Move QRCode to menu
++ Refactor tests with delay
 
 ## 1.0.0
 + Upgrade dependencies + reorganize Docker

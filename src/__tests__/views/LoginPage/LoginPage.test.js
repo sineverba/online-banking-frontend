@@ -11,36 +11,36 @@ describe("Test LoginPage", () => {
     const inputUsername = screen.getByLabelText(/username/i);
     fireEvent.change(inputUsername, {
       target: {
-        value: email,
-      },
+        value: email
+      }
     });
 
     const inputPassword = screen.getByLabelText(/password/i);
     fireEvent.change(inputPassword, {
       target: {
-        value: password,
-      },
+        value: password
+      }
     });
 
     const loginButton = screen.getByRole("button", { name: /login/i });
     fireEvent.click(loginButton);
   });
 
-  it("Can manage wrong credentials", async () => {
+  it("Can handle wrong credentials", async () => {
     renderWithProviders(<GenericForm />);
 
     const inputUsername = screen.getByLabelText(/username/i);
     fireEvent.change(inputUsername, {
       target: {
-        value: email,
-      },
+        value: email
+      }
     });
 
     const inputPassword = screen.getByLabelText(/password/i);
     fireEvent.change(inputPassword, {
       target: {
-        value: password,
-      },
+        value: password
+      }
     });
 
     const loginButton = screen.getByRole("button", { name: /login/i });

@@ -33,4 +33,4 @@ __This project uses:__
 `npm run msw` to start development with mocked call.
 
 ## Production
-+ Use files in `/production` folder
++ Use files in `/dockerfiles/production` folder
