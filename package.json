@@ -24,10 +24,10 @@
     "msw": "REACT_APP_MSW=true react-scripts start",
     "start": "react-scripts start",
     "build": "DISABLE_ESLINT_PLUGIN='true' REACT_APP_VERSION=$npm_package_version react-scripts build",
-    "test": "react-scripts test",
-    "test:ci": "npm run test -- --testResultsProcessor=\"jest-junit\"",
+    "test": "react-scripts test --testEnvironment node",
+    "test:ci": "npm run test --testEnvironment node -- --testResultsProcessor=\"jest-junit\"",
     "eject": "react-scripts eject",
-    "coverage": "CI=true react-scripts test --coverage",
+    "coverage": "CI=true react-scripts test --testEnvironment node --coverage",
     "eslint": "npx eslint .",
     "fixeslint": "npx eslint . --fix",
     "prepare": "husky install"

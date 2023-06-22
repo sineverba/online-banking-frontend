@@ -8,6 +8,10 @@ import setupStore from "./store/index";
 
 const store = setupStore({});
 
+beforeEach(() => {
+  localStorage.clear();
+});
+
 // Establish API mocking before all tests.
 beforeAll(() => {
   server.listen();
