@@ -2,7 +2,7 @@ include .env
 
 IMAGE_NAME=registry.gitlab.com/cicdprojects/online-banking-frontend
 CONTAINER_NAME=online-banking-frontend
-APP_VERSION=1.0.0-dev
+APP_VERSION=1.1.0-dev
 SONARSCANNER_VERSION=4.8.0
 BUILDX_VERSION=0.10.5
 BINFMT_VERSION=qemu-v7.0.0-28
@@ -12,7 +12,7 @@ sonar:
 		--name $(CONTAINER_NAME)-sonarscanner \
 		-v $(PWD):/usr/src \
 		-e SONAR_HOST_URL=$(SONAR_HOST_URL) \
-		-e SONAR_LOGIN=$(SONAR_LOGIN) \
+		-e SONAR_LOGIN=$(SONAR_TOKEN) \
 		sonarsource/sonar-scanner-cli:$(SONARSCANNER_VERSION)
 
 upgrade:
@@ -55,10 +55,11 @@ multi:
 
 test:
 	docker run --rm -it --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION) cat /etc/os-release | grep "Alpine Linux v3.17"
-	docker run --rm -it --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION) cat /etc/os-release | grep "VERSION_ID=3.17.3"
+	docker run --rm -it --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION) cat /etc/os-release | grep "VERSION_ID=3.17.2"
 	
 spin:
 	docker container run -it --rm --publish 8080:80 --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION)
 
 destroy:
+	docker image rm nginx:1.23.3-alpine-slim
 	docker image rm $(IMAGE_NAME):$(APP_VERSION)
