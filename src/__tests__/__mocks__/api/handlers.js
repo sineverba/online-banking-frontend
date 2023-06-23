@@ -8,18 +8,18 @@ import { item as payment } from "../responses/payment";
 export const handlers = [
   // Login
   rest.post(
-    `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
+    `${process.env.REACT_APP_BACKEND_URL}/v1/auth/login`,
     (req, res, ctx) => {
       return res(ctx.json(login));
     }
   ),
   // Balance
-  rest.get(`${process.env.REACT_APP_BACKEND_URL}/balance`, (req, res, ctx) => {
+  rest.get(`${process.env.REACT_APP_BACKEND_URL}/v1/balance`, (req, res, ctx) => {
     return res(ctx.json(balance));
   }),
   // Transactions
   rest.get(
-    `${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions`,
+    `${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions`,
     (req, res, ctx) => {
       if (req.url.searchParams.get("page") === "1") {
         return res(ctx.json(transactionsPage1));
@@ -28,12 +28,12 @@ export const handlers = [
     }
   ),
   // Single transaction
-  rest.get(`${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions/:id`, (req, res, ctx) => {
+  rest.get(`${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions/:id`, (req, res, ctx) => {
     return res(ctx.json(transactionsPage0.content[0]));
   }),
   // Make payment
   rest.post(
-    `${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions`,
+    `${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions`,
     (req, res, ctx) => {
       return res(ctx.json(payment));
     }

@@ -22,7 +22,7 @@ describe("Test TransactionsPage", () => {
     };
 
     server.use(
-      rest.get(`${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions`, (req, res, ctx) => {
+      rest.get(`${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions`, (req, res, ctx) => {
         return res(ctx.json(zeroItems));
       })
     );

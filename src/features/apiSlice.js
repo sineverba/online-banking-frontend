@@ -20,7 +20,7 @@ export const apiSlice = createApi({
      */
     postLogin: builder.mutation({
       query: (body) => ({
-        url: "/auth/login",
+        url: "/v1/auth/login",
         method: "POST",
         body
       }),
@@ -30,24 +30,24 @@ export const apiSlice = createApi({
      * Balance section
      */
     getBalance: builder.query({
-      query: () => "/balance",
+      query: () => "/v1/balance",
       providesTags: ["balance", "transactions"]
     }),
     /**
      * Transactions section
      */
     getTransactions: builder.query({
-      query: (queryString) => `/bank-account-transactions?${queryString}`,
+      query: (queryString) => `/v1/bank-account-transactions?${queryString}`,
       providesTags: ["transactions"]
     }),
     // Single
     getTransaction: builder.query({
-      query: (id) => `/bank-account-transactions/${id}`,
+      query: (id) => `/v1/bank-account-transactions/${id}`,
       providesTags: ["transaction"]
     }),
     postPayment: builder.mutation({
       query: (body) => ({
-        url: "/bank-account-transactions",
+        url: "/v1/bank-account-transactions",
         method: "POST",
         body
       }),
