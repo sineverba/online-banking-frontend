@@ -4,3 +4,4 @@
 .semaphore/
 coverage/
 node_modules/
+report/
