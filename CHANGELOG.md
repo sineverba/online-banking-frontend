@@ -1,5 +1,6 @@
 # Next version
 + Upgrade dependencies
++ Move v1 to the code
 
 ## 1.1.0
 + Upgrade dependencies
