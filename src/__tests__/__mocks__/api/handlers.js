@@ -9,33 +9,59 @@ export const handlers = [
   // Login
   rest.post(
     `${process.env.REACT_APP_BACKEND_URL}/v1/auth/login`,
-    (req, res, ctx) => {
-      return res(ctx.json(login));
+    async (req, res, ctx) => {
+      let status = 200;
+      let result = login;
+      const body = await req.json();
+      // Wrong, 401
+      if (body && body.username && body.username === "empty") {
+        status = 200;
+        result = [];
+      }
+      return res(ctx.delay(), ctx.status(status), ctx.json(result));
     }
   ),
   // Balance
-  rest.get(`${process.env.REACT_APP_BACKEND_URL}/v1/balance`, (req, res, ctx) => {
-    return res(ctx.json(balance));
-  }),
+  rest.get(
+    `${process.env.REACT_APP_BACKEND_URL}/v1/balance`,
+    (req, res, ctx) => {
+      const status = 200;
+      return res(ctx.delay(), ctx.status(status), ctx.json(balance));
+    }
+  ),
   // Transactions
   rest.get(
     `${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions`,
     (req, res, ctx) => {
+      const status = 200;
       if (req.url.searchParams.get("page") === "1") {
-        return res(ctx.json(transactionsPage1));
+        return res(
+          ctx.delay(),
+          ctx.status(status),
+          ctx.json(transactionsPage1)
+        );
       }
-      return res(ctx.json(transactionsPage0));
+      return res(ctx.delay(), ctx.status(status), ctx.json(transactionsPage0));
     }
   ),
   // Single transaction
-  rest.get(`${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions/:id`, (req, res, ctx) => {
-    return res(ctx.json(transactionsPage0.content[0]));
-  }),
+  rest.get(
+    `${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions/:id`,
+    (req, res, ctx) => {
+      const status = 200;
+      return res(
+        ctx.delay(),
+        ctx.status(status),
+        ctx.json(transactionsPage0.content[0])
+      );
+    }
+  ),
   // Make payment
   rest.post(
     `${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions`,
     (req, res, ctx) => {
-      return res(ctx.json(payment));
+      const status = 201;
+      return res(ctx.delay(), ctx.status(status), ctx.json(payment));
     }
   )
 ];

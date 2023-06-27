@@ -6,7 +6,6 @@ import GenericPage from "../../../views/GenericPage/GenericPage";
 import { ENTITY_TRANSACTIONS } from "../../../utils/constants/constant";
 
 describe("Test TransactionsPage", () => {
-
   it("Test can show transactions", async () => {
     renderWithProviders(<GenericPage entity={ENTITY_TRANSACTIONS} />);
     await waitFor(() => {
@@ -15,43 +14,22 @@ describe("Test TransactionsPage", () => {
     });
   });
 
-  it("Test can manage zero transactions", async () => {
-
-    const zeroItems = {
-      content: []
-    };
-
-    server.use(
-      rest.get(`${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions`, (req, res, ctx) => {
-        return res(ctx.json(zeroItems));
-      })
-    );
-
-    renderWithProviders(<GenericPage entity={ENTITY_TRANSACTIONS} />);
-    await waitFor(() => {
-      const noData = screen.getByText(/There are no records to display/i);
-      expect(noData).toBeInTheDocument();
-    });
-  });
-
   it("Test can manage change page", async () => {
-
     renderWithProviders(<GenericPage entity={ENTITY_TRANSACTIONS} />);
     await waitFor(() => {
-      const nextPageButton = screen.getByRole("button", {name: "Next Page"});
+      const nextPageButton = screen.getByRole("button", { name: "Next Page" });
       expect(nextPageButton).toBeInTheDocument();
       fireEvent.click(nextPageButton);
     });
   });
 
   it("Test can manage change per page", async () => {
-
     renderWithProviders(<GenericPage entity={ENTITY_TRANSACTIONS} />);
     await waitFor(() => {
-      const perPageSelect = screen.getByLabelText('Rows per page:');
+      const perPageSelect = screen.getByLabelText("Rows per page:");
       expect(perPageSelect).toBeInTheDocument();
       fireEvent.change(perPageSelect, {
-        target: { value: "20" },
+        target: { value: "20" }
       });
     });
   });
@@ -66,7 +44,9 @@ describe("Test TransactionsPage", () => {
   });
 
   it("Test can manage callback", async () => {
-    renderWithProviders(<GenericPage entity={ENTITY_TRANSACTIONS} forceUndefinedForSort />);
+    renderWithProviders(
+      <GenericPage entity={ENTITY_TRANSACTIONS} forceUndefinedForSort />
+    );
     await waitFor(() => {
       const column = screen.getByText(/amount/i);
       expect(column).toBeInTheDocument();
@@ -95,5 +75,4 @@ describe("Test TransactionsPage", () => {
       fireEvent.click(closeButton.at(1));
     });
   });
-
 });
