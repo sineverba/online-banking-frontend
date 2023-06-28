@@ -76,15 +76,6 @@ describe("Test App.js", () => {
   });
 
   it("Can manage missing data from mutation", async () => {
-    server.use(
-      rest.post(
-        `${process.env.REACT_APP_BACKEND_URL}/v1/auth/login`,
-        (req, res, ctx) => {
-          return res(ctx.json([]));
-        }
-      )
-    );
-
     renderWithProviders(
       <BrowserRouter>
         <App />
@@ -94,7 +85,7 @@ describe("Test App.js", () => {
     const inputUsername = screen.getByLabelText(/username/i);
     fireEvent.change(inputUsername, {
       target: {
-        value: mockedEmail
+        value: "empty"
       }
     });
 
