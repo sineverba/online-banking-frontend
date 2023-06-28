@@ -14,11 +14,14 @@ export const handlers = [
       let result = login;
       const body = await req.json();
       // Wrong, 401
-      if (body && body.username && body.username === "empty") {
-        status = 200;
+      if (body && body.username && body.username === "wrong") {
+        status = 401;
         result = [];
       }
-      return res(ctx.status(status), ctx.json(result));
+      if (body && body.username && body.username === "empty") {
+        result = [];
+      }
+      return res(ctx.delay(), ctx.status(status), ctx.json(result));
     }
   ),
   // Balance
@@ -33,15 +36,12 @@ export const handlers = [
   rest.get(
     `${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions`,
     (req, res, ctx) => {
+      let result = transactionsPage0;
       const status = 200;
       if (req.url.searchParams.get("page") === "1") {
-        return res(
-          ctx.delay(),
-          ctx.status(status),
-          ctx.json(transactionsPage1)
-        );
+        result = transactionsPage1;
       }
-      return res(ctx.status(status), ctx.json(transactionsPage0));
+      return res(ctx.status(status), ctx.json(result));
     }
   ),
   // Single transaction
@@ -49,11 +49,7 @@ export const handlers = [
     `${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions/:id`,
     (req, res, ctx) => {
       const status = 200;
-      return res(
-        ctx.delay(),
-        ctx.status(status),
-        ctx.json(transactionsPage0.content[0])
-      );
+      return res(ctx.status(status), ctx.json(transactionsPage0.content[0]));
     }
   ),
   // Make payment

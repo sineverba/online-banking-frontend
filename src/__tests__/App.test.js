@@ -75,7 +75,7 @@ describe("Test App.js", () => {
     });
   });
 
-  it("Can manage missing data from mutation", async () => {
+  it("Can handle missing data from mutation", async () => {
     renderWithProviders(
       <BrowserRouter>
         <App />
