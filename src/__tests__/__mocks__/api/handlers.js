@@ -18,7 +18,7 @@ export const handlers = [
         status = 200;
         result = [];
       }
-      return res(ctx.delay(), ctx.status(status), ctx.json(result));
+      return res(ctx.status(status), ctx.json(result));
     }
   ),
   // Balance
@@ -26,7 +26,7 @@ export const handlers = [
     `${process.env.REACT_APP_BACKEND_URL}/v1/balance`,
     (req, res, ctx) => {
       const status = 200;
-      return res(ctx.delay(), ctx.status(status), ctx.json(balance));
+      return res(ctx.status(status), ctx.json(balance));
     }
   ),
   // Transactions
@@ -41,7 +41,7 @@ export const handlers = [
           ctx.json(transactionsPage1)
         );
       }
-      return res(ctx.delay(), ctx.status(status), ctx.json(transactionsPage0));
+      return res(ctx.status(status), ctx.json(transactionsPage0));
     }
   ),
   // Single transaction
@@ -61,7 +61,7 @@ export const handlers = [
     `${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions`,
     (req, res, ctx) => {
       const status = 201;
-      return res(ctx.delay(), ctx.status(status), ctx.json(payment));
+      return res(ctx.status(status), ctx.json(payment));
     }
   )
 ];
