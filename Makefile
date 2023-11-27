@@ -3,8 +3,8 @@ include .env
 IMAGE_NAME=registry.gitlab.com/cicdprojects/online-banking-frontend
 CONTAINER_NAME=online-banking-frontend
 APP_VERSION=1.1.0-dev
-SONARSCANNER_VERSION=4.8.0
-BUILDX_VERSION=0.11.0
+SONARSCANNER_VERSION=5.0.1
+BUILDX_VERSION=0.12.0
 BINFMT_VERSION=qemu-v7.0.0-28
 
 sonar:
@@ -16,8 +16,8 @@ sonar:
 		sonarsource/sonar-scanner-cli:$(SONARSCANNER_VERSION)
 
 upgrade:
-	npx ncu -u
-	npx browserslist@latest --update-db
+	npx ncu -u -x msw
+	npx update-browserslist-db@latest
 	npm install
 	npm audit fix
 
@@ -54,12 +54,12 @@ multi:
 	rm -r build
 
 test:
-	docker run --rm -it --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION) cat /etc/os-release | grep "Alpine Linux v3.17"
-	docker run --rm -it --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION) cat /etc/os-release | grep "VERSION_ID=3.17.3"
+	docker run --rm -it --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION) cat /etc/os-release | grep "Alpine Linux v3.18"
+	docker run --rm -it --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION) cat /etc/os-release | grep "VERSION_ID=3.18.4"
 	
 spin:
 	docker container run -it --rm --publish 8080:80 --name $(CONTAINER_NAME) $(IMAGE_NAME):$(APP_VERSION)
 
 destroy:
-	docker image rm nginx:1.23.4-alpine3.17-slim
+	docker image rm nginx:1.25.3-alpine3.18-slim
 	docker image rm $(IMAGE_NAME):$(APP_VERSION)

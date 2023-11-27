@@ -1,5 +1,5 @@
 # Use NGINX
-FROM nginx:1.23.4-alpine3.17-slim
+FROM nginx:1.25.3-alpine3.18-slim
 # Update and upgrade
 RUN apk update --no-cache && apk upgrade
 # Copy from builder
