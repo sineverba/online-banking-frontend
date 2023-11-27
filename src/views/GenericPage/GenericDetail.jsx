@@ -33,8 +33,8 @@ export function GenericDetail(props) {
           <Loading />
         ) : (
           <>
-            <h1>{transaction && transaction.purpose}</h1>
-            <p>{transaction && transaction.transactionDate}</p>
+            <h1>{transaction?.purpose}</h1>
+            <p>{transaction?.transactionDate}</p>
           </>
         )}
       </Card.Body>

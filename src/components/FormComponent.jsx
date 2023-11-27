@@ -27,7 +27,7 @@ export const FormComponent = (props) => {
     return true;
   };
 
-  const getDefaultValue = () => (props.currentItem && props.currentItem[props.field.name]
+  const getDefaultValue = () => (props?.currentItem?.[props.field.name]
     ? props.currentItem[props.field.name]
     : "");
 
@@ -36,7 +36,7 @@ export const FormComponent = (props) => {
       <Form.Label>
         <AlertField
           label={
-            props.field && props.field.label
+            props?.field?.label
               ? props.field.label
               : props.field.name
           }

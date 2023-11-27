@@ -3,6 +3,7 @@
 + Move v1 to the code
 + Remove servers inside tests
 + Refactor login tests
++ Upgrade dependencies
 
 ## 1.1.0
 + Upgrade dependencies
