@@ -27,7 +27,7 @@ export const FormComponent = (props) => {
     return true;
   };
 
-  const getDefaultValue = () => (props?.currentItem[props.field.name]
+  const getDefaultValue = () => (props?.currentItem?.[props.field.name]
     ? props.currentItem[props.field.name]
     : "");
 
