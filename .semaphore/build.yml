@@ -15,19 +15,17 @@ global_job_config:
     - name: GITLAB_REGISTRY
       value: registry.gitlab.com
     - name: BUILDX_VERSION
-      value: 0.12.0
-    - name: BINFMT_VERSION
-      value: qemu-v7.0.0-28
+      value: 0.12.1
+    - name: NODE_VERSION
+      value: 20.11.0
     - name: NPM_VERSION
       value: 10.3.0
+    - name: NGINX_VERSION
+      value: 1.25.3
   prologue:
     commands:
       - checkout
       - cp .env.bak .env
-      - npm install -g npm@$NPM_VERSION
-      - npm pkg set scripts.prepare="echo no-prepare"
-      - npm install --omit=dev
-      - npm run build
 
 blocks:
   - name: "Build"
@@ -43,14 +41,14 @@ blocks:
               -L "https://github.com/docker/buildx/releases/download/v$BUILDX_VERSION/buildx-v$BUILDX_VERSION.linux-amd64" 
               > ~/.docker/cli-plugins/docker-buildx
             - chmod a+x ~/.docker/cli-plugins/docker-buildx
-            - docker buildx version
-            - docker run --rm --privileged tonistiigi/binfmt:$BINFMT_VERSION --install all
-            - docker buildx ls
-            - docker buildx create --name multiarch --driver docker-container --use
+            - docker buildx create --name multiarch --use
             - docker buildx inspect --bootstrap --builder multiarch
             - >-
               docker buildx build 
               --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8 
+              --build-arg NODE_VERSION=$NODE_VERSION 
+              --build-arg NPM_VERSION=$NPM_VERSION 
+              --build-arg NGINX_VERSION=$NGINX_VERSION 
               --tag $DOCKER_IMAGE:$SEMAPHORE_GIT_TAG_NAME 
               --tag $DOCKER_IMAGE:latest 
               --push 
