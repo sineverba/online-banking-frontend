@@ -2,7 +2,7 @@ include .env
 
 IMAGE_NAME=registry.gitlab.com/cicdprojects/online-banking-frontend
 CONTAINER_NAME=online-banking-frontend
-APP_VERSION=1.2.0-dev
+APP_VERSION=1.2.1-dev
 NODE_VERSION=20.11.0
 NPM_VERSION=10.3.0
 NGINX_VERSION=1.25.3
@@ -50,8 +50,12 @@ build:
 
 multi:
 	docker buildx build \
-		--platform linux/arm64/v8,linux/amd64,linux/arm/v6,linux/arm/v7 \
+		--platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64 \
+		--build-arg NODE_VERSION=$(NODE_VERSION) \
+		--build-arg NPM_VERSION=$(NPM_VERSION) \
+		--build-arg NGINX_VERSION=$(NGINX_VERSION) \
 		--tag $(IMAGE_NAME):$(APP_VERSION) \
+		--tag $(IMAGE_NAME):latest \
 		--push \
 		--file dockerfiles/production/build/docker/Dockerfile "."
 

@@ -42,10 +42,9 @@ blocks:
               > ~/.docker/cli-plugins/docker-buildx
             - chmod a+x ~/.docker/cli-plugins/docker-buildx
             - docker buildx create --name multiarch --use
-            - docker buildx inspect --bootstrap --builder multiarch
             - >-
               docker buildx build 
-              --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64/v8 
+              --platform linux/amd64,linux/arm/v6,linux/arm/v7,linux/arm64 
               --build-arg NODE_VERSION=$NODE_VERSION 
               --build-arg NPM_VERSION=$NPM_VERSION 
               --build-arg NGINX_VERSION=$NGINX_VERSION 
