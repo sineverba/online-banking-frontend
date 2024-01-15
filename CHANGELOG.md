@@ -5,6 +5,7 @@
 + Refactor login tests
 + Upgrade dependencies
 + Upgrade dependencies
++ Refactor Docker build
 
 ## 1.1.0
 + Upgrade dependencies
