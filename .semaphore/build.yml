@@ -19,7 +19,7 @@ global_job_config:
     - name: BINFMT_VERSION
       value: qemu-v7.0.0-28
     - name: NPM_VERSION
-      value: 10.2.4
+      value: 10.3.0
   prologue:
     commands:
       - checkout
