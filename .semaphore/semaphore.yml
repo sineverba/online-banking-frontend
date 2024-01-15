@@ -10,9 +10,9 @@ global_job_config:
     - name: ACCESS_TOKENS
   env_vars:
     - name: NPM_VERSION
-      value: 9.7.1
+      value: 10.3.0
     - name: SONARSCANNER_VERSION
-      value: 4.8.0
+      value: 5.0.1
   prologue:
     commands:
       - checkout

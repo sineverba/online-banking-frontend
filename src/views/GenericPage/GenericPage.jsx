@@ -95,8 +95,7 @@ export function GenericPage(props) {
   const getItems = () => {
     let items = [];
     if (
-      transactions &&
-      transactions.content &&
+      transactions?.content &&
       transactions.content.length > 0
     ) {
       // Copy all array into items
@@ -111,7 +110,7 @@ export function GenericPage(props) {
    * @returns the total number of elements
    */
   const getTotalRows = () => {
-    if (transactions && transactions.totalElements) {
+    if (transactions?.totalElements) {
       return transactions.totalElements;
     }
     return 0;

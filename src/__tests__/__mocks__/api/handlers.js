@@ -8,34 +8,56 @@ import { item as payment } from "../responses/payment";
 export const handlers = [
   // Login
   rest.post(
-    `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
-    (req, res, ctx) => {
-      return res(ctx.json(login));
+    `${process.env.REACT_APP_BACKEND_URL}/v1/auth/login`,
+    async (req, res, ctx) => {
+      let status = 200;
+      let result = login;
+      const body = await req.json();
+      // Wrong, 401
+      if (body && body.username && body.username === "wrong") {
+        status = 401;
+        result = [];
+      }
+      if (body && body.username && body.username === "empty") {
+        result = [];
+      }
+      return res(ctx.delay(), ctx.status(status), ctx.json(result));
     }
   ),
   // Balance
-  rest.get(`${process.env.REACT_APP_BACKEND_URL}/balance`, (req, res, ctx) => {
-    return res(ctx.json(balance));
-  }),
+  rest.get(
+    `${process.env.REACT_APP_BACKEND_URL}/v1/balance`,
+    (req, res, ctx) => {
+      const status = 200;
+      return res(ctx.status(status), ctx.json(balance));
+    }
+  ),
   // Transactions
   rest.get(
-    `${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions`,
+    `${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions`,
     (req, res, ctx) => {
+      let result = transactionsPage0;
+      const status = 200;
       if (req.url.searchParams.get("page") === "1") {
-        return res(ctx.json(transactionsPage1));
+        result = transactionsPage1;
       }
-      return res(ctx.json(transactionsPage0));
+      return res(ctx.status(status), ctx.json(result));
     }
   ),
   // Single transaction
-  rest.get(`${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions/:id`, (req, res, ctx) => {
-    return res(ctx.json(transactionsPage0.content[0]));
-  }),
+  rest.get(
+    `${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions/:id`,
+    (req, res, ctx) => {
+      const status = 200;
+      return res(ctx.status(status), ctx.json(transactionsPage0.content[0]));
+    }
+  ),
   // Make payment
   rest.post(
-    `${process.env.REACT_APP_BACKEND_URL}/bank-account-transactions`,
+    `${process.env.REACT_APP_BACKEND_URL}/v1/bank-account-transactions`,
     (req, res, ctx) => {
-      return res(ctx.json(payment));
+      const status = 201;
+      return res(ctx.status(status), ctx.json(payment));
     }
   )
 ];

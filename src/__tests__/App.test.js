@@ -1,4 +1,4 @@
-import { fireEvent, renderHook, screen, waitFor } from "@testing-library/react";
+import { fireEvent, screen, waitFor } from "@testing-library/react";
 import App from "../App";
 import { renderWithProviders } from "./__test-utils__/test-utils";
 import { BrowserRouter } from "react-router-dom";
@@ -8,9 +8,7 @@ import { rest } from "msw";
 import { server } from "./__mocks__/api/server";
 
 describe("Test App.js", () => {
-
   it("Perform login and show menu", async () => {
-
     renderWithProviders(
       <BrowserRouter>
         <App />
@@ -43,7 +41,6 @@ describe("Test App.js", () => {
   });
 
   it("Perform logout", async () => {
-
     renderWithProviders(
       <BrowserRouter>
         <App />
@@ -78,18 +75,7 @@ describe("Test App.js", () => {
     });
   });
 
-
-  it("Can manage missing data from mutation", async () => {
-
-    server.use(
-      rest.post(
-        `${process.env.REACT_APP_BACKEND_URL}/auth/login`,
-        (req, res, ctx) => {
-          return res(ctx.json([]));
-        }
-      )
-    );
-
+  it("Can handle missing data from mutation", async () => {
     renderWithProviders(
       <BrowserRouter>
         <App />
@@ -99,7 +85,7 @@ describe("Test App.js", () => {
     const inputUsername = screen.getByLabelText(/username/i);
     fireEvent.change(inputUsername, {
       target: {
-        value: mockedEmail
+        value: "empty"
       }
     });
 
@@ -118,5 +104,4 @@ describe("Test App.js", () => {
       expect(loginButton).toBeInTheDocument();
     });
   });
-
 });

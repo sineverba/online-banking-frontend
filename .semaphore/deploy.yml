@@ -15,14 +15,13 @@ global_job_config:
       value: registry.gitlab.com/cicdprojects/online-banking-frontend
     - name: GITLAB_REGISTRY
       value: registry.gitlab.com
-    - name: BUILDX_VERSION
-      value: 0.10.5
-    - name: BINFMT_VERSION
-      value: qemu-v7.0.0-28
     - name: FOLDER_APP
       value: online-banking-frontend
+    - name: BUILDX_VERSION
+      value: 0.12.1
     - name: NPM_VERSION
-      value: 9.7.1
+      value: 10.3.0
+      
   prologue:
     commands:
       - checkout
