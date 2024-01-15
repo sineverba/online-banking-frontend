@@ -3,9 +3,12 @@ include .env
 IMAGE_NAME=registry.gitlab.com/cicdprojects/online-banking-frontend
 CONTAINER_NAME=online-banking-frontend
 APP_VERSION=1.1.0-dev
+NODE_VERSION=20.11.0
+NPM_VERSION=10.3.0
 SONARSCANNER_VERSION=5.0.1
 BUILDX_VERSION=0.12.0
 BINFMT_VERSION=qemu-v7.0.0-28
+
 
 sonar:
 	docker run --rm -it \
@@ -16,7 +19,10 @@ sonar:
 		sonarsource/sonar-scanner-cli:$(SONARSCANNER_VERSION)
 
 upgrade:
-	npx ncu -u -x msw
+	npx ncu -u \
+		-x @reduxjs/toolkit \
+		-x msw \
+		-x react-redux
 	npx update-browserslist-db@latest
 	npm install
 	npm audit fix
