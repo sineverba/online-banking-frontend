@@ -1,4 +1,7 @@
-# 1.2.0
+# 1.2.1
++ Fix Docker architecture
+
+## 1.2.0
 + Upgrade dependencies
 + Move v1 to the code
 + Remove servers inside tests
