@@ -2,7 +2,7 @@ include .env
 
 IMAGE_NAME=registry.gitlab.com/cicdprojects/online-banking-frontend
 CONTAINER_NAME=online-banking-frontend
-APP_VERSION=1.1.0-dev
+APP_VERSION=1.2.0-dev
 NODE_VERSION=20.11.0
 NPM_VERSION=10.3.0
 NGINX_VERSION=1.25.3
