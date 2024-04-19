@@ -2,6 +2,9 @@
   "name": "online-banking-frontend",
   "version": "1.2.1",
   "private": true,
+  "engines": {
+    "node": "20.x"
+  },
   "scripts": {
     "dev": "next dev",
     "mirage": "NEXT_PUBLIC_USE_MIRAGE_SERVER=true next dev",
@@ -37,6 +40,7 @@
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.3.0",
     "@types/jest": "^29.5.12",
+    "coveralls": "^3.1.1",
     "eslint": "^8",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "14.1.4",
