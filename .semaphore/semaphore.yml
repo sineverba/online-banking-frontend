@@ -64,8 +64,7 @@ blocks:
               sonarsource/sonar-scanner-cli:$SONARSCANNER_VERSION
         - name: Deploy to Vercel
           commands:
-            - nvm install
-            - nvm use
+            - cp .env.bak .env
             - npm pkg set scripts.prepare="echo no-prepare"
             - npm install --omit=dev
             - npm install -g vercel

@@ -34,7 +34,7 @@ jobs:
           command: |
             ssh-keyscan -p $VPS01_OCI_PORT -H $VPS01_OCI_URL >> ~/.ssh/known_hosts
             echo "-----BEGIN OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
-            echo $VPS01_OCI_SSH_PRIVATE_KEY >> ~/.ssh/circleci
+            echo $VPS01_OCI_PRIVATE_SSH_KEY >> ~/.ssh/circleci
             echo "-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
             chmod 0600 ~/.ssh/circleci
             ssh-add ~/.ssh/circleci
