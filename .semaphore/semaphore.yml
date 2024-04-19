@@ -28,6 +28,7 @@ blocks:
         - name: 'Install'
           commands:
             - npm ci
+            - cp .env.bak .env
             - cache store
 
   - name: Test
