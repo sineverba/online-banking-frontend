@@ -1,4 +1,7 @@
-# 1.2.1
+# Next version
++ Move to Next.js framework
+
+## 1.2.1
 + Fix Docker architecture
 
 ## 1.2.0

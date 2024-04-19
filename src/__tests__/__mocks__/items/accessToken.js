@@ -1,1 +1,0 @@
-export const accessToken = "an.access.token";

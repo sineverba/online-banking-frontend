@@ -10,7 +10,7 @@ global_job_config:
     - name: ACCESS_TOKENS
   env_vars:
     - name: NPM_VERSION
-      value: 10.3.0
+      value: 10.5.1
     - name: SONARSCANNER_VERSION
       value: 5.0.1
   prologue:
@@ -40,7 +40,9 @@ blocks:
       jobs:
         - name: Test
           commands:
-            - npm run eslint
+            - npx jest
+            - '[[ -f ./.test_report/junit.xml ]] && test-results publish ./.test_report/junit.xml'
+            - test-results gen-pipeline-report
         - name: Eslint
           commands:
             - npm run eslint
@@ -58,9 +60,21 @@ blocks:
               -e SONAR_LOGIN=$SONAR_TOKEN
               -v "/home/semaphore/online-banking-frontend:/usr/src"
               sonarsource/sonar-scanner-cli:$SONARSCANNER_VERSION
-          
+        - name: Deploy to Vercel
+          commands:
+            - npm pkg set scripts.prepare="echo no-prepare"
+            - npm install --omit=dev
+            - npm install -g vercel
+            - >-
+              VERCEL_PROJECT_ID=$VERCEL_BITBANK_PROJECT_ID 
+              VERCEL_ORG_ID=$VERCEL_ORG_ID 
+              npx vercel 
+              --token $VERCEL_TOKEN 
+              --confirm 
+              --prod
+
 promotions:
-  - name: Build
-    pipeline_file: build.yml
+  - name: Build and deploy
+    pipeline_file: build-and-deploy.yml
     auto_promote:
       when: "result = 'passed' and tag =~ '.*'"
