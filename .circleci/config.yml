@@ -28,33 +28,6 @@ executors:
       BINFMT_VERSION: qemu-v7.0.0-28
       DELETE_TAG_TAG: 1.0.2
 jobs:
-  login_ssh:
-    executor: amd64_executor
-    steps:
-      - run:
-          name: "Deploy to VPS"
-          command: |
-            ssh-keyscan -p $VPS01_OCI_PORT -H $VPS01_OCI_URL >> ~/.ssh/known_hosts
-            echo "-----BEGIN OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
-            echo $VPS01_OCI_PRIVATE_SSH_KEY >> ~/.ssh/circleci
-            echo "-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
-            chmod 0600 ~/.ssh/circleci
-            ssh-add ~/.ssh/circleci
-            # Stop Docker
-            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
-              "cd $FOLDER_APP && docker compose stop && docker container rm $FOLDER_APP && exit"
-            # Remove all images
-            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
-              "docker images | grep $FOLDER_APP | tr -s ' ' | cut -d ' ' -f 2 | xargs -I {} docker rmi $DOCKER_IMAGE:{} && exit"
-            # Pull new image
-            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT
-              "docker pull $DOCKER_IMAGE:1.2.0 && exit"
-            # Replace tag image in docker compose file
-            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT
-              "sed -i \"/image\: registry.gitlab.com\/cicdprojects\/$FOLDER_APP:/c\    image\: registry.gitlab.com\/cicdprojects\/$FOLDER_APP\:1.2.0\" $FOLDER_APP/docker-compose.yml && exit"
-            # Restart the service
-            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT
-              "cd $FOLDER_APP && docker compose up -d && exit"
   test:
     executor: docker_executor
     steps:
@@ -154,10 +127,37 @@ jobs:
             -e IMAGE=$DOCKER_IMAGE \
             -e TAG=cache-arm \
             sineverba/delete-tag:$DELETE_TAG_TAG
+  deploy_to_vps:
+    executor: amd64_executor
+    steps:
+      - run:
+          name: "Deploy to VPS"
+          command: |
+            ssh-keyscan -p $VPS01_OCI_PORT -H $VPS01_OCI_URL >> ~/.ssh/known_hosts
+            echo "-----BEGIN OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
+            echo $VPS01_OCI_PRIVATE_SSH_KEY >> ~/.ssh/circleci
+            echo "-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
+            chmod 0600 ~/.ssh/circleci
+            ssh-add ~/.ssh/circleci
+            # Stop Docker
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
+              "cd $FOLDER_APP && docker compose stop && docker container rm $FOLDER_APP && exit"
+            # Remove all images
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
+              "docker images | grep $FOLDER_APP | tr -s ' ' | cut -d ' ' -f 2 | xargs -I {} docker rmi $DOCKER_IMAGE:{} && exit"
+            # Pull new image
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
+              "docker pull $DOCKER_IMAGE:1.2.0 && exit"
+            # Replace tag image in docker compose file
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
+              "sed -i \"/image\: registry.gitlab.com\/cicdprojects\/$FOLDER_APP:/c\    image\: registry.gitlab.com\/cicdprojects\/$FOLDER_APP\:1.2.0\" $FOLDER_APP/docker-compose.yml && exit"
+            # Restart the service
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
+              "cd $FOLDER_APP && docker compose up -d && exit"
 workflows:
   build_docker_images:
     jobs:
-      - login_ssh:
+      - deploy_to_vps:
           context: SECRETS
           filters:
             branches:
