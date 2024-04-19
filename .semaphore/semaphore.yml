@@ -62,19 +62,6 @@ blocks:
               -e SONAR_LOGIN=$SONAR_TOKEN
               -v "/home/semaphore/online-banking-frontend:/usr/src"
               sonarsource/sonar-scanner-cli:$SONARSCANNER_VERSION
-        - name: Deploy to Vercel
-          commands:
-            - cp .env.bak .env
-            - npm pkg set scripts.prepare="echo no-prepare"
-            - npm install --omit=dev
-            - npm install -g vercel
-            - >-
-              VERCEL_PROJECT_ID=$VERCEL_BITBANK_PROJECT_ID 
-              VERCEL_ORG_ID=$VERCEL_ORG_ID 
-              npx vercel 
-              --token $VERCEL_TOKEN 
-              --yes 
-              --prod
 
 promotions:
   - name: Build and deploy

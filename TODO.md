@@ -1,6 +1,9 @@
 TODO
 ====
 
++ Sostituire $CIRCLE_TAG invece di 1.2.0
++ Valuta di togliere tutte le immagini tranne il tag corrente (Vedi DB o GFE)
+
 + Add loading to login
 + dockerbuild node
 + Remove localstorage access token

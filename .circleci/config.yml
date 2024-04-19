@@ -20,9 +20,11 @@ executors:
       image: ubuntu-2204:current
     resource_class: medium
     environment:
+      FOLDER_APP: online-banking-frontend
+      DOCKER_REGISTRY: registry.gitlab.com
+      DOCKER_IMAGE: registry.gitlab.com/cicdprojects/online-banking-frontend
       NODE_VERSION: 20.12.1
       NPM_VERSION: 10.5.1
-      DOCKER_IMAGE: cloudflare-ddns
       BINFMT_VERSION: qemu-v7.0.0-28
       DELETE_TAG_TAG: 1.0.2
 jobs:
@@ -30,7 +32,7 @@ jobs:
     executor: amd64_executor
     steps:
       - run:
-          name: "Login to VPS"
+          name: "Deploy to VPS"
           command: |
             ssh-keyscan -p $VPS01_OCI_PORT -H $VPS01_OCI_URL >> ~/.ssh/known_hosts
             echo "-----BEGIN OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
@@ -38,7 +40,21 @@ jobs:
             echo "-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
             chmod 0600 ~/.ssh/circleci
             ssh-add ~/.ssh/circleci
-            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT "touch test.txt && exit"
+            # Stop Docker
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
+              "cd $FOLDER_APP && docker compose stop && docker container rm $FOLDER_APP && exit"
+            # Remove all images
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
+              "docker images | grep $FOLDER_APP | tr -s ' ' | cut -d ' ' -f 2 | xargs -I {} docker rmi $DOCKER_IMAGE:{} && exit"
+            # Pull new image
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT
+              "docker pull $DOCKER_IMAGE:1.2.0 && exit"
+            # Replace tag image in docker compose file
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT
+              "sed -i \"/image\: registry.gitlab.com\/cicdprojects\/$FOLDER_APP:/c\    image\: registry.gitlab.com\/cicdprojects\/$FOLDER_APP\:1.2.0\" $FOLDER_APP/docker-compose.yml && exit"
+            # Restart the service
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT
+              "cd $FOLDER_APP && docker compose up -d && exit"
   test:
     executor: docker_executor
     steps:
