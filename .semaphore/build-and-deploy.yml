@@ -48,5 +48,5 @@ blocks:
               VERCEL_ORG_ID=$VERCEL_ORG_ID 
               npx vercel 
               --token $VERCEL_TOKEN 
-              --confirm 
+              --yes 
               --prod

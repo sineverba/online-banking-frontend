@@ -63,6 +63,7 @@ blocks:
               sonarsource/sonar-scanner-cli:$SONARSCANNER_VERSION
         - name: Deploy to Vercel
           commands:
+            - nvm use
             - npm pkg set scripts.prepare="echo no-prepare"
             - npm install --omit=dev
             - npm install -g vercel
@@ -71,7 +72,7 @@ blocks:
               VERCEL_ORG_ID=$VERCEL_ORG_ID 
               npx vercel 
               --token $VERCEL_TOKEN 
-              --confirm 
+              --yes 
               --prod
 
 promotions:
