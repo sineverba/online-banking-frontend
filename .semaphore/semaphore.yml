@@ -28,7 +28,6 @@ blocks:
         - name: 'Install'
           commands:
             - npm ci
-            - cp .env.bak .env
             - cache store
 
   - name: Test
@@ -41,17 +40,19 @@ blocks:
       jobs:
         - name: Test
           commands:
+            - cp .env.bak .env
             - npx jest
             - '[[ -f ./.test_report/junit.xml ]] && test-results publish ./.test_report/junit.xml'
             - test-results gen-pipeline-report
-        - name: Eslint
-          commands:
-            - npm run eslint
         - name: Coverage
           commands:
+            - cp .env.bak .env
             - CI=true npm run coverage
             - export COVERALLS_REPO_TOKEN=$COVERALLS_ONLINE_BANKING_FRONTEND
             - cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js
+        - name: Lint
+          commands:
+            - npm run lint
         - name: Sonarcloud
           commands:
             - >-
@@ -63,6 +64,7 @@ blocks:
               sonarsource/sonar-scanner-cli:$SONARSCANNER_VERSION
         - name: Deploy to Vercel
           commands:
+            - nvm install
             - nvm use
             - npm pkg set scripts.prepare="echo no-prepare"
             - npm install --omit=dev

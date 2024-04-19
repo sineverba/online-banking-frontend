@@ -33,10 +33,11 @@ jobs:
           name: "Login to VPS"
           command: |
             ssh-keyscan -p $VPS01_OCI_PORT -H $VPS01_OCI_URL >> ~/.ssh/known_hosts
-            ls -l -a ~/.ssh/
-            echo $VPS01_OCI_PRIVATE_KEY > ~/.ssh/circleci
-            #chmod 0600 ~/.ssh/id_semaphore
-            #ssh-add ~/.ssh/id_semaphore
+            echo "-----BEGIN OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
+            echo "\n$VPS01_OCI_SSH_PRIVATE_KEY" >> ~/.ssh/circleci
+            echo "\n-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
+            chmod 0600 ~/.ssh/circleci
+            ssh-add ~/.ssh/circleci
   test:
     executor: docker_executor
     steps:
