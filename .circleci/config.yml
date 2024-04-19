@@ -38,6 +38,7 @@ jobs:
             echo "-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
             chmod 0600 ~/.ssh/circleci
             ssh-add ~/.ssh/circleci
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT "touch test.txt && exit"
   test:
     executor: docker_executor
     steps:

@@ -39,7 +39,7 @@ blocks:
               ./out
         - name: Deploy to Vercel
           commands:
-            - npm install -g npm@$NPM_VERSION
+            - cp .env.bak .env
             - npm pkg set scripts.prepare="echo no-prepare"
             - npm install --omit=dev
             - npm install -g vercel
