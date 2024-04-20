@@ -13,7 +13,8 @@ executors:
     environment:
       NODE_VERSION: 20.12.1
       NPM_VERSION: 10.5.1
-      DOCKER_IMAGE: cloudflare-ddns
+      DOCKER_REGISTRY: registry.gitlab.com
+      DOCKER_IMAGE: registry.gitlab.com/cicdprojects/online-banking-frontend
       BINFMT_VERSION: qemu-v7.0.0-28
   amd64_executor:
     machine:
@@ -179,8 +180,8 @@ jobs:
     executor: amd64_executor
     steps:
       - run:
-          name: "Login to Docker HUB"
-          command: docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+          name: "Login to Docker Gitlab Registry HUB"
+          command: docker login -u $DOCKER_LOGIN -p $GITLAB_TOKEN $DOCKER_REGISTRY
       - run:
           name: "Remove cache arm image"
           command: |
@@ -195,7 +196,7 @@ jobs:
             -e TAG=cache-arm \
             sineverba/delete-tag:$DELETE_TAG_TAG
 workflows:
-  build_docker_images:
+  test_build_deploy:
     jobs:
       - test:
           filters:
