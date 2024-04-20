@@ -139,21 +139,27 @@ jobs:
             echo "-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
             chmod 0600 ~/.ssh/circleci
             ssh-add ~/.ssh/circleci
-            # Stop Docker
-            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
-              "cd $FOLDER_APP && docker compose stop && docker container rm $FOLDER_APP && exit"
-            # Remove all images but not current tag
-            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
-              "docker rmi $$(docker images $(DOCKER_IMAGE):* --format "{{.Repository}}:{{.Tag}}" | grep -v '1.2.0') && exit"
             # Pull new image
             ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
               "docker pull $DOCKER_IMAGE:1.2.0 && exit"
+            # Stop Docker
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
+              "cd $FOLDER_APP && docker compose stop && docker container rm $FOLDER_APP && exit"
             # Replace tag image in docker compose file
             ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
               "sed -i \"/image\: registry.gitlab.com\/cicdprojects\/$FOLDER_APP:/c\    image\: registry.gitlab.com\/cicdprojects\/$FOLDER_APP\:1.2.0\" $FOLDER_APP/docker-compose.yml && exit"
             # Restart the service
             ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
               "cd $FOLDER_APP && docker compose up -d && exit"
+            # Remove all images but not current
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
+              "docker images | \
+              grep $FOLDER_APP | \
+              tr -s ' ' | \
+              cut -d ' ' -f 2 | \
+              grep -v 1.2.0 | \
+              xargs -I {} docker rmi $DOCKER_IMAGE:{} && exit"
+            
 workflows:
   build_docker_images:
     jobs:
