@@ -141,26 +141,31 @@ jobs:
             chmod 0600 ~/.ssh/circleci
             ssh-add ~/.ssh/circleci
             # Pull new image
+            echo ">>>>> PULLING NEW IMAGE"
             ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
               "docker pull $DOCKER_IMAGE:1.2.0 \
               && exit"
             # Stop Docker
+            echo ">>>>> STOP DOCKER"
             ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
               "cd $FOLDER_APP \
               && docker compose stop \
               && docker container rm $FOLDER_APP \
               && exit"
             # Replace docker-compose.yml
+            echo ">>>>> REPLACE docker-compose.yml"
             scp \
             -P $VPS01_OCI_PORT \
             dockerfiles/production/deploy/docker-compose.yml \
             $VPS01_OCI_USERNAME@$VPS01_OCI_URL:$FOLDER_APP
             # Restart the service
+            echo ">>>>> RESTART SERVICE"
             ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
               "cd $FOLDER_APP \
               && docker compose up -d \
               && exit"
             # Remove all images but not current
+            echo ">>>>> REMOVE OLD IMAGES"
             ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
               "docker images | \
               grep $FOLDER_APP | \
