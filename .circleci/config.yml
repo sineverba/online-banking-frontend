@@ -149,7 +149,7 @@ jobs:
             echo ">>>>> STOP DOCKER"
             ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
               "cd $FOLDER_APP \
-              && docker compose stop \
+              && docker compose stop || exit 1 \
               && docker container rm $FOLDER_APP || exit 1 \
               && exit"
             # Replace docker-compose.yml
