@@ -1,7 +1,6 @@
 TODO
 ====
 
-+ Spostare docker compose invece di cambiare tag
 + Verificare build cache e put in registry gitlab
 + Verificare se è possibile cancellare la cache ARM in registry git lab
 + Sostituire $CIRCLE_TAG invece di 1.2.0
