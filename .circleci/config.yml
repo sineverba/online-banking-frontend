@@ -130,10 +130,10 @@ jobs:
   deploy_to_vps:
     executor: amd64_executor
     steps:
+      - checkout
       - run:
           name: "Deploy to VPS"
           command: |
-            checkout
             ssh-keyscan -p $VPS01_OCI_PORT -H $VPS01_OCI_URL >> ~/.ssh/known_hosts
             echo "-----BEGIN OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
             echo $VPS01_OCI_PRIVATE_SSH_KEY >> ~/.ssh/circleci
