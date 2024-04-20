@@ -71,7 +71,7 @@ jobs:
           command: |
             docker buildx build \
             --cache-to=type=inline \
-            --platform linux/arm64,linux/arm/v6,linux/arm/v7 \
+            --platform linux/arm64 \
             --build-arg NODE_VERSION=$NODE_VERSION \
             --build-arg NPM_VERSION=$NPM_VERSION \
             --build-arg NGINX_VERSION=$NGINX_VERSION \
@@ -104,7 +104,7 @@ jobs:
           command: |
             docker buildx build \
             --cache-from type=registry,ref=$DOCKER_IMAGE:cache-arm \
-            --platform linux/amd64,linux/arm64,linux/arm/v6,linux/arm/v7 \
+            --platform linux/amd64,linux/arm64 \
             --build-arg NODE_VERSION=$NODE_VERSION \
             --build-arg NPM_VERSION=$NPM_VERSION \
             --build-arg NGINX_VERSION=$NGINX_VERSION \

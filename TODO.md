@@ -6,6 +6,7 @@ TODO
 + Sostituire $CIRCLE_TAG invece di 1.2.0
 + Unire tutti i comandi di deploy VPS in uno o due soli
 + Move production docker sotto docker e app.conf sotto nginx
++ Reimplementare build per armm/v7 e arm/v6 al momento sospese
 
 
 + Add loading to login
