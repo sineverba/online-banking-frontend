@@ -4,8 +4,13 @@ module.exports = {
     es2021: true,
     node: true
   },
-  extends: ["plugin:react/recommended", "airbnb", "prettier"],
-  ignorePatterns: ["src/__tests__/*", "node_modules/", "src/setupTests.js"],
+  extends: [
+    "plugin:react/recommended",
+    "airbnb",
+    "prettier",
+    "next/core-web-vitals"
+  ],
+  ignorePatterns: ["src/__tests__/*", "node_modules/"],
   overrides: [
     {
       files: ["*.js", "*.jsx"]
@@ -27,8 +32,28 @@ module.exports = {
         functions: "never"
       }
     ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        js: "never",
+        jsx: "never",
+        ts: "never",
+        tsx: "never"
+      }
+    ],
+    "import/no-named-as-default": 0,
+    "import/prefer-default-export": 0,
+    "jsx-a11y/control-has-associated-label": 0,
     "linebreak-style": ["error", "unix"],
     "multiline-ternary": 0,
+    "no-param-reassign": [
+      "error",
+      {
+        props: true,
+        ignorePropertyModificationsFor: ["state", "accumulator"]
+      }
+    ],
     "no-restricted-syntax": [
       "error",
       "ForInStatement",
@@ -36,9 +61,7 @@ module.exports = {
       "WithStatement"
     ],
     "react/destructuring-assignment": [1, "always"],
-    "react/jsx-props-no-spreading": 1,
-    "react/prop-types": 0,
-    "react/no-unstable-nested-components": 0,
+    "react/forbid-prop-types": [1, { forbid: ["any"] }],
     "react/function-component-definition": [
       2,
       {
@@ -46,14 +69,12 @@ module.exports = {
         unnamedComponents: "arrow-function"
       }
     ],
-    semi: [2, "always"],
-    "no-param-reassign": [
-      "error",
-      {
-        props: true,
-        ignorePropertyModificationsFor: ["state", "accumulator"]
-      }
-    ]
+    "react/jsx-filename-extension": [2, { extensions: [".jsx", ".tsx"] }],
+    "react/jsx-props-no-spreading": 1,
+    "react/no-unstable-nested-components": 0,
+    "react/require-default-props": [2, { functions: "defaultArguments" }],
+    "react/prop-types": 0,
+    semi: [2, "always"]
   },
   settings: {
     react: {

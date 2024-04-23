@@ -8,6 +8,7 @@ Online Banking Demo Frontend
 | Backend | [https://github.com/sineverba/online-banking-backend](https://github.com/sineverba/online-banking-backend) | [Swagger](https://bitbankapi.k2p.it/swagger-ui/index.html) |
 | Frontend | [https://github.com/sineverba/online-banking-frontend](https://github.com/sineverba/online-banking-frontend) | [Netlify](https://bit-bank.netlify.app/) - [Vercel](https://online-banking-frontend.vercel.app/) - [Custom](https://bitbank.k2p.it/) |
 
+
 __This project uses:__
 
 + TDD
@@ -24,13 +25,10 @@ __This project uses:__
 
 ## Setup
 1. Copy .env.bak into .env
-2. Insert random string on `LOCALSTORAGE_ACCESS_TOKEN` in .env file (`$ echo $RANDOM | md5sum | head -c 20; echo;`). This will deny conflicts with other localStorage used by other projects
+2. Insert random string on `SESSIONSTORAGE_ACCESS_TOKEN` in .env file (`$ echo $RANDOM | md5sum | head -c 20; echo;`).
 
 ## Development
 
-`npm run start` to start development with real call.
+`npm run dev` to start development with real call.
 
-`npm run msw` to start development with mocked call.
-
-## Production
-+ Use files in `/production` folder
+`npm run mirage` to start development with fake call.

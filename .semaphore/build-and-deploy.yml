@@ -1,0 +1,52 @@
+version: v1.0
+
+name: Deploy
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+
+global_job_config:
+  secrets:
+    - name: ACCESS_TOKENS
+  env_vars:
+    - name: NPM_VERSION
+      value: 10.5.1
+      
+  prologue:
+    commands:
+      - checkout
+      - cp .env.bak .env
+
+blocks:
+  - name: "Deploy"
+    task:
+      jobs:
+        - name: Deploy to Netlify
+          commands:
+            - npm install -g npm@$NPM_VERSION
+            - npm pkg set scripts.prepare="echo no-prepare"
+            - npm install --omit=dev
+            - npm install netlify-cli -g
+            - npm run build
+            - >-
+              netlify deploy 
+              -s 
+              $NETLIFY_BITBANK_SITE_ID 
+              --auth $NETLIFY_ACCESS_TOKEN 
+              -p 
+              --dir 
+              ./out
+        - name: Deploy to Vercel
+          commands:
+            - cp .env.bak .env
+            - npm pkg set scripts.prepare="echo no-prepare"
+            - npm install --omit=dev
+            - npm install -g vercel
+            - >-
+              VERCEL_PROJECT_ID=$VERCEL_BITBANK_PROJECT_ID 
+              VERCEL_ORG_ID=$VERCEL_ORG_ID 
+              npx vercel 
+              --token $VERCEL_TOKEN 
+              --yes 
+              --prod

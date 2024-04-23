@@ -1,8 +1,8 @@
-import React from 'react'
-import { render } from '@testing-library/react'
-import { Provider } from 'react-redux'
-import setupStore from '../../store/index'
-import { setupListeners } from '@reduxjs/toolkit/dist/query'
+import React from "react";
+import { render } from "@testing-library/react";
+import { Provider } from "react-redux";
+import setupStore from "@/app/store";
+import { setupListeners } from "@reduxjs/toolkit/query";
 
 export function renderWithProviders(
   ui,
@@ -13,12 +13,10 @@ export function renderWithProviders(
     ...renderOptions
   } = {}
 ) {
-
   setupListeners(store.dispatch);
-
   function Wrapper({ children }) {
-    return <Provider store={store}>{children}</Provider>
+    return <Provider store={store}>{children}</Provider>;
   }
 
-  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) }
+  return { store, ...render(ui, { wrapper: Wrapper, ...renderOptions }) };
 }
