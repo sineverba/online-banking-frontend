@@ -1,4 +1,7 @@
-# 1.3.0
+# Next version
++ Remove session storage
+
+## 1.3.0
 + Move to Next.js framework
 + Fix CircleCI
 
