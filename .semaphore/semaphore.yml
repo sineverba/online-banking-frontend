@@ -10,7 +10,7 @@ global_job_config:
     - name: ACCESS_TOKENS
   env_vars:
     - name: NPM_VERSION
-      value: 10.3.0
+      value: 10.5.1
     - name: SONARSCANNER_VERSION
       value: 5.0.1
   prologue:
@@ -40,15 +40,19 @@ blocks:
       jobs:
         - name: Test
           commands:
-            - npm run eslint
-        - name: Eslint
-          commands:
-            - npm run eslint
+            - cp .env.bak .env
+            - npx jest
+            - '[[ -f ./.test_report/junit.xml ]] && test-results publish ./.test_report/junit.xml'
+            - test-results gen-pipeline-report
         - name: Coverage
           commands:
+            - cp .env.bak .env
             - CI=true npm run coverage
             - export COVERALLS_REPO_TOKEN=$COVERALLS_ONLINE_BANKING_FRONTEND
             - cat coverage/lcov.info | node_modules/coveralls/bin/coveralls.js
+        - name: Lint
+          commands:
+            - npm run lint
         - name: Sonarcloud
           commands:
             - >-
@@ -58,9 +62,9 @@ blocks:
               -e SONAR_LOGIN=$SONAR_TOKEN
               -v "/home/semaphore/online-banking-frontend:/usr/src"
               sonarsource/sonar-scanner-cli:$SONARSCANNER_VERSION
-          
+
 promotions:
-  - name: Build
-    pipeline_file: build.yml
+  - name: Build and deploy
+    pipeline_file: build-and-deploy.yml
     auto_promote:
       when: "result = 'passed' and tag =~ '.*'"

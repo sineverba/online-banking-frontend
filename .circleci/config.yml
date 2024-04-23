@@ -1,19 +1,127 @@
 version: 2.1
-jobs:
-
-  test:
+executors:
+  docker_executor:
     docker:
-      - image: cimg/node:20.11.0
-
+      - image: cimg/node:20.12.1
+    resource_class: medium
+    environment:
+      NPM_VERSION: 10.5.1
+  amd64_executor:
+    machine:
+      image: ubuntu-2204:current
+    resource_class: large
+    environment:
+      FOLDER_APP: online-banking-frontend
+      DOCKER_REGISTRY: registry.gitlab.com
+      DOCKER_IMAGE: registry.gitlab.com/cicdprojects/online-banking-frontend
+      NODE_VERSION: 20.12.1
+      NPM_VERSION: 10.5.1
+      NGINX_VERSION: 1.25.4
+      BINFMT_VERSION: qemu-v7.0.0-28
+jobs:
+  test:
+    executor: docker_executor
     steps:
       - checkout
-      - run: npm install -g npm@10.3.0
-      - run: npm ci
-      - run: CI=true npm run test
-
+      - run:
+          name: "Setup NPM version"
+          command: npm install npm@$NPM_VERSION
+      - run:
+          name: "Setup project"
+          command: npm ci
+      - run:
+          name: "Add .env file"
+          command: cp .env.bak .env
+      - run:
+          name: "Run test"
+          command: npx jest
+      - store_test_results:
+          path: ./.test_report
+  build_image:
+    executor: amd64_executor
+    steps:
+      - checkout
+      - run:
+          name: "Login to Docker Gitlab Registry HUB"
+          command: docker login -u $DOCKER_LOGIN -p $GITLAB_TOKEN $DOCKER_REGISTRY
+      - run:
+          name: "Install tonistiigi/binfmt"
+          command: docker run --rm --privileged tonistiigi/binfmt:$BINFMT_VERSION --install all
+      - run:
+          name: "Create buildx multiarch"
+          command: |
+            docker buildx create \
+            --name multiarch \
+            --use \
+            && docker buildx inspect \
+            --bootstrap \
+            --builder \
+            multiarch
+      - run:
+          name: "Build image and push to Gitlab registry HUB"
+          command: |
+            docker buildx build \
+            --platform linux/amd64,linux/arm64 \
+            --build-arg NODE_VERSION=$NODE_VERSION \
+            --build-arg NPM_VERSION=$NPM_VERSION \
+            --build-arg NGINX_VERSION=$NGINX_VERSION \
+            --tag $DOCKER_IMAGE:$CIRCLE_TAG \
+            --tag $DOCKER_IMAGE:latest \
+            --push \
+            --file dockerfiles/production/build/Dockerfile \
+            "."
+  deploy_to_vps:
+    executor: amd64_executor
+    steps:
+      - checkout
+      - run:
+          name: "Deploy to VPS"
+          command: |
+            ssh-keyscan -p $VPS01_OCI_PORT -H $VPS01_OCI_URL >> ~/.ssh/known_hosts
+            echo "-----BEGIN OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
+            echo $VPS01_OCI_PRIVATE_SSH_KEY >> ~/.ssh/circleci
+            echo "-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
+            chmod 0600 ~/.ssh/circleci
+            ssh-add ~/.ssh/circleci
+            # Replace docker-compose.yml
+            echo ""
+            echo ""
+            echo ">>>>> REPLACE docker-compose.yml"
+            echo ""
+            echo ""
+            scp \
+            -P $VPS01_OCI_PORT \
+            dockerfiles/production/deploy/docker-compose.yml \
+            $VPS01_OCI_USERNAME@$VPS01_OCI_URL:$FOLDER_APP
+            # Pull new image
+            echo ""
+            echo ""
+            echo ">>>>> PULL AND START NEW IMAGE"
+            echo ""
+            echo ""
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
+              "docker pull $DOCKER_IMAGE:$CIRCLE_TAG \
+              && cd $FOLDER_APP \
+              && docker compose stop \
+              && docker container rm $FOLDER_APP \
+              && docker compose up -d \
+              && exit"
+            # Remove all images but not current
+            echo ""
+            echo ""
+            echo ">>>>> REMOVE OLD IMAGES"
+            echo ""
+            echo ""
+            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
+              "docker images | \
+              grep $FOLDER_APP | \
+              tr -s ' ' | \
+              cut -d ' ' -f 2 | \
+              grep -v 1.3.0 | \
+              xargs -I {} docker rmi $DOCKER_IMAGE:{} \
+              && exit"
 workflows:
-  version: 2
-  test:
+  test_build_deploy:
     jobs:
       - test:
           filters:
@@ -21,3 +129,19 @@ workflows:
               only:
                 - master
                 - develop
+      - build_image:
+          context: SECRETS
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+      - deploy_to_vps:
+          context: SECRETS
+          filters:
+            tags:
+              only: /.*/
+            branches:
+              ignore: /.*/
+          requires:
+            - build_image
