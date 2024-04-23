@@ -27,6 +27,8 @@ FROM node:${NODE_VERSION}-alpine3.19 AS builder
 WORKDIR /app
 # Copy all files
 COPY ./ .
+# Set env
+COPY .env.bak .env
 # Remove tests
 RUN rm -rf /app/src/__tests__/
 # Skip prepare

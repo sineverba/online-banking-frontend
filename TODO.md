@@ -1,13 +1,10 @@
 TODO
 ====
 
-+ Sostituire $CIRCLE_TAG invece di 1.3.0
++ Remove localstorage access token
 + Move production docker sotto docker e app.conf sotto nginx
-
-
 + Add loading to login
 + dockerbuild node
-+ Remove localstorage access token
 + Create amount component
 + Check if possible to upgrade eslint (remove from makefile)
 + Add sticky footer
