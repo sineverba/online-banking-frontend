@@ -33,4 +33,9 @@ describe("Constants file", () => {
       currentSessionStorageAccessTokenName
     );
   });
+
+  it("Can return value for APP ANME", () => {
+    const currentAppName = "Online Banking Frontend";
+    expect(extraValues.get("APP_NAME")).toBe(currentAppName);
+  });
 });
