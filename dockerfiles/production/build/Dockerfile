@@ -10,11 +10,11 @@ ENV CI=true
 ARG NPM_VERSION
 # Add a workdir directory
 WORKDIR /app
-# Copy all files
+# Copy all files into the directory.
 COPY ./ .
 # Update node
 RUN npm install -g npm@$NPM_VERSION && npm -v | grep $NPM_VERSION && npm install
-RUN npm run eslint
+RUN npm run lint
 RUN npm pkg set scripts.test="CI=true jest"
 RUN npm run test
 ######################################
@@ -42,7 +42,7 @@ RUN npm run build
 #
 ######################################
 # Use NGINX
-FROM nginx:${NGINX_VERSION}-alpine3.18-slim AS production
+FROM nginx:${NGINX_VERSION}-alpine3.19-slim AS production
 # Update and upgrade
 RUN apk update && \
     apk upgrade --available --no-cache && \
