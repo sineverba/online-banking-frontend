@@ -1,11 +1,11 @@
 IMAGE_NAME=registry.gitlab.com/cicdprojects/online-banking-frontend
 CONTAINER_NAME=online-banking-frontend
 VERSION=1.3.0-dev
-NODE_VERSION=20.12.1
-NPM_VERSION=10.5.1
-NGINX_VERSION=1.25.4
+NODE_VERSION=20.12.2
+NPM_VERSION=10.5.2
+NGINX_VERSION=1.25.5
 SONARSCANNER_VERSION=5.0.1
-BUILDX_VERSION=0.13.1
+BUILDX_VERSION=0.14.0
 
 
 sonar:
@@ -30,6 +30,7 @@ fixnodesass:
 build:
 	docker build \
 		--no-cache \
+		--pull \
 		--build-arg NODE_VERSION=$(NODE_VERSION) \
 		--build-arg NPM_VERSION=$(NPM_VERSION) \
 		--build-arg NGINX_VERSION=$(NGINX_VERSION) \
@@ -58,8 +59,8 @@ multi: preparemulti
 		"."
 
 test:
-	docker run --rm -it $(IMAGE_NAME):$(VERSION) cat /etc/os-release | grep "Alpine Linux v3.18"
-	docker run --rm -it $(IMAGE_NAME):$(VERSION) cat /etc/os-release | grep "VERSION_ID=3.18.5"
+	docker run --rm -it $(IMAGE_NAME):$(VERSION) cat /etc/os-release | grep "Alpine Linux v3.19"
+	docker run --rm -it $(IMAGE_NAME):$(VERSION) cat /etc/os-release | grep "VERSION_ID=3.19.1"
 	docker run --rm -it $(IMAGE_NAME):$(VERSION) nginx -v | grep $(NGINX_VERSION)
 
 inspect:
@@ -70,7 +71,13 @@ inspect:
 	$(IMAGE_NAME):$(VERSION)
 	
 spin:
-	docker container run -it --rm --publish 8080:80 --name $(CONTAINER_NAME) $(IMAGE_NAME):$(VERSION)
+	docker container \
+		run \
+		-it \
+		--rm \
+		--publish 8080:80 \
+		--name $(CONTAINER_NAME) \
+		$(IMAGE_NAME):$(VERSION)
 
 destroy:
 	# Remove all images with no current tag
@@ -81,3 +88,5 @@ destroy:
 	docker rmi $$(docker images nginx --format "{{.Repository}}:{{.Tag}}") || exit 0;
 	# Remove all dangling images
 	docker rmi $$(docker images -f "dangling=true" -q) || exit 0;
+	# Remove cached builder
+	docker builder prune -f

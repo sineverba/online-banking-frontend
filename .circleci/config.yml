@@ -2,10 +2,10 @@ version: 2.1
 executors:
   docker_executor:
     docker:
-      - image: cimg/node:20.12.1
+      - image: cimg/node:20.12.2
     resource_class: medium
     environment:
-      NPM_VERSION: 10.5.1
+      NPM_VERSION: 10.5.2
   amd64_executor:
     machine:
       image: ubuntu-2204:current
@@ -14,9 +14,9 @@ executors:
       FOLDER_APP: online-banking-frontend
       DOCKER_REGISTRY: registry.gitlab.com
       DOCKER_IMAGE: registry.gitlab.com/cicdprojects/online-banking-frontend
-      NODE_VERSION: 20.12.1
-      NPM_VERSION: 10.5.1
-      NGINX_VERSION: 1.25.4
+      NODE_VERSION: 20.12.2
+      NPM_VERSION: 10.5.2
+      NGINX_VERSION: 1.25.5
       BINFMT_VERSION: qemu-v7.0.0-28
 jobs:
   test:
