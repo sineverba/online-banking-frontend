@@ -1,4 +1,4 @@
-# Next version
+# 1.3.0
 + Move to Next.js framework
 + Fix CircleCI
 
