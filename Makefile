@@ -29,6 +29,7 @@ fixnodesass:
 
 build:
 	docker build \
+		--no-cache \
 		--build-arg NODE_VERSION=$(NODE_VERSION) \
 		--build-arg NPM_VERSION=$(NPM_VERSION) \
 		--build-arg NGINX_VERSION=$(NGINX_VERSION) \

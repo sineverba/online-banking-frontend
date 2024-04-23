@@ -55,7 +55,7 @@ jobs:
             --builder \
             multiarch
       - run:
-          name: "Build image and push to Docker HUB"
+          name: "Build image and push to Gitlab registry HUB"
           command: |
             docker buildx build \
             --platform linux/amd64,linux/arm64 \
@@ -80,26 +80,6 @@ jobs:
             echo "-----END OPENSSH PRIVATE KEY-----" >> ~/.ssh/circleci
             chmod 0600 ~/.ssh/circleci
             ssh-add ~/.ssh/circleci
-            # Pull new image
-            echo ""
-            echo ""
-            echo ">>>>> PULLING NEW IMAGE"
-            echo ""
-            echo ""
-            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
-              "docker pull $DOCKER_IMAGE:1.3.0 \
-              && exit"
-            # Stop Docker
-            echo ""
-            echo ""
-            echo ">>>>> STOP DOCKER"
-            echo ""
-            echo ""
-            ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
-              "cd $FOLDER_APP \
-              && docker compose stop \
-              && docker container rm $FOLDER_APP \
-              && exit"
             # Replace docker-compose.yml
             echo ""
             echo ""
@@ -110,14 +90,17 @@ jobs:
             -P $VPS01_OCI_PORT \
             dockerfiles/production/deploy/docker-compose.yml \
             $VPS01_OCI_USERNAME@$VPS01_OCI_URL:$FOLDER_APP
-            # Restart the service
+            # Pull new image
             echo ""
             echo ""
-            echo ">>>>> RESTART SERVICE"
+            echo ">>>>> PULL AND START NEW IMAGE"
             echo ""
             echo ""
             ssh -t $VPS01_OCI_USERNAME@$VPS01_OCI_URL -p $VPS01_OCI_PORT \
-              "cd $FOLDER_APP \
+              "docker pull $DOCKER_IMAGE:1.3.0 \
+              && cd $FOLDER_APP \
+              && docker compose stop \
+              && docker container rm $FOLDER_APP \
               && docker compose up -d \
               && exit"
             # Remove all images but not current
@@ -155,9 +138,11 @@ workflows:
       - deploy_to_vps:
           context: SECRETS
           filters:
-            tags:
-              only: /.*/
+            #tags:
+            #  only: /.*/
+            #branches:
+            #  ignore: /.*/
             branches:
-              ignore: /.*/
+              only: /.*/
           requires:
             - build_image

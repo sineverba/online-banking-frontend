@@ -1,12 +1,8 @@
 TODO
 ====
 
-+ Verificare build cache e put in registry gitlab
-+ Verificare se è possibile cancellare la cache ARM in registry git lab
 + Sostituire $CIRCLE_TAG invece di 1.3.0
-+ Unire tutti i comandi di deploy VPS in uno o due soli
 + Move production docker sotto docker e app.conf sotto nginx
-+ Reimplementare build per armm/v7 e arm/v6 al momento sospese
 
 
 + Add loading to login

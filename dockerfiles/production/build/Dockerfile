@@ -15,7 +15,7 @@ COPY ./ .
 # Update node
 RUN npm install -g npm@$NPM_VERSION && npm -v | grep $NPM_VERSION && npm install
 RUN npm run eslint
-RUN npm pkg set scripts.test="CI=true react-scripts test"
+RUN npm pkg set scripts.test="CI=true jest"
 RUN npm run test
 ######################################
 #
