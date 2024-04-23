@@ -1,7 +1,7 @@
 TODO
 ====
 
-+ Remove localstorage access token
++ Move APP Name from .env to constants
 + Move production docker sotto docker e app.conf sotto nginx
 + Add loading to login
 + dockerbuild node
