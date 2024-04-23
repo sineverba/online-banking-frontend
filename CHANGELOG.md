@@ -1,5 +1,6 @@
 # Next version
-+ Remove session storage
++ Remove session storage from .env
++ Move APP NAME to constants from .env
 
 ## 1.3.0
 + Move to Next.js framework
