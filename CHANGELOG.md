@@ -1,5 +1,6 @@
 # Next version
 + Move to Next.js framework
++ Fix CircleCI
 
 ## 1.2.1
 + Fix Docker architecture

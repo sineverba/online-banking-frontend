@@ -30,6 +30,9 @@ jobs:
           name: "Setup project"
           command: npm ci
       - run:
+          name: "Add .env file"
+          command: cp .env.bak .env
+      - run:
           name: "Run test"
           command: npx jest
       - store_test_results:
