@@ -1,37 +1,37 @@
 const transactions = [
   {
     id: 99,
-    amount: 2145.0,
+    amount: 2145.00,
     purpose: "December 2022 - Salary",
     transactionDate: "2023-01-04T12:32:13.929561"
   },
   {
     id: 98,
-    amount: -17.0,
+    amount: -17.00,
     purpose: "Nickel free ring",
     transactionDate: "2022-10-02T09:57:41"
   },
   {
     id: 97,
-    amount: 500.0,
+    amount: 500.00,
     purpose: "provaprova",
     transactionDate: "2022-07-28T14:05:43"
   },
   {
     id: 96,
-    amount: -10.0,
+    amount: -10.00,
     purpose: "Phone charge",
     transactionDate: "2022-04-02T08:23:49"
   },
   {
     id: 95,
-    amount: -25.0,
+    amount: -25.00,
     purpose: "Paddle reservation",
     transactionDate: "2022-04-02T08:16:13"
   },
   {
     id: 94,
-    amount: 1.0,
+    amount: 1.00,
     purpose: "test",
     transactionDate: "2022-04-02T08:15:11"
   },
@@ -43,7 +43,7 @@ const transactions = [
   },
   {
     id: 92,
-    amount: -50.0,
+    amount: -50.00,
     purpose: "Gasoline Station 144th Street",
     transactionDate: "2022-03-26T07:57:30"
   },
@@ -79,19 +79,19 @@ const transactions = [
   },
   {
     id: 86,
-    amount: -20.0,
+    amount: -20.00,
     purpose: "Fixed line charge",
     transactionDate: "2022-04-02T08:23:49"
   },
   {
     id: 85,
-    amount: -85.0,
+    amount: -85.00,
     purpose: "Basket",
     transactionDate: "2022-04-02T08:16:13"
   },
   {
     id: 84,
-    amount: 6.0,
+    amount: 6.00,
     purpose: "A test",
     transactionDate: "2022-04-02T08:15:11"
   },
@@ -103,7 +103,7 @@ const transactions = [
   },
   {
     id: 82,
-    amount: -77.0,
+    amount: -77.00,
     purpose: "GPL Station",
     transactionDate: "2022-03-26T07:57:30"
   },
