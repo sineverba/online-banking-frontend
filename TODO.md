@@ -1,11 +1,6 @@
 TODO
 ====
 
-+ Remove localstorage access token
-+ Move production docker sotto docker e app.conf sotto nginx
-+ Add loading to login
-+ dockerbuild node
-+ Create amount component
 + Check if possible to upgrade eslint (remove from makefile)
 + Add sticky footer
 + Refactor js mock in json module.exports

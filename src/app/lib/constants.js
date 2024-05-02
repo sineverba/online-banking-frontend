@@ -1,6 +1,7 @@
 const extraValues = new Map();
 
-extraValues.set("SESSIONSTORAGE_ACCESS_TOKEN", "accessToken");
+extraValues.set("APP_NAME", "Online Banking Frontend");
+extraValues.set("SESSIONSTORAGE_ACCESS_TOKEN", "OnlineBankingFrontendAccessToken");
 extraValues.set("BACKEND_URL", process.env.NEXT_PUBLIC_BACKEND_URL);
 extraValues.set("URL_PING", "ping");
 extraValues.set("URL_LOGIN", "auth/login");

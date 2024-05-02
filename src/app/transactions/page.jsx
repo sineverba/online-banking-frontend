@@ -6,6 +6,7 @@ import { isAuthenticated } from "../lib/utility";
 import DatatableComponent from "../components/common/DatatableComponent";
 import { useGetTransactionsQuery } from "../features/apiSlice";
 import DateComponent from "../components/common/DateComponent";
+import Amount from "../components/common/Amount";
 
 export default function Page() {
   const isUserAuthenticated = isAuthenticated();
@@ -33,7 +34,7 @@ export default function Page() {
       name: "amount",
       sortable: true,
       sortField: "amount",
-      selector: (row) => row.amount
+      selector: (row) => <Amount value={row.amount} />
     },
     {
       name: "purpose",

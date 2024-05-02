@@ -1,4 +1,11 @@
-# 1.3.0
+# 1.4.0
++ Remove session storage from .env
++ Move APP NAME to constants from .env
++ Upgrade dependencies
++ Refactor dockerfiles
++ Add amount component
+
+## 1.3.0
 + Move to Next.js framework
 + Fix CircleCI
 

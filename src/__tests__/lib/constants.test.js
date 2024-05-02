@@ -25,4 +25,17 @@ describe("Constants file", () => {
     const regex = /[^a-zA-Z0-9]/g;
     expect(extraValues.get("REGEX_ONLY_CHAR_NUMBER")).toStrictEqual(regex);
   });
+
+  it("Can return value for session storage access token", () => {
+    const currentSessionStorageAccessTokenName =
+      "OnlineBankingFrontendAccessToken";
+    expect(extraValues.get("SESSIONSTORAGE_ACCESS_TOKEN")).toBe(
+      currentSessionStorageAccessTokenName
+    );
+  });
+
+  it("Can return value for APP ANME", () => {
+    const currentAppName = "Online Banking Frontend";
+    expect(extraValues.get("APP_NAME")).toBe(currentAppName);
+  });
 });
