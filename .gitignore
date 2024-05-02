@@ -39,3 +39,4 @@ next-env.d.ts
 dockerfiles/mocks/node_modules/
 .swc/
 .test_report/
+.vscode/
