@@ -5,7 +5,7 @@ executors:
       - image: cimg/node:20.12.2
     resource_class: medium
     environment:
-      NPM_VERSION: 10.5.2
+      NPM_VERSION: 10.7.0
   amd64_executor:
     machine:
       image: ubuntu-2204:current
@@ -15,7 +15,7 @@ executors:
       DOCKER_REGISTRY: registry.gitlab.com
       DOCKER_IMAGE: registry.gitlab.com/cicdprojects/online-banking-frontend
       NODE_VERSION: 20.12.2
-      NPM_VERSION: 10.5.2
+      NPM_VERSION: 10.7.0
       NGINX_VERSION: 1.25.5
       BINFMT_VERSION: qemu-v7.0.0-28
 jobs:

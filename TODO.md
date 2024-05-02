@@ -1,7 +1,6 @@
 TODO
 ====
 
-+ Check if possible to upgrade eslint (remove from makefile)
 + Add sticky footer
 + Refactor js mock in json module.exports
 + Aggiungere middleware che controlla token
