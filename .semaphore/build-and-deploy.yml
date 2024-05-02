@@ -11,7 +11,7 @@ global_job_config:
     - name: ACCESS_TOKENS
   env_vars:
     - name: NPM_VERSION
-      value: 10.5.2
+      value: 10.7.0
       
   prologue:
     commands:
