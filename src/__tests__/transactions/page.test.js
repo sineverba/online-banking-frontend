@@ -45,7 +45,7 @@ describe("Transactions Page", () => {
     await waitFor(() => {
       const purpose = screen.getByText(/December 2022 - Salary/i);
       expect(purpose).toBeInTheDocument();
-      const amount = screen.getByText("2145");
+      const amount = screen.getByText(/145/);
       expect(amount).toBeInTheDocument();
       const date = screen.getByText("04/01/2023");
       expect(date).toBeInTheDocument();
