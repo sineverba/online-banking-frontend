@@ -68,7 +68,7 @@ jobs:
             --tag $DOCKER_IMAGE:$CIRCLE_TAG \
             --tag $DOCKER_IMAGE:latest \
             --push \
-            --file dockerfiles/production/build/Dockerfile \
+            --file dockerfiles/production/build/docker/Dockerfile \
             "."
   deploy_to_vps:
     executor: amd64_executor

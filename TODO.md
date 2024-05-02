@@ -1,7 +1,6 @@
 TODO
 ====
 
-+ Move production docker sotto docker e app.conf sotto nginx
 + Add loading to login
 + dockerbuild node
 + Create amount component
