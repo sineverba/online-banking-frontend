@@ -6,6 +6,7 @@ NPM_VERSION=10.5.2
 NGINX_VERSION=1.25.5
 SONARSCANNER_VERSION=5.0.1
 BUILDX_VERSION=0.14.0
+BINFMT_VERSION=qemu-v7.0.0-28
 
 
 sonar:
@@ -29,13 +30,12 @@ fixnodesass:
 
 build:
 	docker build \
-		--no-cache \
 		--pull \
 		--build-arg NODE_VERSION=$(NODE_VERSION) \
 		--build-arg NPM_VERSION=$(NPM_VERSION) \
 		--build-arg NGINX_VERSION=$(NGINX_VERSION) \
 		--tag $(IMAGE_NAME):$(VERSION) \
-		--file dockerfiles/production/build/Dockerfile \
+		--file dockerfiles/production/build/docker/Dockerfile \
 		"."
 
 preparemulti:
@@ -46,7 +46,12 @@ preparemulti:
 		> \
 		~/.docker/cli-plugins/docker-buildx
 	chmod a+x ~/.docker/cli-plugins/docker-buildx
-	docker buildx create --name multiarch --use
+	docker buildx version
+	docker run --rm --privileged tonistiigi/binfmt:$(BINFMT_VERSION) --install all
+	docker buildx ls
+	docker buildx rm multiarch
+	docker buildx create --name multiarch --driver docker-container --use
+	docker buildx inspect --bootstrap --builder multiarch
 
 multi: preparemulti
 	docker buildx build \

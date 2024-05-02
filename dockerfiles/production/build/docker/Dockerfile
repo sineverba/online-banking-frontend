@@ -53,7 +53,7 @@ COPY --from=builder /app/out /usr/share/nginx/html
 RUN find /usr/share/nginx/html -type f -exec chmod 644 {} + && \
     find /usr/share/nginx/html -type d -exec chmod 755 {} +
 # Copy nginx configuration
-COPY dockerfiles/production/build/app.conf /etc/nginx/conf.d/default.conf
+COPY dockerfiles/production/build/nginx/app.conf /etc/nginx/conf.d/default.conf
 # Expose port
 EXPOSE 80
 # Start nginx
