@@ -1,5 +1,6 @@
 # Next version
 + Upgrade dependencies
++ Remove form component
 
 ## 1.4.0
 + Remove session storage from .env

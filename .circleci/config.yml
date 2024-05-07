@@ -34,7 +34,7 @@ jobs:
           command: cp .env.bak .env
       - run:
           name: "Run test"
-          command: npx jest
+          command: npx jest --silent
       - store_test_results:
           path: ./.test_report
   build_image:

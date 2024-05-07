@@ -15,7 +15,7 @@ COPY ./ .
 # Update node
 RUN npm install -g npm@$NPM_VERSION && npm -v | grep $NPM_VERSION && npm install
 RUN npm run lint
-RUN npm pkg set scripts.test="CI=true jest"
+RUN npm pkg set scripts.test="CI=true jest --silent"
 RUN npm run test
 ######################################
 #
