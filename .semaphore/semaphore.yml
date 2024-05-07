@@ -41,7 +41,7 @@ blocks:
         - name: Test
           commands:
             - cp .env.bak .env
-            - npx jest
+            - npx jest --silent
             - '[[ -f ./.test_report/junit.xml ]] && test-results publish ./.test_report/junit.xml'
             - test-results gen-pipeline-report
         - name: Coverage

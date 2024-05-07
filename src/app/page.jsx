@@ -3,8 +3,8 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Feedback } from "@sineverba/feedback";
+import { FormComponent } from "@sineverba/form-component";
 import { Loading } from "@sineverba/loading";
-import { FormComponent } from "./components/common/FormComponent";
 import Footer from "./components/common/footer";
 import { usePostLoginMutation } from "./features/apiSlice";
 import { isAuthenticated, login } from "./lib/utility";
